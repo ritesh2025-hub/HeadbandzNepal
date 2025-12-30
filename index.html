@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Headbandz Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .setup-section, .game-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .game-section {
+            display: none;
+        }
+
+        .ready-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ready-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .ready-content h2 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .ready-player-name {
+            color: #ffd89b;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .ready-motivation {
+            color: white;
+            font-size: 1.3em;
+            margin: 20px 0;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .ready-instructions {
+            color: white;
+            font-size: 1.1em;
+            margin: 30px 0;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .start-turn-btn {
+            background: #48bb78;
+            color: white;
+            font-size: 1.8em;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .start-turn-btn:hover {
+            background: #38a169;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .start-turn-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .welcome-screen.hidden {
+            display: none;
+        }
+
+        .welcome-content {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-emoji {
+            font-size: 5em;
+            animation: bounce 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .welcome-title {
+            font-size: 2.5em;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2em;
+            color: #718096;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .instructions-section {
+            margin-bottom: 30px;
+        }
+
+        .instructions-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instruction-step {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #667eea;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .instruction-step:nth-child(1) { animation-delay: 0.2s; }
+        .instruction-step:nth-child(2) { animation-delay: 0.4s; }
+        .instruction-step:nth-child(3) { animation-delay: 0.6s; }
+        .instruction-step:nth-child(4) { animation-delay: 0.8s; }
+        .instruction-step:nth-child(5) { animation-delay: 1s; }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            display: inline-block;
+            vertical-align: middle;
+            width: calc(100% - 55px);
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .step-description {
+            color: #718096;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .important-note {
+            background: #fff5e6;
+            border: 2px solid #ed8936;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-out forwards 1.2s;
+            opacity: 0;
+        }
+
+        .important-note-title {
+            color: #ed8936;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .important-note-text {
+            color: #744210;
+            line-height: 1.6;
+        }
+
+        .start-game-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            font-size: 1.8em;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 30px;
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.4);
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .start-game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(72, 187, 120, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 25px rgba(72, 187, 120, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 35px rgba(72, 187, 120, 0.6);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-content {
+                padding: 30px 20px;
+            }
+
+            .logo-emoji {
+                font-size: 3em;
+            }
+
+            .welcome-title {
+                font-size: 1.8em;
+            }
+
+            .welcome-subtitle {
+                font-size: 1em;
+            }
+
+            .instructions-title {
+                font-size: 1.4em;
+            }
+
+            .step-number {
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 1em;
+            }
+
+            .step-content {
+                width: calc(100% - 45px);
+            }
+
+            .step-title {
+                font-size: 1em;
+            }
+
+            .step-description {
+                font-size: 0.9em;
+            }
+
+            .start-game-btn {
+                font-size: 1.4em;
+                padding: 15px 30px;
+            }
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .player-input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #38a169;
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .btn-warning {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #dd6b20;
+        }
+
+        .players-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .player-tag {
+            background: #e6e9ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #667eea;
+        }
+
+        .player-tag button {
+            background: #f56565;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 0;
+        }
+
+        .category-section {
+            margin-bottom: 30px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .category-card {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .category-card:hover {
+            border-color: #667eea;
+            background: #e6e9ff;
+        }
+
+        .category-card label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .category-card input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .game-layout {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .card-display {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            border-radius: 20px;
+            padding: 40px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .card-image {
+            font-size: 120px;
+            margin-bottom: 20px;
+            animation: bounce 1s ease;
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        .card-image img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card-image.emoji-fallback {
+            font-size: 120px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .card-name {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .card-category {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .timer-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .timer-box {
+            background: #2d3748;
+            color: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .timer-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .timer-display {
+            font-size: 3em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .timer-display.warning {
+            color: #fc8181;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .player-info {
+            background: #48bb78;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .player-info-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .player-info-name {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .score-box {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .score-label {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .score-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-buttons button {
+            width: 100%;
+        }
+
+        .no-cards-message {
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .no-cards-message h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+
+            .setup-section, .game-section {
+                padding: 20px 15px;
+            }
+
+            .section-title {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+
+            .game-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .timer-sidebar {
+                order: -1;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .timer-box {
+                padding: 20px 10px;
+                grid-column: 1 / -1;
+            }
+
+            .timer-display {
+                font-size: 2.5em;
+            }
+
+            .player-info {
+                padding: 15px 10px;
+            }
+
+            .player-info-name {
+                font-size: 1.2em;
+            }
+
+            .score-box {
+                padding: 15px 10px;
+            }
+
+            .score-value {
+                font-size: 1.5em;
+            }
+
+            .action-buttons {
+                grid-column: 1 / -1;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .action-buttons button {
+                width: 100%;
+            }
+
+            .card-display {
+                padding: 30px 20px;
+                min-height: 300px;
+            }
+
+            .card-name {
+                font-size: 2em;
+            }
+
+            .card-image {
+                font-size: 100px;
+            }
+
+            .card-category {
+                font-size: 12px;
+                padding: 6px 12px;
+                top: 10px;
+                right: 10px;
+            }
+
+            button {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input-group button {
+                width: 100%;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .game-controls button {
+                width: 100%;
+            }
+
+            .ready-content {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+
+            .ready-content h2 {
+                font-size: 2em;
+            }
+
+            .ready-player-name {
+                font-size: 2em;
+            }
+
+            .ready-motivation {
+                font-size: 1.1em;
+            }
+
+            .ready-instructions {
+                font-size: 1em;
+            }
+
+            .start-turn-btn {
+                font-size: 1.5em;
+                padding: 15px 40px;
+            }
+        }
+
+        .start-game-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .game-over {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .game-over h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .final-scores {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .score-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <div class="logo-container">
+                <div class="logo-emoji">🎭</div>
+            </div>
+            <h1 class="welcome-title">नेपाली हेडब्यान्ड्ज</h1>
+            <p class="welcome-subtitle">अनुमान लगाउने रोमाञ्चक खेल!</p>
+
+            <div class="instructions-section">
+                <h2 class="instructions-title">🎮 कसरी खेल्ने?</h2>
+
+                <div class="instruction-step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">📱 फोन निधारमा राख्नुहोस्</div>
+                        <div class="step-description">
+                            खेलाडीले फोन आफ्नो निधारमा राख्नुपर्छ (स्क्रिन बाहिर तिर) ताकि आफूले शब्द देख्न नसकून्।
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">👥 अरूले सङ्केत दिनुहोस्</div>
+                        <div class="step-description">
+                            अन्य खेलाडीहरूले शब्द देखेर सङ्केत दिनुहोस्। उदाहरण: "हात्ती" देखिएमा → "यो जनावर हो", "यो ठूलो छ", "यसको लामो नाक छ"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">🤔 अनुमान लगाउनुहोस्</div>
+                        <div class="step-description">
+                            सङ्केतबाट शब्द अनुमान लगाउनुहोस्। सही भएमा "सही हो! ✓" थिच्नुहोस्। गाह्रो भएमा "छोड्नुहोस्" थिच्नुहोस्।
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">⏰ १ मिनेट भित्र</div>
+                        <div class="step-description">
+                            प्रत्येक खेलाडीलाई १ मिनेट समय मिल्छ। त्यो समयमा सकेसम्म धेरै सही अनुमान लगाएर अंक कमाउनुहोस्!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <span class="step-number">5</span>
+                    <div class="step-content">
+                        <div class="step-title">🏆 जित</div>
+                        <div class="step-description">
+                            सबै राउन्ड समाप्त भएपछि सबैभन्दा बढी अंक भएको खेलाडी विजेता हुन्छ!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="important-note">
+                    <div class="important-note-title">⚠️ महत्वपूर्ण सुझाव</div>
+                    <div class="important-note-text">
+                        <strong>सबै वर्ग छान्नुहोस्!</strong> यदि तपाईंले सबै ८ वर्गहरू छान्नुभयो भने खेल धेरै रोमाञ्चक हुन्छ। किनभने खेलाडीलाई थाहा हुँदैन कि शब्द कुन वर्गको हो!
+                    </div>
+                </div>
+            </div>
+
+            <button class="start-game-btn" onclick="closeWelcome()">
+                खेल सेटअप सुरु गर्नुहोस् 🚀
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 3em; animation: bounce 2s infinite; display: inline-block;">🎭</div>
+        </div>
+        <h1>🎭 नेपाली हेडब्यान्ड्ज खेल</h1>
+
+        <!-- Setup Section -->
+        <div class="setup-section" id="setupSection">
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="player-input-section">
+                <h2 class="section-title">खेलाडीहरू थप्नुहोस्</h2>
+                <div class="input-group">
+                    <input type="text" id="playerNameInput" placeholder="खेलाडीको नाम लेख्नुहोस्">
+                    <button class="btn-primary" onclick="addPlayer()">थप्नुहोस्</button>
+                </div>
+                <div class="players-list" id="playersList"></div>
+            </div>
+
+            <div class="category-section">
+                <h2 class="section-title">वर्गहरू छान्नुहोस्</h2>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="animals" checked>
+                            🦁 जनावरहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="food" checked>
+                            🍜 खाना
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="objects" checked>
+                            🎺 वस्तुहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="festivals" checked>
+                            🎉 चाडपर्वहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="personalities" checked>
+                            👤 प्रसिद्ध व्यक्तित्व
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="places" checked>
+                            🏔️ प्रसिद्ध ठाउँहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="others" checked>
+                            ✨ अन्य
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="flags" checked>
+                            🏳️ झण्डाहरू
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <h2 class="section-title">राउन्ड संख्या</h2>
+                <div class="input-group">
+                    <input type="number" id="roundsInput" value="5" min="1" max="20" placeholder="राउन्ड संख्या">
+                    <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
+                        प्रति खेलाडी राउन्ड
+                    </label>
+                </div>
+                <p style="color: #718096; font-size: 14px; margin-top: 10px;">
+                    प्रत्येक खेलाडीले यति राउन्ड खेलेपछि खेल समाप्त हुनेछ
+                </p>
+            </div>
+
+            <div class="start-game-section">
+                <button class="btn-primary" onclick="startGame()" style="font-size: 20px; padding: 15px 40px;">
+                    खेल सुरु गर्नुहोस् 🎮
+                </button>
+            </div>
+        </div>
+
+        <!-- Ready Screen -->
+        <div class="ready-screen" id="readyScreen">
+            <div class="ready-content">
+                <h2>🎯 तयार हुनुहोस्!</h2>
+                <div class="ready-player-name" id="readyPlayerName"></div>
+                <div class="ready-motivation" id="readyMotivation"></div>
+                <div class="ready-instructions">
+                    तपाईंसँग <strong>1 मिनेट</strong> छ<br>
+                    सकेसम्म धेरै अनुमान लगाउनुहोस्!
+                </div>
+                <button class="start-turn-btn" onclick="startPlayerTurn()">
+                    सुरु गर्नुहोस् 🚀
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Section -->
+        <div class="game-section" id="gameSection">
+            <div class="game-controls">
+                <button class="btn-danger" onclick="endGame()">खेल समाप्त गर्नुहोस्</button>
+            </div>
+
+            <div class="game-layout">
+                <div class="card-display" id="cardDisplay">
+                    <div class="card-category" id="cardCategory"></div>
+                    <div class="card-image" id="cardImage"></div>
+                    <div class="card-name" id="cardName"></div>
+                </div>
+
+                <div class="timer-sidebar">
+                    <div class="timer-box">
+                        <div class="timer-label">समय</div>
+                        <div class="timer-display" id="timerDisplay">1:00</div>
+                    </div>
+
+                    <div class="player-info">
+                        <div class="player-info-label">अब पालो</div>
+                        <div class="player-info-name" id="currentPlayerName"></div>
+                    </div>
+
+                    <div class="score-box">
+                        <div class="score-label">स्कोर</div>
+                        <div class="score-value" id="currentScore">0</div>
+                    </div>
+
+                    <div class="score-box">
+                        <div class="score-label">राउन्ड</div>
+                        <div class="score-value" id="currentRounds" style="font-size: 1.5em;">0 / 5</div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-secondary" onclick="correctGuess()">सही हो! ✓</button>
+                        <button class="btn-warning" onclick="skipCard()">छोड्नुहोस्</button>
+                        <button class="btn-danger" onclick="endTurnEarly()" style="font-size: 14px;">पालो समाप्त गर्नुहोस्</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gameData = {
+            animals: [
+                { name: 'बाघ', emoji: '🐯', imageFile: 'tiger.jpg' },
+                { name: 'हात्ती', emoji: '🐘', imageFile: 'elephant.jpg' },
+                { name: 'बाँदर', emoji: '🐵', imageFile: 'monkey.jpg' },
+                { name: 'गाई', emoji: '🐄', imageFile: 'cow.jpg' },
+                { name: 'भालु', emoji: '🐻', imageFile: 'bear.jpg' },
+                { name: 'हिरण', emoji: '🦌', imageFile: 'deer.jpg' },
+                { name: 'गैंडा', emoji: '🦏', imageFile: 'rhino.jpg' },
+                { name: 'सर्प', emoji: '🐍', imageFile: 'snake.jpg' },
+                { name: 'चरा', emoji: '🦅', imageFile: 'bird.jpg' },
+                { name: 'माछा', emoji: '🐟', imageFile: 'fish.jpg' },
+                { name: 'कुकुर', emoji: '🐕', imageFile: 'dog.jpg' },
+                { name: 'बिरालो', emoji: '🐈', imageFile: 'cat.jpg' },
+                { name: 'सिंह', emoji: '🦁', imageFile: 'lion.jpg' },
+                { name: 'पाण्डा', emoji: '🐼', imageFile: 'panda.jpg' },
+                { name: 'भेडा', emoji: '🐑', imageFile: 'sheep.jpg' },
+                { name: 'बाख्रा', emoji: '🐐', imageFile: 'goat.jpg' },
+                { name: 'खरायो', emoji: '🐇', imageFile: 'rabbit.jpg' },
+                { name: 'याक', emoji: '🦌', imageFile: 'yak.jpg' },
+                { name: 'चिल', emoji: '🦅', imageFile: 'eagle.jpg' },
+                { name: 'भ्यागुता', emoji: '🐸', imageFile: 'frog.jpg' }
+            ],
+            food: [
+                { name: 'मोमो', emoji: '🥟', imageFile: 'momo.jpg' },
+                { name: 'दालभात', emoji: '🍚', imageFile: 'dalbhat.jpg' },
+                { name: 'सेलरोटी', emoji: '🍩', imageFile: 'sel-roti.jpg' },
+                { name: 'चोयला', emoji: '🍖', imageFile: 'choyla.jpg' },
+                { name: 'बारा', emoji: '🥞', imageFile: 'bara.jpg' },
+                { name: 'चाट', emoji: '🥗', imageFile: 'chaat.jpg' },
+                { name: 'समोसा', emoji: '🥙', imageFile: 'samosa.jpg' },
+                { name: 'जलेबी', emoji: '🧡', imageFile: 'jalebi.jpg' },
+                { name: 'लस्सी', emoji: '🥛', imageFile: 'lassi.jpg' },
+                { name: 'चाउमिन', emoji: '🍜', imageFile: 'chowmein.jpg' },
+                { name: 'पानीपुरी', emoji: '🫓', imageFile: 'panipuri.jpg' },
+                { name: 'छोयला', emoji: '🍗', imageFile: 'chhoyela.jpg' },
+                { name: 'भटमास', emoji: '🥜', imageFile: 'bhatmas.jpg' },
+                { name: 'गुन्द्रुक', emoji: '🥬', imageFile: 'gundruk.jpg' },
+                { name: 'ढिडो', emoji: '🥣', imageFile: 'dhido.jpg' },
+                { name: 'यमरी', emoji: '🥟', imageFile: 'yomari.jpg' },
+                { name: 'वडा', emoji: '🍘', imageFile: 'wada.jpg' },
+                { name: 'आलुदम', emoji: '🥔', imageFile: 'aludam.jpg' },
+                { name: 'खीर', emoji: '🍮', imageFile: 'kheer.jpg' },
+                { name: 'पकौडा', emoji: '🥙', imageFile: 'pakoda.jpg' },
+                { name: 'चटामरी', emoji: '🥞', imageFile: 'chatamari.jpg' },
+                { name: 'लखामरी', emoji: '🍪', imageFile: 'lakhamari.jpg' },
+                { name: 'चुरपी', emoji: '🧀', imageFile: 'chhurpi.jpg' },
+                { name: 'थुक्पा', emoji: '🍲', imageFile: 'thukpa.jpg' },
+                { name: 'पुरी तरकारी', emoji: '🥘', imageFile: 'puri-tarkari.jpg' },
+                { name: 'राजमा', emoji: '🫘', imageFile: 'rajma.jpg' }
+            ],
+            objects: [
+                { name: 'ढोल', emoji: '🥁', imageFile: 'dhol.jpg' },
+                { name: 'खुकुरी', emoji: '🔪', imageFile: 'khukuri.jpg' },
+                { name: 'टोपी', emoji: '🧢', imageFile: 'dhaka-topi.jpg' },
+                { name: 'मदल', emoji: '🪘', imageFile: 'madal.jpg' },
+                { name: 'बाँसुरी', emoji: '🎵', imageFile: 'bansuri.jpg' },
+                { name: 'किताब', emoji: '📚', imageFile: 'book.jpg' },
+                { name: 'फोन', emoji: '📱', imageFile: 'phone.jpg' },
+                { name: 'घडी', emoji: '⌚', imageFile: 'watch.jpg' },
+                { name: 'झोला', emoji: '🎒', imageFile: 'bag.jpg' },
+                { name: 'ढाका कपडा', emoji: '🧵', imageFile: 'dhaka-fabric.jpg' },
+                { name: 'झोलुङ्गे पुल', emoji: '🌉', imageFile: 'suspension-bridge.jpg' },
+                { name: 'घण्टी', emoji: '🔔', imageFile: 'bell.jpg' },
+                { name: 'दियो', emoji: '🪔', imageFile: 'lamp.jpg' },
+                { name: 'चुरा', emoji: '💍', imageFile: 'bangle.jpg' },
+                { name: 'नौबजे बाजा', emoji: '🎺', imageFile: 'naumati-baja.jpg' }
+            ],
+            festivals: [
+                { name: 'दशैं', emoji: '🎉', imageFile: 'dashain.jpg' },
+                { name: 'तिहार', emoji: '🪔', imageFile: 'tihar.jpg' },
+                { name: 'होली', emoji: '🎨', imageFile: 'holi.jpg' },
+                { name: 'लोसार', emoji: '🎊', imageFile: 'losar.jpg' },
+                { name: 'तीज', emoji: '💃', imageFile: 'teej.jpg' },
+                { name: 'छठ', emoji: '🌅', imageFile: 'chhath.jpg' },
+                { name: 'गाईजात्रा', emoji: '🐄', imageFile: 'gai-jatra.jpg' },
+                { name: 'जनाई पूर्णिमा', emoji: '🧵', imageFile: 'janai-purnima.jpg' },
+                { name: 'माघे संक्रान्ती', emoji: '🍯', imageFile: 'maghe-sankranti.jpg' },
+                { name: 'शिवरात्रि', emoji: '🔱', imageFile: 'shivaratri.jpg' },
+            ],
+            personalities: [
+                { name: 'गौतम बुद्ध', emoji: '☸️', imageFile: 'gautam-buddha.jpg' },
+                { name: 'पृथ्वीनारायण शाह', emoji: '👑', imageFile: 'prithvi-narayan-shah.jpg' },
+                { name: 'लक्ष्मी प्रसाद देवकोटा', emoji: '✍️', imageFile: 'laxmi-prasad-devkota.jpg' },
+                { name: 'नारायण गोपाल', emoji: '🎤', imageFile: 'narayan-gopal.jpg' },
+                { name: 'कुमारी', emoji: '👸', imageFile: 'kumari.jpg' },
+                { name: 'संदीप लामिछाने', emoji: '🏏', imageFile: 'sandeep-lamichhane.jpg' },
+                { name: 'भानुभक्त आचार्य', emoji: '✒️', imageFile: 'bhanubhakta-acharya.jpg' },
+                { name: 'अरनिको', emoji: '🏛️', imageFile: 'araniko.jpg' },
+                { name: 'तेन्जिङ नोर्गे', emoji: '🏔️', imageFile: 'tenzing-norgay.jpg' },
+                { name: 'पारस खड्का', emoji: '🏏', imageFile: 'paras-khadka.jpg' },
+                { name: 'मदन कृष्ण श्रेष्ठ', emoji: '🎭', imageFile: 'madan-krishna-shrestha.jpg' },
+                { name: 'हरि बंश आचार्य', emoji: '🎸', imageFile: 'hari-bansha-acharya.jpg' },
+                { name: 'विराटनगर', emoji: '🎬', imageFile: 'bhuwan-kc.jpg' }
+            ],
+            places: [
+                { name: 'सगरमाथा', emoji: '🏔️', imageFile: 'mount-everest.jpg' },
+                { name: 'पशुपतिनाथ', emoji: '🛕', imageFile: 'pashupatinath.jpg' },
+                { name: 'पाटन', emoji: '🏛️', imageFile: 'patan.jpg' },
+                { name: 'लुम्बिनी', emoji: '🕉️', imageFile: 'lumbini.jpg' },
+                { name: 'पोखरा', emoji: '🏞️', imageFile: 'pokhara.jpg' },
+                { name: 'चितवन', emoji: '🦏', imageFile: 'chitwan.jpg' },
+                { name: 'अन्नपूर्ण', emoji: '⛰️', imageFile: 'annapurna.jpg' },
+                { name: 'स्वयम्भूनाथ', emoji: '🙏', imageFile: 'swayambhunath.jpg' },
+                { name: 'बौद्धनाथ', emoji: '☸️', imageFile: 'boudhanath.jpg' },
+                { name: 'रारा ताल', emoji: '🏞️', imageFile: 'rara-lake.jpg' },
+                { name: 'काठमाडौं', emoji: '🏙️', imageFile: 'kathmandu.jpg' },
+                { name: 'भक्तपुर', emoji: '🏯', imageFile: 'bhaktapur.jpg' },
+                { name: 'मनकामना', emoji: '🙏', imageFile: 'manakamana.jpg' },
+                { name: 'मुक्तिनाथ', emoji: '🕉️', imageFile: 'muktinath.jpg' },
+                { name: 'फेवा ताल', emoji: '🛶', imageFile: 'fewa-lake.jpg' },
+                { name: 'नागरकोट', emoji: '🌄', imageFile: 'nagarkot.jpg' },
+                { name: 'धरहरा', emoji: '🗼', imageFile: 'dharahara.jpg' }
+            ],
+            others: [
+                { name: 'दुर्गेश थापा', emoji: '👨', imageFile: 'durgesh-thapa.jpg' },
+                { name: 'केपी ओली', emoji: '🧑‍💼', imageFile: 'kp-oli.jpg' },
+                { name: 'शिशान बानिया', emoji: '🎤', imageFile: 'shishan-baniya.jpg' },
+                { name: 'श्रीनखला खतिवडा', emoji: '👩', imageFile: 'shrinkhala-khatiwada.jpg' },
+                { name: 'च्यातप्याते', emoji: '🎭', imageFile: 'chatpatye.jpg' },
+                { name: 'बुढो साइकल', emoji: '🚲', imageFile: 'budho-cycle.jpg' },
+                { name: 'मछिन्द्रनाथ', emoji: '🙏', imageFile: 'machindranath.jpg' },
+                { name: 'काले दाइ', emoji: '😎', imageFile: 'kale-dai.jpg' },
+                { name: 'दर्पण छाया', emoji: '📺', imageFile: 'darpan-chaya.jpg' },
+                { name: 'कीर्तिपुर', emoji: '🏘️', imageFile: 'kirtipur.jpg' },
+                { name: 'शेर्पा', emoji: '🧗', imageFile: 'sherpa.jpg' },
+                { name: 'तोङ्बा', emoji: '🍺', imageFile: 'tongba.jpg' },
+                { name: 'पण्डित', emoji: '🧙', imageFile: 'pandit.jpg' },
+                { name: 'अनमोल केसी', emoji: '🎬', imageFile: 'anmol-kc.jpg' },
+                { name: 'गिरिजा प्रसाद', emoji: '👔', imageFile: 'girija-prasad.jpg' },
+                { name: 'सफा टेम्पो', emoji: '🚐', imageFile: 'safa-tempo.jpg' },
+                { name: 'सुन', emoji: '🪙', imageFile: 'gold.jpg' },
+                { name: 'बिबाह', emoji: '💒', imageFile: 'wedding.jpg' },
+                { name: 'भीटेन', emoji: '🎤', imageFile: 'vten.jpg' }
+            ],
+            flags: [
+                { name: 'नेपाल', emoji: '🇳🇵', imageFile: 'flag-nepal.jpg' },
+                { name: 'भारत', emoji: '🇮🇳', imageFile: 'flag-india.jpg' },
+                { name: 'चीन', emoji: '🇨🇳', imageFile: 'flag-china.jpg' },
+                { name: 'जापान', emoji: '🇯🇵', imageFile: 'flag-japan.jpg' },
+                { name: 'अमेरिका', emoji: '🇺🇸', imageFile: 'flag-usa.jpg' },
+                { name: 'बेलायत', emoji: '🇬🇧', imageFile: 'flag-uk.jpg' },
+                { name: 'अष्ट्रेलिया', emoji: '🇦🇺', imageFile: 'flag-australia.jpg' },
+                { name: 'दक्षिण कोरिया', emoji: '🇰🇷', imageFile: 'flag-south-korea.jpg' },
+                { name: 'बंगलादेश', emoji: '🇧🇩', imageFile: 'flag-bangladesh.jpg' },
+                { name: 'पाकिस्तान', emoji: '🇵🇰', imageFile: 'flag-pakistan.jpg' },
+                { name: 'श्रीलंका', emoji: '🇱🇰', imageFile: 'flag-sri-lanka.jpg' },
+                { name: 'भुटान', emoji: '🇧🇹', imageFile: 'flag-bhutan.jpg' },
+                { name: 'थाइल्याण्ड', emoji: '🇹🇭', imageFile: 'flag-thailand.jpg' },
+                { name: 'मलेसिया', emoji: '🇲🇾', imageFile: 'flag-malaysia.jpg' },
+                { name: 'सिंगापुर', emoji: '🇸🇬', imageFile: 'flag-singapore.jpg' },
+                { name: 'जर्मनी', emoji: '🇩🇪', imageFile: 'flag-germany.jpg' },
+                { name: 'फ्रान्स', emoji: '🇫🇷', imageFile: 'flag-france.jpg' },
+                { name: 'क्यानडा', emoji: '🇨🇦', imageFile: 'flag-canada.jpg' },
+                { name: 'ब्राजिल', emoji: '🇧🇷', imageFile: 'flag-brazil.jpg' },
+                { name: 'रसिया', emoji: '🇷🇺', imageFile: 'flag-russia.jpg' }
+            ]
+        };
+
+        const categoryNames = {
+            animals: 'जनावरहरू',
+            food: 'खाना',
+            objects: 'वस्तुहरू',
+            festivals: 'चाडपर्वहरू',
+            personalities: 'प्रसिद्ध व्यक्तित्व',
+            places: 'प्रसिद्ध ठाउँहरू',
+            others: 'अन्य',
+            flags: 'झण्डाहरू'
+        };
+
+        const motivationalPhrases = [
+            'तपाईं गर्न सक्नुहुन्छ! 💪',
+            'शुभकामना! 🌟',
+            'जित तपाईंको हो! 🏆',
+            'दिमाग तेज राख्नुहोस्! 🧠',
+            'यो तपाईंको समय हो! ⏰',
+            'आत्मविश्वास राख्नुहोस्! 🎯',
+            'खेल जिताउनुहोस्! 🎮',
+            'तपाईं उत्कृष्ट हुनुहुन्छ! ⭐',
+            'ध्यान केन्द्रित गर्नुहोस्! 🎪',
+            'सफलता नजिकै छ! 🚀'
+        ];
+
+        let players = [];
+        let currentPlayerIndex = 0;
+        let currentCardIndex = 0;
+        let cards = [];
+        let timer = null;
+        let timeRemaining = 60;
+        let playerScores = {};
+        let playerRounds = {};
+        let maxRounds = 5;
+        let totalRoundsPlayed = 0;
+
+        function addPlayer() {
+            const input = document.getElementById('playerNameInput');
+            const playerName = input.value.trim();
+
+            if (!playerName) {
+                showError('कृपया खेलाडीको नाम लेख्नुहोस्!');
+                return;
+            }
+
+            if (players.includes(playerName)) {
+                showError('यो खेलाडी पहिले नै थपिएको छ!');
+                return;
+            }
+
+            players.push(playerName);
+            playerScores[playerName] = 0;
+            playerRounds[playerName] = 0;
+            input.value = '';
+            renderPlayers();
+            hideError();
+        }
+
+        function removePlayer(playerName) {
+            players = players.filter(p => p !== playerName);
+            delete playerScores[playerName];
+            delete playerRounds[playerName];
+            renderPlayers();
+        }
+
+        function renderPlayers() {
+            const playersList = document.getElementById('playersList');
+            playersList.innerHTML = players.map(player => `
+                <div class="player-tag">
+                    <span>${player}</span>
+                    <button onclick="removePlayer('${player}')">×</button>
+                </div>
+            `).join('');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.style.display = 'none';
+        }
+
+        function startGame() {
+            if (players.length === 0) {
+                showError('कम्तिमा एक खेलाडी थप्नुहोस्!');
+                return;
+            }
+
+            const selectedCategories = Array.from(document.querySelectorAll('.category-card input:checked'))
+                .map(cb => cb.value);
+
+            if (selectedCategories.length === 0) {
+                showError('कम्तिमा एक वर्ग छान्नुहोस्!');
+                return;
+            }
+
+            maxRounds = parseInt(document.getElementById('roundsInput').value) || 5;
+            if (maxRounds < 1) maxRounds = 1;
+
+            cards = [];
+            selectedCategories.forEach(category => {
+                gameData[category].forEach(item => {
+                    cards.push({
+                        ...item,
+                        category: categoryNames[category]
+                    });
+                });
+            });
+
+            shuffleArray(cards);
+            currentPlayerIndex = 0;
+            currentCardIndex = 0;
+            totalRoundsPlayed = 0;
+
+            players.forEach(player => {
+                playerRounds[player] = 0;
+            });
+
+            document.getElementById('setupSection').style.display = 'none';
+            document.getElementById('gameSection').style.display = 'block';
+
+            showReadyScreen();
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function showReadyScreen() {
+            const allPlayersCompletedRounds = players.every(player => playerRounds[player] >= maxRounds);
+
+            if (allPlayersCompletedRounds) {
+                gameOver();
+                return;
+            }
+
+            const currentPlayer = players[currentPlayerIndex];
+            const randomMotivation = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
+
+            document.getElementById('readyPlayerName').textContent = currentPlayer;
+            document.getElementById('readyMotivation').textContent = randomMotivation;
+            document.getElementById('readyScreen').style.display = 'flex';
+        }
+
+        function displayCard(card) {
+            const cardImageElement = document.getElementById('cardImage');
+            cardImageElement.innerHTML = '';
+            cardImageElement.className = 'card-image';
+
+            if (card.imageFile) {
+                const img = document.createElement('img');
+                img.src = `images/${card.imageFile}`;
+                img.alt = card.name;
+                img.onerror = function() {
+                    cardImageElement.textContent = card.emoji;
+                    cardImageElement.classList.add('emoji-fallback');
+                };
+                cardImageElement.appendChild(img);
+            } else {
+                cardImageElement.textContent = card.emoji;
+                cardImageElement.classList.add('emoji-fallback');
+            }
+        }
+
+        function startPlayerTurn() {
+            document.getElementById('readyScreen').style.display = 'none';
+
+            if (currentCardIndex >= cards.length) {
+                shuffleArray(cards);
+                currentCardIndex = 0;
+            }
+
+            const card = cards[currentCardIndex];
+            const currentPlayer = players[currentPlayerIndex];
+
+            displayCard(card);
+            document.getElementById('cardName').textContent = card.name;
+            document.getElementById('cardCategory').textContent = card.category;
+            document.getElementById('currentPlayerName').textContent = currentPlayer;
+            document.getElementById('currentScore').textContent = playerScores[currentPlayer];
+            document.getElementById('currentRounds').textContent = `${playerRounds[currentPlayer]} / ${maxRounds}`;
+
+            startTimer();
+        }
+
+        function startTimer() {
+            stopTimer();
+            timeRemaining = 60;
+            updateTimerDisplay();
+
+            timer = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 10) {
+                    document.getElementById('timerDisplay').classList.add('warning');
+                } else {
+                    document.getElementById('timerDisplay').classList.remove('warning');
+                }
+
+                if (timeRemaining <= 0) {
+                    stopTimer();
+                    playTimeUpSound();
+                    setTimeout(() => {
+                        alert('समय समाप्त भयो! अर्को खेलाडीको पालो');
+                        nextPlayer();
+                    }, 100);
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+            document.getElementById('timerDisplay').classList.remove('warning');
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('timerDisplay').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function correctGuess() {
+            const currentPlayer = players[currentPlayerIndex];
+            playerScores[currentPlayer]++;
+            document.getElementById('currentScore').textContent = playerScores[currentPlayer];
+            playSuccessSound();
+            nextCard();
+        }
+
+        function skipCard() {
+            nextCard();
+        }
+
+        function nextCard() {
+            currentCardIndex++;
+
+            if (currentCardIndex >= cards.length) {
+                shuffleArray(cards);
+                currentCardIndex = 0;
+            }
+
+            const card = cards[currentCardIndex];
+            displayCard(card);
+            document.getElementById('cardName').textContent = card.name;
+            document.getElementById('cardCategory').textContent = card.category;
+        }
+
+        function endTurnEarly() {
+            if (confirm('के तपाईं आफ्नो पालो समाप्त गर्न चाहनुहुन्छ?')) {
+                stopTimer();
+                nextPlayer();
+            }
+        }
+
+        function nextPlayer() {
+            stopTimer();
+
+            playerRounds[players[currentPlayerIndex]]++;
+
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+
+            if (currentPlayerIndex === 0) {
+                totalRoundsPlayed++;
+            }
+
+            const allPlayersCompletedRounds = players.every(player => playerRounds[player] >= maxRounds);
+
+            if (allPlayersCompletedRounds) {
+                gameOver();
+                return;
+            }
+
+            currentCardIndex++;
+
+            if (currentCardIndex >= cards.length) {
+                shuffleArray(cards);
+                currentCardIndex = 0;
+            }
+
+            showReadyScreen();
+        }
+
+        function gameOver() {
+            stopTimer();
+
+            const sortedPlayers = Object.entries(playerScores)
+                .sort((a, b) => b[1] - a[1]);
+
+            const scoresHTML = sortedPlayers.map((entry, index) => `
+                <div class="score-item">
+                    <span><strong>${index + 1}. ${entry[0]}</strong></span>
+                    <span style="font-size: 1.2em; color: #667eea;">${entry[1]} अंक</span>
+                </div>
+            `).join('');
+
+            document.getElementById('cardDisplay').innerHTML = `
+                <div class="game-over">
+                    <h2>🎉 खेल समाप्त भयो!</h2>
+                    <p style="color: #718096; margin-bottom: 20px;">
+                        ${maxRounds} राउन्ड पूरा भयो
+                    </p>
+                    <div class="final-scores">
+                        <h3 style="margin-bottom: 15px; color: #667eea;">अन्तिम स्कोर</h3>
+                        ${scoresHTML}
+                    </div>
+                    <button class="btn-primary" onclick="restartGame()" style="font-size: 18px; padding: 12px 30px; margin-top: 20px;">
+                        फेरि खेल्नुहोस्
+                    </button>
+                </div>
+            `;
+        }
+
+        function endGame() {
+            if (confirm('के तपाईं निश्चित हुनुहुन्छ कि तपाईं खेल समाप्त गर्न चाहनुहुन्छ?')) {
+                gameOver();
+            }
+        }
+
+        function restartGame() {
+            stopTimer();
+            players = [];
+            currentPlayerIndex = 0;
+            currentCardIndex = 0;
+            cards = [];
+            playerScores = {};
+            playerRounds = {};
+            totalRoundsPlayed = 0;
+            maxRounds = 5;
+
+            document.getElementById('setupSection').style.display = 'block';
+            document.getElementById('gameSection').style.display = 'none';
+            document.getElementById('readyScreen').style.display = 'none';
+            document.getElementById('playersList').innerHTML = '';
+            document.getElementById('playerNameInput').value = '';
+            document.getElementById('roundsInput').value = '5';
+
+            document.querySelectorAll('.category-card input[type="checkbox"]').forEach(cb => {
+                cb.checked = true;
+            });
+        }
+
+        function playSuccessSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        function playTimeUpSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 300;
+            oscillator.type = 'sawtooth';
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        function closeWelcome() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+        }
+
+        document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addPlayer();
+            }
+        });
+    </script>
+</body>
+</html>
