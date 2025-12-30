@@ -149,7 +149,7 @@
             right: 0;
             bottom: 0;
             background:
-                linear-gradient(135deg, rgba(220, 20, 60, 0.7) 0%, rgba(0, 56, 147, 0.7) 100%),
+                linear-gradient(135deg, rgba(220, 20, 60, 0.95) 0%, rgba(0, 56, 147, 0.95) 100%),
                 url('images/logo.jpg') center/cover fixed;
             z-index: 3000;
             display: flex;
@@ -157,6 +157,11 @@
             justify-content: center;
             overflow: hidden;
             animation: fadeIn 0.5s ease-in;
+        }
+
+        body.splash-active {
+            overflow: hidden;
+            height: 100vh;
         }
 
         .splash-screen.hidden {
@@ -820,16 +825,17 @@
         }
 
         .action-buttons button {
-            font-size: 3.5em;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
+            font-size: 1.5em;
+            width: 180px;
+            height: 80px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0;
+            padding: 20px 30px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             transition: all 0.3s;
+            font-weight: bold;
         }
 
         .action-buttons button:active {
@@ -839,7 +845,6 @@
         .btn-correct {
             background: #48bb78;
             color: white;
-            font-weight: normal;
         }
 
         .btn-correct:hover {
@@ -851,12 +856,6 @@
         .btn-skip {
             background: #ed8936;
             color: white;
-            font-weight: bold;
-            font-size: 1.3em;
-            width: auto;
-            padding: 20px 30px;
-            border-radius: 15px;
-            min-width: 150px;
         }
 
         .btn-skip:hover {
@@ -952,21 +951,16 @@
             }
 
             .action-buttons {
-                gap: 20px;
+                gap: 15px;
+                flex-direction: column;
             }
 
             .action-buttons button {
-                width: 90px;
-                height: 90px;
-                font-size: 3em;
-            }
-
-            .action-buttons .btn-skip {
-                width: auto;
-                height: auto;
-                font-size: 1.1em;
+                width: 100%;
+                max-width: 300px;
+                height: 70px;
+                font-size: 1.3em;
                 padding: 15px 20px;
-                min-width: 120px;
             }
 
             button {
@@ -1069,6 +1063,19 @@
     </style>
 </head>
 <body>
+    <!-- Flash Overlay -->
+    <div id="flashOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; opacity: 0; transition: opacity 0.3s;"></div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); z-index: 10000; display: none; align-items: center; justify-content: center;">
+        <div style="background: linear-gradient(135deg, #DC143C 0%, #003893 100%); padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+            <h2 style="color: white; margin-bottom: 20px; font-size: 1.8em;">🔒 पासवर्ड प्रविष्ट गर्नुहोस्</h2>
+            <input type="password" id="passwordInput" placeholder="पासवर्ड" style="width: 100%; padding: 15px; font-size: 1.2em; border: none; border-radius: 10px; margin-bottom: 20px; text-align: center;">
+            <div id="passwordError" style="color: #ffcccb; margin-bottom: 15px; display: none;">गलत पासवर्ड! कृपया पुन: प्रयास गर्नुहोस्।</div>
+            <button onclick="checkPassword()" style="background: #48bb78; color: white; padding: 15px 40px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%;">प्रवेश गर्नुहोस्</button>
+        </div>
+    </div>
+
     <!-- Splash Screen -->
     <div class="splash-screen" id="splashScreen">
         <div class="splash-content">
@@ -1276,6 +1283,7 @@
         <!-- Ready Screen -->
         <div class="ready-screen" id="readyScreen">
             <div class="ready-content">
+                <div id="readyRoundIndicator" style="color: white; font-size: 1.1em; margin-bottom: 10px; opacity: 0.9;"></div>
                 <h2>🎯 तयार हुनुहोस्!</h2>
                 <div class="ready-player-name" id="readyPlayerName"></div>
                 <div class="ready-motivation" id="readyMotivation"></div>
@@ -1305,19 +1313,29 @@
                     </div>
                     <div class="info-item">
                         <div class="info-label">समय:</div>
-                        <div class="info-value timer-value" id="timerDisplay">1:00</div>
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                            <div class="info-value timer-value" id="timerDisplay">1:00</div>
+                            <div style="width: 100px; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                                <div id="timeProgress" style="height: 100%; background: #48bb78; transition: width 1s linear;"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">स्कोर:</div>
-                        <div class="info-value">
+                        <div class="info-value" style="position: relative;">
                             <span id="currentScore">0</span>
                             <span style="font-size: 0.7em; color: #718096;"> (<span id="currentRounds">0/5</span>)</span>
+                            <div id="scoreAnimation" style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); opacity: 0; color: #48bb78; font-weight: bold; font-size: 1.2em;"></div>
                         </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">अर्को:</div>
+                        <div class="info-value" id="skipCounter" style="font-size: 1em;">1</div>
                     </div>
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn-correct" onclick="correctGuess()">✓</button>
+                    <button class="btn-correct" onclick="correctGuess()">✓ सही</button>
                     <button class="btn-skip" id="skipButton" onclick="skipCard()">अर्को</button>
                 </div>
 
@@ -1704,9 +1722,11 @@
 
             const currentPlayer = players[currentPlayerIndex];
             const randomMotivation = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
+            const currentRound = playerRounds[currentPlayer] + 1;
 
             document.getElementById('readyPlayerName').textContent = currentPlayer;
             document.getElementById('readyMotivation').textContent = randomMotivation;
+            document.getElementById('readyRoundIndicator').textContent = `राउन्ड ${currentRound} / ${maxRounds}`;
             document.getElementById('readyScreen').style.display = 'flex';
         }
 
@@ -1768,6 +1788,7 @@
             document.getElementById('skipButton').disabled = false;
             document.getElementById('skipButton').style.opacity = '1';
             document.getElementById('skipButton').style.cursor = 'pointer';
+            document.getElementById('skipCounter').textContent = '1';
 
             if (currentCardIndex >= cards.length) {
                 shuffleArray(cards);
@@ -1826,12 +1847,48 @@
             const seconds = timeRemaining % 60;
             document.getElementById('timerDisplay').textContent =
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            // Update progress bar
+            const progress = (timeRemaining / 60) * 100;
+            const progressBar = document.getElementById('timeProgress');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+                if (timeRemaining <= 10) {
+                    progressBar.style.background = '#fc8181';
+                } else {
+                    progressBar.style.background = '#48bb78';
+                }
+            }
+        }
+
+        function flashScreen(color) {
+            const overlay = document.getElementById('flashOverlay');
+            overlay.style.backgroundColor = color;
+            overlay.style.opacity = '0.3';
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+            }, 200);
+        }
+
+        function showScoreAnimation() {
+            const scoreAnim = document.getElementById('scoreAnimation');
+            scoreAnim.textContent = '+1';
+            scoreAnim.style.opacity = '1';
+            scoreAnim.style.transition = 'all 0.6s ease-out';
+            scoreAnim.style.transform = 'translateX(-50%) translateY(-30px)';
+
+            setTimeout(() => {
+                scoreAnim.style.opacity = '0';
+                scoreAnim.style.transform = 'translateX(-50%) translateY(0)';
+            }, 600);
         }
 
         function correctGuess() {
             const currentPlayer = players[currentPlayerIndex];
             playerScores[currentPlayer]++;
             document.getElementById('currentScore').textContent = playerScores[currentPlayer];
+            flashScreen('#48bb78');
+            showScoreAnimation();
             playSuccessSound();
             nextCard();
         }
@@ -1844,6 +1901,8 @@
             document.getElementById('skipButton').disabled = true;
             document.getElementById('skipButton').style.opacity = '0.5';
             document.getElementById('skipButton').style.cursor = 'not-allowed';
+            document.getElementById('skipCounter').textContent = '0';
+            flashScreen('#ed8936');
             nextCard();
         }
 
@@ -1993,8 +2052,22 @@
         }
 
         function startFromSplash() {
-            document.getElementById('splashScreen').classList.add('hidden');
-            document.getElementById('welcomeScreen').classList.add('active');
+            document.getElementById('passwordModal').style.display = 'flex';
+            document.getElementById('passwordInput').focus();
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === 'NepaliPass') {
+                document.getElementById('passwordModal').style.display = 'none';
+                document.body.classList.remove('splash-active');
+                document.getElementById('splashScreen').classList.add('hidden');
+                document.getElementById('welcomeScreen').classList.add('active');
+            } else {
+                document.getElementById('passwordError').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
         }
 
         function closeWelcome() {
@@ -2019,6 +2092,15 @@
                 addPlayer();
             }
         });
+
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Prevent scrolling on load
+        document.body.classList.add('splash-active');
     </script>
 </body>
 </html>
