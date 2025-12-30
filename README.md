@@ -90,6 +90,7 @@ See `IMAGE_GUIDE.md` for complete list of 149 filenames!
 
 ## Features Included
 
+✅ Animated splash screen with custom logo
 ✅ 8 diverse categories with 149+ items
 ✅ Welcome screen with animated instructions
 ✅ Player management with add/remove
@@ -104,7 +105,7 @@ See `IMAGE_GUIDE.md` for complete list of 149 filenames!
 ✅ Game over screen with final scores & leaderboard
 ✅ Restart functionality
 ✅ Mobile-optimized responsive design
-✅ Beautiful gradient UI with smooth animations
+✅ Beautiful Nepali-themed color scheme (red, blue, gold)
 ✅ Image support with emoji fallback
 
 ## Credits
