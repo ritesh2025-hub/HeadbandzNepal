@@ -288,9 +288,13 @@
         }
 
         .logo-emoji {
-            font-size: 5em;
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
             animation: bounce 2s infinite;
             display: inline-block;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         @keyframes bounce {
@@ -451,7 +455,8 @@
             }
 
             .logo-emoji {
-                font-size: 3em;
+                width: 100px;
+                height: 100px;
             }
 
             .welcome-title {
@@ -665,7 +670,9 @@
         }
 
         .card-display {
-            background: linear-gradient(135deg, #FFD700 0%, #DC143C 100%);
+            background:
+                linear-gradient(135deg, rgba(220, 20, 60, 0.7) 0%, rgba(0, 56, 147, 0.7) 100%),
+                url('images/logo.jpg') center/cover;
             border-radius: 20px;
             padding: 0;
             min-height: 500px;
@@ -695,13 +702,17 @@
         .card-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
             border-radius: 0;
         }
 
         .card-image.emoji-fallback {
             font-size: 180px;
-            background: linear-gradient(135deg, #FFD700 0%, #DC143C 100%);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @keyframes bounce {
@@ -1027,7 +1038,7 @@
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-content">
             <div class="logo-container">
-                <div class="logo-emoji">🎭</div>
+                <img src="images/logo.jpg" alt="नेपाली हेडब्यान्ड्ज" class="logo-emoji">
             </div>
             <h1 class="welcome-title">नेपाली हेडब्यान्ड्ज</h1>
             <p class="welcome-subtitle">अनुमान लगाउने रोमाञ्चक खेल!</p>
@@ -1119,6 +1130,10 @@
 
             <div class="category-section">
                 <h2 class="section-title">वर्गहरू छान्नुहोस्</h2>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <button class="btn-secondary" onclick="selectAllCategories()" style="flex: 1;">सबै छान्नुहोस्</button>
+                    <button class="btn-warning" onclick="unselectAllCategories()" style="flex: 1;">सबै हटाउनुहोस्</button>
+                </div>
                 <div class="category-grid">
                     <div class="category-card">
                         <label>
@@ -1166,6 +1181,30 @@
                         <label>
                             <input type="checkbox" value="flags" checked>
                             🏳️ झण्डाहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="world_places" checked>
+                            🌍 विश्वका ठाउँहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="movie_stars" checked>
+                            🎬 चलचित्र ताराहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="athletes" checked>
+                            🏆 खेलाडीहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="professions" checked>
+                            👨‍💼 पेशाहरू
                         </label>
                     </div>
                 </div>
@@ -1343,7 +1382,7 @@
                 { name: 'भुवन केसी', emoji: '🎬', imageFile: 'bhuwan-kc.jpg' }
             ],
             places: [
-                { name: 'सगरमाथा', emoji: '🏔️', imageFile: 'mount-everest.jpg' },
+                { name: 'सगरमाथा', emoji: '🏔️', imageUrl: 'https://media.istockphoto.com/id/478627080/photo/evening-view-of-ama-dablam.jpg?s=612x612&w=0&k=20&c=GLKvtQt1JVoOB4yR2WI86_fYOmG8WObeZP_QV_gFG_0=' },
                 { name: 'पशुपतिनाथ', emoji: '🛕', imageFile: 'pashupatinath.jpg' },
                 { name: 'पाटन', emoji: '🏛️', imageFile: 'patan.jpg' },
                 { name: 'लुम्बिनी', emoji: '🕉️', imageFile: 'lumbini.jpg' },
@@ -1403,6 +1442,70 @@
                 { name: 'क्यानडा', emoji: '🇨🇦', imageFile: 'flag-canada.jpg' },
                 { name: 'ब्राजिल', emoji: '🇧🇷', imageFile: 'flag-brazil.jpg' },
                 { name: 'रसिया', emoji: '🇷🇺', imageFile: 'flag-russia.jpg' }
+            ],
+            world_places: [
+                // Example entries with external URLs - you can replace these URLs with any image URL
+                { name: 'एफिल टावर', emoji: '🗼', imageUrl: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800' },
+                { name: 'स्ट्याच्यु अफ लिबर्टी', emoji: '🗽', imageUrl: 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800' },
+                { name: 'ताज महल', emoji: '🕌', imageUrl: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800' },
+                { name: 'कोलोसियम', emoji: '🏛️', imageUrl: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800' },
+                { name: 'ग्रेट वाल अफ चाइना', emoji: '🏯', imageUrl: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800' },
+                { name: 'बुर्ज खलिफा', emoji: '🏙️', imageUrl: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800' },
+                { name: 'सिडनी ओपेरा हाउस', emoji: '🎭', imageUrl: 'https://images.unsplash.com/photo-1523059623039-a9ed027e7fad?w=800' },
+                { name: 'माचु पिचु', emoji: '⛰️', imageUrl: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=800' },
+                { name: 'पिरामिड अफ गिजा', emoji: '🔺', imageUrl: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800' },
+                { name: 'बिग बेन', emoji: '🕰️', imageUrl: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800' },
+                { name: 'माउन्ट फुजी', emoji: '🗻', imageUrl: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800' },
+                { name: 'नायगरा फल्स', emoji: '💦', imageUrl: 'https://images.unsplash.com/photo-1489447068241-b3490214e879?w=800' },
+                { name: 'सान्टोरिनी', emoji: '🏝️', imageUrl: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800' },
+                { name: 'ग्रान्ड क्यान्यन', emoji: '🏜️', imageUrl: 'https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=800' },
+                { name: 'पेट्रा', emoji: '🏛️', imageUrl: 'https://images.unsplash.com/photo-1579606032821-4e6161c81bd3?w=800' }
+            ],
+            movie_stars: [
+                // PASTE YOUR IMAGE URLs HERE (right-click image → copy image address)
+                { name: 'शाहरुख खान', emoji: '⭐', imageUrl: 'https://img.punjabkesari.in/multimedia/914/0/0X0/0/static.punjabkesari.in/2024_12image_17_54_232787637shahrukh-ll.jpg' }, // Paste URL between quotes
+                { name: 'सलमान खान', emoji: '🎬', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Salman_Khan_in_2023_%281%29_%28cropped%29.jpg/500px-Salman_Khan_in_2023_%281%29_%28cropped%29.jpg' },
+                { name: 'आमिर खान', emoji: '🎭', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_FMjpg_UX1000_.jpg' },
+                { name: 'दीपिका पादुकोण', emoji: '👸', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmEXXW_2IgRhb3bJtRmynok_rANjbvWBBDtG3zCSkKj2j4c61zpw3dBXiN6dMQ4dSEJ0FFEoMPlsXIfZf-Lc5J4g8SrM9zUcFQLk6GaVE&s=10' },
+                { name: 'प्रियंका चोपडा', emoji: '🌟', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZlBG6M9CVIWqte3MFeT0I869Ic_cpA7Npi6qR6cZTGMu32pqXmkESDrO81PZcY8q-JC_lIIG8t989gBy_6QJcY85E2OrXbfmc5_Jkig&s=10' },
+                { name: 'आलिया भट', emoji: '💫', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alia_Bhatt_2016.jpg/250px-Alia_Bhatt_2016.jpg' },
+                { name: 'रणबीर कपूर', emoji: '🎪', imageUrl: 'https://cdn.siasat.com/wp-content/uploads/2024/09/Ranbir-Kapoor-1.jpg' },
+                { name: 'कटरिना कैफ', emoji: '✨', imageUrl: 'https://i.pinimg.com/736x/0c/dc/cc/0cdccc12d49541d3b92764341aacb700.jpg' },
+                { name: 'अक्षय कुमार', emoji: '🦸', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsG_FRCBTUv_9IDfT3YmXOWdjrW93lPklakg&s' },
+                { name: 'अजय देवगन', emoji: '🎥', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJgxMfF1ofDc0M_h_QCOI3m7jOnCZtWsCAhw&s' },
+                { name: 'ऋतिक रोशन', emoji: '💃', imageUrl: 'https://pbs.twimg.com/media/ErTTbXdUcAAWyu5.jpg' },
+                { name: 'राजेश हमाल', emoji: '🇳🇵', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsKDlEpXq-kpNWwsMZ-Tml6AHRb59WpKK17Q&s' },
+                // Hollywood Stars
+                { name: 'टम क्रुज', emoji: '🚁', imageUrl: 'https://cdn.britannica.com/11/185311-050-31E5BD65/Tom-Cruise-Top-Gun-Tony-Scott.jpg' },
+                { name: 'लियोनार्डो डिक्याप्रियो', emoji: '🌊', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_FMjpg_UX1000_.jpg' },
+                { name: 'ड्वेन जोन्सन', emoji: '💪', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3wfXs7PHOuU21K9tlBzvutD0Gh0DE8_bV_g&s' },
+                { name: 'स्कारलेट जोहानसन', emoji: '👩', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLKoj0Csu_gN-4Lem1Y2zjaxxQvEopXKN-A&s' },
+                { name: 'रबर्ट डाउनी जुनियर', emoji: '🦾', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-xnZVm4o9JOojh-8ed3jJvGx321MUiNbjw&s' },
+                { name: 'टम ह्यांक्स', emoji: '🎖️', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg/250px-Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg' },
+                { name: 'विल स्मिथ', emoji: '👊', imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/777882a/2147483647/strip/true/crop/5220x3700+0+0/resize/1200x851!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F9a%2F5d%2F9fa87c8743ffbdf346ce3a8830f2%2F936361-la-et-show-94th-academy-awards-2196.jpg' },
+                { name: 'एन्जेलिना जोली', emoji: '👼', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNjcxYzIyZWItZWRiOS00ODliLWI3ZTEtZTA4NTg4OGQwZDY1XkEyXkFqcGc@._V1_.jpg' }
+            ],
+            athletes: [
+                // PASTE YOUR IMAGE URLs HERE
+                { name: 'क्रिस्टियानो रोनाल्डो', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVieHozTmpGgdDFFYxj9tskHfNiH3AUSxl5g&s' },
+                { name: 'लियोनल मेस्सी', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeu2Z4ie86F85LJo1xBKmnekC9JZRQejNooQ&s' },
+                { name: 'विराट कोहली', emoji: '🏏', imageUrl: 'https://hindibusinessstandard.imagibyte.sortdcdn.net/wp-content/uploads/2024/05/virat-kohli-rcb-300x214.jpg?size=800' },
+                { name: 'लेब्रोन जेम्स', emoji: '🏀', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg' },
+                { name: 'सेरेना विलियम्स', emoji: '🎾', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjB5PxTVgxCMdAhP0n4JuWl4-cJ3poGqVbnA&s' },
+                { name: 'रोजर फेडरर', emoji: '🎾', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Roger_Federer_2015_%28cropped%29.jpg' },
+                { name: 'माइकल जोर्डन', emoji: '🏀', imageUrl: 'https://cdn.britannica.com/96/195196-050-3909D5BD/Michael-Jordan-1988.jpg' },
+                { name: 'उसेन बोल्ट', emoji: '🏃', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMDRLjbRDoR4UrFmluT8KMSGeKAT_fDxz6-A&s' },
+                { name: 'कीलियन एमब्याप्पे', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT75C5vXQUZ1dMa44ZqZuvJptOhSePdEn1kzQ&s' },
+                { name: 'राफेल नडाल', emoji: '🎾', imageUrl: 'https://i.guim.co.uk/img/static/sys-images/Sport/Pix/pictures/2009/5/22/1242992420041/Rafael-Nadal-001.jpg?width=465&dpr=1&s=none&crop=none' },
+                { name: 'मुहम्मद अली', emoji: '🥊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB8C2dkHgMCWDUF138xb_EfueyOfAUwhjoIA&s' },
+                { name: 'माइक टायसन', emoji: '🥊', imageUrl: 'https://m.media-amazon.com/images/I/71tBZQF9FoL._AC_UF894,1000_QL80_.jpg' }
+            ],
+            professions: [
+                { name: 'डाक्टर', emoji: '👨‍⚕️', imageUrl: 'https://blog.engineering.vanderbilt.edu/hubfs/AdobeStock_222740403-1.jpeg' },
+                { name: 'शिक्षक', emoji: '👩‍🏫', imageUrl: 'https://images.bhaskarassets.com/web2images/521/2025/12/18/orig_origorigcapture16521362651748045022_1766014617.jpg' },
+                { name: 'इन्जिनियर', emoji: '👷', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQePCVmdmFv26b0gt_uISu7ffgRgAwUZoOsFA&s' },
+                { name: 'पाइलट', emoji: '👨‍✈️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIK7ZpueRCrX3tLUb9hi7K73qI9Um69zh6dA&s' },
+                { name: 'फोटोग्राफर', emoji: '📷', imageUrl: 'https://www.training.com.au/wp-content/uploads/Photographer.jpeg' }
             ]
         };
 
@@ -1414,7 +1517,11 @@
             personalities: 'प्रसिद्ध व्यक्तित्व',
             places: 'प्रसिद्ध ठाउँहरू',
             others: 'अन्य',
-            flags: 'झण्डाहरू'
+            flags: 'झण्डाहरू',
+            world_places: 'विश्वका ठाउँहरू',
+            movie_stars: 'चलचित्र ताराहरू',
+            athletes: 'खेलाडीहरू',
+            professions: 'पेशाहरू'
         };
 
         const motivationalPhrases = [
@@ -1561,7 +1668,19 @@
             cardImageElement.innerHTML = '';
             cardImageElement.className = 'card-image';
 
-            if (card.imageFile) {
+            // Check for external URL first, then local file, then emoji fallback
+            if (card.imageUrl) {
+                // External URL support
+                const img = document.createElement('img');
+                img.src = card.imageUrl;
+                img.alt = card.name;
+                img.onerror = function() {
+                    cardImageElement.textContent = card.emoji;
+                    cardImageElement.classList.add('emoji-fallback');
+                };
+                cardImageElement.appendChild(img);
+            } else if (card.imageFile) {
+                // Local file support
                 const img = document.createElement('img');
                 img.src = `images/${card.imageFile}`;
                 img.alt = card.name;
@@ -1571,6 +1690,7 @@
                 };
                 cardImageElement.appendChild(img);
             } else {
+                // Emoji fallback
                 cardImageElement.textContent = card.emoji;
                 cardImageElement.classList.add('emoji-fallback');
             }
@@ -1802,6 +1922,18 @@
         function closeWelcome() {
             document.getElementById('welcomeScreen').classList.remove('active');
             document.getElementById('welcomeScreen').classList.add('hidden');
+        }
+
+        function selectAllCategories() {
+            document.querySelectorAll('.category-card input[type="checkbox"]').forEach(cb => {
+                cb.checked = true;
+            });
+        }
+
+        function unselectAllCategories() {
+            document.querySelectorAll('.category-card input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
         }
 
         document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
