@@ -1330,6 +1330,12 @@
                 <button class="btn-primary" onclick="startGame()" style="font-size: 20px; padding: 15px 40px;">
                     खेल सुरु गर्नुहोस् 🎮
                 </button>
+                <button class="btn-warning" onclick="clearGameData()" style="font-size: 14px; padding: 10px 20px; margin-top: 15px;">
+                    🗑️ खेल डाटा रिसेट गर्नुहोस्
+                </button>
+                <p id="savedGameNotice" style="color: #48bb78; font-size: 14px; margin-top: 10px; display: none;">
+                    ✓ सुरक्षित खेल फेला पर्‍यो! तपाईं जहाँबाट छोड्नुभयो त्यहाँबाट जारी राख्न सक्नुहुन्छ।
+                </p>
             </div>
         </div>
 
@@ -1696,6 +1702,7 @@
             input.value = '';
             renderPlayers();
             hideError();
+            saveGameState();
         }
 
         function removePlayer(playerName) {
@@ -1703,6 +1710,7 @@
             delete playerScores[playerName];
             delete playerRounds[playerName];
             renderPlayers();
+            saveGameState();
         }
 
         function renderPlayers() {
@@ -1771,6 +1779,7 @@
             document.getElementById('setupSection').style.display = 'none';
             document.getElementById('gameSection').style.display = 'block';
 
+            saveGameState();
             showReadyScreen();
         }
 
@@ -2064,6 +2073,7 @@
             playSuccessSound();
             disableButtons();
             pauseTimer(); // Pause the main timer
+            saveGameState();
 
             showCountdown(() => {
                 nextCard();
@@ -2085,6 +2095,7 @@
             flashScreen('#ed8936');
             disableButtons();
             pauseTimer(); // Pause the main timer
+            saveGameState();
 
             showCountdown(() => {
                 nextCard();
@@ -2148,11 +2159,13 @@
                 currentCardIndex = 0;
             }
 
+            saveGameState();
             showReadyScreen();
         }
 
         function gameOver() {
             stopTimer();
+            localStorage.removeItem('nepaliHeadbandz'); // Clear saved game when game ends
 
             const sortedPlayers = Object.entries(playerScores)
                 .sort((a, b) => b[1] - a[1]);
@@ -2232,6 +2245,7 @@
 
         function restartGame() {
             stopTimer();
+            localStorage.removeItem('nepaliHeadbandz'); // Clear saved game
             players = [];
             currentPlayerIndex = 0;
             currentCardIndex = 0;
@@ -2305,7 +2319,17 @@
                 document.getElementById('passwordModal').style.display = 'none';
                 document.body.classList.remove('splash-active');
                 document.getElementById('splashScreen').classList.add('hidden');
-                document.getElementById('welcomeScreen').classList.add('active');
+
+                // Try to load saved game
+                const hasLoadedGame = loadGameState();
+
+                if (!hasLoadedGame) {
+                    // No saved game, show welcome screen
+                    document.getElementById('welcomeScreen').classList.add('active');
+                } else {
+                    // Game loaded, skip welcome screen
+                    document.getElementById('welcomeScreen').classList.remove('active');
+                }
             } else {
                 document.getElementById('passwordError').style.display = 'block';
                 document.getElementById('passwordInput').value = '';
@@ -2328,6 +2352,118 @@
             document.querySelectorAll('.category-card input[type="checkbox"]').forEach(cb => {
                 cb.checked = false;
             });
+        }
+
+        // ========== LocalStorage Functions ==========
+        function saveGameState() {
+            const gameState = {
+                players: players,
+                currentPlayerIndex: currentPlayerIndex,
+                currentCardIndex: currentCardIndex,
+                cards: cards,
+                timeRemaining: timeRemaining,
+                roundTime: roundTime,
+                playerScores: playerScores,
+                playerRounds: playerRounds,
+                playerRoundDetails: playerRoundDetails,
+                maxRounds: maxRounds,
+                totalRoundsPlayed: totalRoundsPlayed,
+                skipCount: skipCount,
+                currentRoundCorrect: currentRoundCorrect,
+                currentRoundSkipped: currentRoundSkipped,
+                isGameInProgress: document.getElementById('gameSection').style.display !== 'none',
+                timestamp: Date.now()
+            };
+
+            try {
+                localStorage.setItem('nepaliHeadbandz', JSON.stringify(gameState));
+            } catch (e) {
+                console.error('Failed to save game state:', e);
+            }
+        }
+
+        function loadGameState() {
+            try {
+                const saved = localStorage.getItem('nepaliHeadbandz');
+                if (!saved) return false;
+
+                const gameState = JSON.parse(saved);
+
+                // Check if save is less than 24 hours old
+                const hoursSinceSave = (Date.now() - gameState.timestamp) / (1000 * 60 * 60);
+                if (hoursSinceSave > 24) {
+                    localStorage.removeItem('nepaliHeadbandz');
+                    return false;
+                }
+
+                // Restore game state
+                players = gameState.players || [];
+                currentPlayerIndex = gameState.currentPlayerIndex || 0;
+                currentCardIndex = gameState.currentCardIndex || 0;
+                cards = gameState.cards || [];
+                timeRemaining = gameState.timeRemaining || 60;
+                roundTime = gameState.roundTime || 60;
+                playerScores = gameState.playerScores || {};
+                playerRounds = gameState.playerRounds || {};
+                playerRoundDetails = gameState.playerRoundDetails || {};
+                maxRounds = gameState.maxRounds || 5;
+                totalRoundsPlayed = gameState.totalRoundsPlayed || 0;
+                skipCount = gameState.skipCount || 0;
+                currentRoundCorrect = gameState.currentRoundCorrect || 0;
+                currentRoundSkipped = gameState.currentRoundSkipped || 0;
+
+                // If game was in progress, restore UI
+                if (gameState.isGameInProgress && players.length > 0) {
+                    document.getElementById('setupSection').style.display = 'none';
+                    document.getElementById('gameSection').style.display = 'block';
+                    document.getElementById('savedGameNotice').style.display = 'block';
+
+                    // Restore players list in setup for later
+                    renderPlayers();
+
+                    // Restore game UI
+                    const currentPlayer = players[currentPlayerIndex];
+                    const card = cards[currentCardIndex];
+
+                    if (card) {
+                        displayCard(card);
+                        document.getElementById('cardName').textContent = card.name;
+                        document.getElementById('cardCategory').textContent = card.category;
+                    }
+
+                    document.getElementById('currentPlayerName').textContent = currentPlayer;
+                    document.getElementById('currentScore').textContent = playerScores[currentPlayer];
+                    document.getElementById('currentRounds').textContent = `${playerRounds[currentPlayer]} / ${maxRounds}`;
+                    document.getElementById('skipCounter').textContent = (1 - skipCount).toString();
+
+                    // Update skip button state
+                    if (skipCount >= 1) {
+                        document.getElementById('skipButton').disabled = true;
+                        document.getElementById('skipButton').style.opacity = '0.5';
+                        document.getElementById('skipButton').style.cursor = 'not-allowed';
+                    }
+
+                    updateTimerDisplay();
+
+                    // Show ready screen instead of auto-starting
+                    document.getElementById('gameSection').style.display = 'none';
+                    showReadyScreen();
+                }
+
+                return true;
+            } catch (e) {
+                console.error('Failed to load game state:', e);
+                localStorage.removeItem('nepaliHeadbandz');
+                return false;
+            }
+        }
+
+        function clearGameData() {
+            if (confirm('के तपाईं सुरक्षित गरिएको खेल डाटा मेटाउन चाहनुहुन्छ?')) {
+                localStorage.removeItem('nepaliHeadbandz');
+                document.getElementById('savedGameNotice').style.display = 'none';
+                alert('खेल डाटा सफलतापूर्वक मेटाइयो!');
+            }
         }
 
         document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
