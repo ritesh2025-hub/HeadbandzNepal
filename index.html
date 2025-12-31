@@ -1691,6 +1691,19 @@
                 </div>
             </div>
 
+            <div class="category-section">
+                <h2 class="section-title">कार्ड काउन्टडाउन</h2>
+                <div class="input-group">
+                    <input type="number" id="countdownInput" value="3" min="0" max="5" placeholder="सेकेन्ड">
+                    <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
+                        सेकेन्ड
+                    </label>
+                </div>
+                <p style="color: #718096; font-size: 14px; margin-top: 10px;">
+                    अर्को कार्ड देखाउनु अगाडि काउन्टडाउन समय (० = काउन्टडाउन बन्द)
+                </p>
+            </div>
+
             <div class="start-game-section">
                 <button class="btn-primary" onclick="startGame()" style="font-size: 20px; padding: 15px 40px;">
                     खेल सुरु गर्नुहोस् 🎮
@@ -2137,6 +2150,7 @@
         let timer = null;
         let timeRemaining = 90;
         let roundTime = 90; // Configurable time per round (default 1 minute 30 seconds)
+        let countdownDuration = 3; // Configurable countdown duration (0 = disabled)
         let playerScores = {};
         let playerRounds = {};
         let maxRounds = 3; // Default 3 rounds per player
