@@ -41,6 +41,11 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        h1.hidden {
+            display: none;
         }
 
         .header-logo {
@@ -767,6 +772,40 @@
             color: #DC143C;
         }
 
+        .issue-report-btn {
+            position: absolute;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(220, 20, 60, 0.9);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9em;
+            z-index: 20;
+            transition: all 0.3s;
+        }
+
+        .issue-report-btn:hover {
+            background: rgba(220, 20, 60, 1);
+            transform: scale(1.05);
+        }
+
+        .issue-report-btn.reported {
+            background: rgba(237, 137, 54, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .issue-report-btn {
+                bottom: 60px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+        }
+
         .game-info-bar {
             background: white;
             border-radius: 15px;
@@ -956,12 +995,16 @@
 
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 5px;
+            }
+
+            .container {
+                padding: 0;
             }
 
             h1 {
                 font-size: 1.5em;
-                margin-bottom: 15px;
+                margin-bottom: 10px;
             }
 
             .header-logo {
@@ -970,7 +1013,7 @@
             }
 
             .setup-section, .game-section {
-                padding: 20px 15px;
+                padding: 15px 10px;
             }
 
             .section-title {
@@ -978,51 +1021,71 @@
                 margin-bottom: 15px;
             }
 
+            .game-section {
+                padding: 5px;
+            }
+
+            .game-layout {
+                gap: 10px;
+            }
+
             .card-display {
                 padding: 0;
-                min-height: 400px;
+                min-height: 350px;
+                border-radius: 15px;
             }
 
             .card-image {
-                min-height: 400px;
-                font-size: 120px;
+                min-height: 350px;
+                font-size: 100px;
             }
 
             .card-image.emoji-fallback {
-                font-size: 120px;
+                font-size: 100px;
             }
 
             .card-name {
-                font-size: 1.8em;
-                padding: 20px 15px;
+                font-size: 1.5em;
+                padding: 15px 10px;
             }
 
             .card-category {
-                font-size: 11px;
-                padding: 5px 10px;
-                top: 10px;
-                right: 10px;
+                font-size: 10px;
+                padding: 4px 8px;
+                top: 8px;
+                right: 8px;
             }
 
             .game-info-bar {
-                gap: 15px;
-                padding: 12px 15px;
-                font-size: 1em;
+                gap: 10px;
+                padding: 8px 10px;
+                font-size: 0.9em;
+                border-radius: 10px;
+            }
+
+            .info-item {
+                min-height: 40px;
+            }
+
+            .info-label {
+                font-size: 0.8em;
             }
 
             .info-value {
-                font-size: 1.2em;
+                font-size: 1.1em;
             }
 
             .action-buttons {
-                gap: 15px;
+                gap: 10px;
                 flex-direction: row;
+                margin-top: 10px;
             }
 
             .action-buttons button {
-                height: 70px;
-                font-size: 1.3em;
-                padding: 15px 20px;
+                height: 60px;
+                font-size: 1.2em;
+                padding: 12px 15px;
+                border-radius: 12px;
             }
 
             .btn-correct {
@@ -1052,13 +1115,16 @@
 
             .game-controls {
                 flex-direction: column;
-                gap: 10px;
-                margin-top: 20px;
-                padding-top: 15px;
+                gap: 5px;
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px solid rgba(220, 20, 60, 0.2);
             }
 
             .game-controls button {
                 width: 100%;
+                padding: 10px 15px;
+                font-size: 0.9em;
             }
 
             .ready-content {
@@ -1085,6 +1151,130 @@
             .start-turn-btn {
                 font-size: 1.5em;
                 padding: 15px 40px;
+            }
+
+            /* Refresh Modal Mobile Styles */
+            #refreshModalContent {
+                padding: 25px 20px !important;
+                max-width: 95% !important;
+                margin: 10px auto !important;
+            }
+
+            #refreshModalContent > div:first-child {
+                font-size: 3em !important;
+                margin-bottom: 15px !important;
+            }
+
+            #refreshModalContent h2 {
+                font-size: 1.5em !important;
+                margin-bottom: 15px !important;
+            }
+
+            #refreshModalContent > p:nth-of-type(1) {
+                font-size: 1em !important;
+                margin-bottom: 10px !important;
+            }
+
+            #refreshModalContent > p:nth-of-type(1) strong {
+                font-size: 1.1em !important;
+            }
+
+            #refreshModalContent > div:nth-of-type(2) {
+                padding: 10px !important;
+                margin: 15px 0 !important;
+            }
+
+            #refreshModalContent > div:nth-of-type(2) p {
+                font-size: 0.95em !important;
+            }
+
+            #refreshModalContent > p:nth-of-type(2) {
+                font-size: 1em !important;
+                margin-bottom: 15px !important;
+            }
+
+            #refreshModalContent > div:nth-of-type(3) {
+                padding: 15px !important;
+                margin-bottom: 15px !important;
+            }
+
+            #refreshModalContent > div:nth-of-type(3) p {
+                font-size: 0.95em !important;
+                margin-bottom: 10px !important;
+            }
+
+            #refreshModalContent > div:nth-of-type(3) p strong {
+                font-size: 1.1em !important;
+            }
+
+            #refreshConfirmInput {
+                padding: 12px !important;
+                font-size: 1em !important;
+                margin-bottom: 10px !important;
+            }
+
+            #refreshModalContent > div:last-child {
+                gap: 10px !important;
+            }
+
+            #refreshModalContent > div:last-child button {
+                padding: 12px 20px !important;
+                font-size: 1em !important;
+            }
+
+            /* Reset Modal Mobile Styles */
+            #resetModalContent {
+                padding: 25px 20px !important;
+                max-width: 95% !important;
+                margin: 10px auto !important;
+            }
+
+            #resetModalContent > div:first-child {
+                font-size: 2.5em !important;
+                margin-bottom: 15px !important;
+            }
+
+            #resetModalContent h2 {
+                font-size: 1.5em !important;
+                margin-bottom: 15px !important;
+            }
+
+            #resetModalContent > p {
+                font-size: 1em !important;
+                margin-bottom: 15px !important;
+            }
+
+            #resetModalContent > p strong {
+                font-size: 1.1em !important;
+            }
+
+            #resetModalContent > div:nth-of-type(2) {
+                padding: 15px !important;
+                margin-bottom: 15px !important;
+            }
+
+            #resetModalContent > div:nth-of-type(2) p {
+                font-size: 0.95em !important;
+                margin-bottom: 10px !important;
+            }
+
+            #resetModalContent > div:nth-of-type(2) p strong {
+                font-size: 1.1em !important;
+            }
+
+            #resetConfirmInput {
+                padding: 12px !important;
+                font-size: 1em !important;
+                margin-bottom: 10px !important;
+            }
+
+            #resetModalContent > div:last-child {
+                gap: 10px !important;
+            }
+
+            #resetModalContent > div:last-child button {
+                padding: 12px 20px !important;
+                font-size: 1em !important;
             }
         }
 
@@ -1147,8 +1337,8 @@
     </div>
 
     <!-- Reset Confirmation Modal -->
-    <div id="resetModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center;">
-        <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 500px; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700;">
+    <div id="resetModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center; overflow-y: auto; padding: 10px;">
+        <div id="resetModalContent" style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700; margin: auto;">
             <div style="font-size: 4em; margin-bottom: 20px; animation: pulse 1s infinite;">⚠️</div>
             <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">चेतावनी!</h2>
             <p style="color: white; font-size: 1.3em; margin-bottom: 15px; line-height: 1.6;">
@@ -1179,8 +1369,8 @@
     </div>
 
     <!-- Refresh Confirmation Modal -->
-    <div id="refreshModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center;">
-        <div style="background: linear-gradient(135deg, #FF4500 0%, #DC143C 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 550px; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700;">
+    <div id="refreshModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center; overflow-y: auto; padding: 10px;">
+        <div id="refreshModalContent" style="background: linear-gradient(135deg, #FF4500 0%, #DC143C 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 550px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700; margin: auto;">
             <div style="font-size: 5em; margin-bottom: 20px; animation: pulse 1s infinite;">🔄</div>
             <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2.2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">पेज रिफ्रेश चेतावनी!</h2>
             <p style="color: white; font-size: 1.4em; margin-bottom: 15px; line-height: 1.6; font-weight: bold;">
@@ -1286,7 +1476,7 @@
                 <div class="important-note">
                     <div class="important-note-title">⚠️ महत्वपूर्ण सुझाव</div>
                     <div class="important-note-text">
-                        <strong>सबै वर्ग छान्नुहोस्!</strong> यदि तपाईंले सबै १२ वर्गहरू छान्नुभयो भने खेल धेरै रोमाञ्चक हुन्छ। किनभने खेलाडीलाई थाहा हुँदैन कि शब्द कुन वर्गको हो!
+                        <strong>सबै वर्ग छान्नुहोस्!</strong> यदि तपाईंले सबै १९ वर्गहरू छान्नुभयो भने खेल धेरै रोमाञ्चक हुन्छ। किनभने खेलाडीलाई थाहा हुँदैन कि शब्द कुन वर्गको हो!
                     </div>
                 </div>
 
@@ -1399,6 +1589,48 @@
                         <label>
                             <input type="checkbox" value="professions" checked>
                             👨‍💼 पेशाहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="vehicles" checked>
+                            🚗 सवारी साधनहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="fruits" checked>
+                            🍎 फलफूलहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="vegetables" checked>
+                            🥕 तरकारीहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="sports" checked>
+                            ⚽ खेलकुदहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="flowers" checked>
+                            🌹 फूलहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="birds" checked>
+                            🦅 चराहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="sea_creatures" checked>
+                            🐋 समुद्री जीवहरू
                         </label>
                     </div>
                 </div>
@@ -1732,6 +1964,90 @@
                 { name: 'इन्जिनियर', emoji: '👷', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQePCVmdmFv26b0gt_uISu7ffgRgAwUZoOsFA&s' },
                 { name: 'पाइलट', emoji: '👨‍✈️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIK7ZpueRCrX3tLUb9hi7K73qI9Um69zh6dA&s' },
                 { name: 'फोटोग्राफर', emoji: '📷', imageUrl: 'https://www.training.com.au/wp-content/uploads/Photographer.jpeg' }
+            ],
+            vehicles: [
+                { name: 'कार', emoji: '🚗', imageUrl: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80' },
+                { name: 'बस', emoji: '🚌', imageUrl: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800&q=80' },
+                { name: 'मोटरसाइकल', emoji: '🏍️', imageUrl: 'https://images.unsplash.com/photo-1558981408-db0ecd8a1ee4?w=800&q=80' },
+                { name: 'साइकल', emoji: '🚲', imageUrl: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=80' },
+                { name: 'हवाइजहाज', emoji: '✈️', imageUrl: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' },
+                { name: 'रेल', emoji: '🚂', imageUrl: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800&q=80' },
+                { name: 'ट्रक', emoji: '🚛', imageUrl: 'https://images.unsplash.com/photo-1519003300449-424ad0405076?w=800&q=80' },
+                { name: 'हेलिकप्टर', emoji: '🚁', imageUrl: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=800&q=80' },
+                { name: 'जहाज', emoji: '🚢', imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80' },
+                { name: 'रिक्सा', emoji: '🛺', imageUrl: 'https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800&q=80' }
+            ],
+            fruits: [
+                { name: 'स्याउ', emoji: '🍎', imageUrl: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=800&q=80' },
+                { name: 'केरा', emoji: '🍌', imageUrl: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&q=80' },
+                { name: 'सुन्तला', emoji: '🍊', imageUrl: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=800&q=80' },
+                { name: 'अंगुर', emoji: '🍇', imageUrl: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80' },
+                { name: 'आँप', emoji: '🥭', imageUrl: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&q=80' },
+                { name: 'तरबूज', emoji: '🍉', imageUrl: 'https://images.unsplash.com/photo-1589984662646-e7b2e4962ec7?w=800&q=80' },
+                { name: 'स्ट्रबेरी', emoji: '🍓', imageUrl: 'https://images.unsplash.com/photo-1543528176-61b239494933?w=800&q=80' },
+                { name: 'अनानास', emoji: '🍍', imageUrl: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80' },
+                { name: 'किवी', emoji: '🥝', imageUrl: 'https://images.unsplash.com/photo-1585059895524-72359e06133a?w=800&q=80' },
+                { name: 'नरिवल', emoji: '🥥', imageUrl: 'https://images.unsplash.com/photo-1525258686769-94e18e6e379f?w=800&q=80' }
+            ],
+            vegetables: [
+                { name: 'टमाटर', emoji: '🍅', imageUrl: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80' },
+                { name: 'गाजर', emoji: '🥕', imageUrl: 'https://images.unsplash.com/photo-1447175008436-054170c2e979?w=800&q=80' },
+                { name: 'बन्दागोभी', emoji: '🥬', imageUrl: 'https://images.unsplash.com/photo-1594282557831-61c5c08f5d1e?w=800&q=80' },
+                { name: 'आलु', emoji: '🥔', imageUrl: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80' },
+                { name: 'प्याज', emoji: '🧅', imageUrl: 'https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80' },
+                { name: 'बिन्स', emoji: '🫘', imageUrl: 'https://images.unsplash.com/photo-1611170802031-1e1b5d31d2ee?w=800&q=80' },
+                { name: 'ब्रोकाउली', emoji: '🥦', imageUrl: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&q=80' },
+                { name: 'काँक्रो', emoji: '🥒', imageUrl: 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=800&q=80' },
+                { name: 'मकै', emoji: '🌽', imageUrl: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=800&q=80' },
+                { name: 'लसुन', emoji: '🧄', imageUrl: 'https://images.unsplash.com/photo-1566174102924-1e37f6e0a5cc?w=800&q=80' }
+            ],
+            sports: [
+                { name: 'फुटबल', emoji: '⚽', imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80' },
+                { name: 'क्रिकेट', emoji: '🏏', imageUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80' },
+                { name: 'बास्केटबल', emoji: '🏀', imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80' },
+                { name: 'टेनिस', emoji: '🎾', imageUrl: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&q=80' },
+                { name: 'ब्याडमिन्टन', emoji: '🏸', imageUrl: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&q=80' },
+                { name: 'भलिबल', emoji: '🏐', imageUrl: 'https://images.unsplash.com/photo-1592656094267-764a45160876?w=800&q=80' },
+                { name: 'तैराकी', emoji: '🏊', imageUrl: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&q=80' },
+                { name: 'बक्सिङ', emoji: '🥊', imageUrl: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80' },
+                { name: 'योग', emoji: '🧘', imageUrl: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80' },
+                { name: 'दौड', emoji: '🏃', imageUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80' }
+            ],
+            flowers: [
+                { name: 'गुलाब', emoji: '🌹', imageUrl: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=800&q=80' },
+                { name: 'सूर्यमुखी', emoji: '🌻', imageUrl: 'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=800&q=80' },
+                { name: 'लिली', emoji: '🌺', imageUrl: 'https://images.unsplash.com/photo-1501250987900-211028be2c82?w=800&q=80' },
+                { name: 'गेंदा', emoji: '🌼', imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80' },
+                { name: 'कमल', emoji: '🪷', imageUrl: 'https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?w=800&q=80' },
+                { name: 'गुलाफशेर', emoji: '🌸', imageUrl: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=800&q=80' },
+                { name: 'ट्युलिप', emoji: '🌷', imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80' },
+                { name: 'ज्यास्मिन', emoji: '🤍', imageUrl: 'https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?w=800&q=80' },
+                { name: 'आर्किड', emoji: '💜', imageUrl: 'https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?w=800&q=80' },
+                { name: 'डहेलिया', emoji: '🌺', imageUrl: 'https://images.unsplash.com/photo-1597002251761-54a2f0e6b3b0?w=800&q=80' }
+            ],
+            birds: [
+                { name: 'चिल', emoji: '🦅', imageUrl: 'https://images.unsplash.com/photo-1520087619250-584c0cbd35e8?w=800&q=80' },
+                { name: 'परेवा', emoji: '🕊️', imageUrl: 'https://images.unsplash.com/photo-1551859616-b966f1039e3f?w=800&q=80' },
+                { name: 'मोर', emoji: '🦚', imageUrl: 'https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?w=800&q=80' },
+                { name: 'काग', emoji: '🦅', imageUrl: 'https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=800&q=80' },
+                { name: 'सुगा', emoji: '🦜', imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&q=80' },
+                { name: 'कोइली', emoji: '🐦', imageUrl: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&q=80' },
+                { name: 'बत्तख', emoji: '🦆', imageUrl: 'https://images.unsplash.com/photo-1568641852-c6eb98162c7b?w=800&q=80' },
+                { name: 'हंस', emoji: '🦢', imageUrl: 'https://images.unsplash.com/photo-1568378780196-a9a0b7d55a2e?w=800&q=80' },
+                { name: 'चिडिया', emoji: '🐦', imageUrl: 'https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=800&q=80' },
+                { name: 'उल्लू', emoji: '🦉', imageUrl: 'https://images.unsplash.com/photo-1573921470445-2c0e1d024e97?w=800&q=80' }
+            ],
+            sea_creatures: [
+                { name: 'ह्वेल', emoji: '🐋', imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80' },
+                { name: 'शार्क', emoji: '🦈', imageUrl: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800&q=80' },
+                { name: 'डल्फिन', emoji: '🐬', imageUrl: 'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=800&q=80' },
+                { name: 'अक्टोपस', emoji: '🐙', imageUrl: 'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?w=800&q=80' },
+                { name: 'जेलीफिस', emoji: '🪼', imageUrl: 'https://images.unsplash.com/photo-1496108493455-c88c6b52726a?w=800&q=80' },
+                { name: 'सी हर्स', emoji: '🐴', imageUrl: 'https://images.unsplash.com/photo-1534088568595-a3ce6a791f74?w=800&q=80' },
+                { name: 'स्टारफिस', emoji: '⭐', imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80' },
+                { name: 'केकडा', emoji: '🦀', imageUrl: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=800&q=80' },
+                { name: 'झिंगा', emoji: '🦐', imageUrl: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=800&q=80' },
+                { name: 'कछुवा', emoji: '🐢', imageUrl: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800&q=80' }
             ]
         };
 
@@ -1747,7 +2063,14 @@
             world_places: 'विश्वका ठाउँहरू',
             movie_stars: 'चलचित्र ताराहरू',
             athletes: 'खेलाडीहरू',
-            professions: 'पेशाहरू'
+            professions: 'पेशाहरू',
+            vehicles: 'सवारी साधनहरू',
+            fruits: 'फलफूलहरू',
+            vegetables: 'तरकारीहरू',
+            sports: 'खेलकुदहरू',
+            flowers: 'फूलहरू',
+            birds: 'चराहरू',
+            sea_creatures: 'समुद्री जीवहरू'
         };
 
         const motivationalPhrases = [
@@ -1974,6 +2297,7 @@
         function startPlayerTurn() {
             document.getElementById('readyScreen').style.display = 'none';
             document.body.classList.add('game-active'); // Prevent pull-to-refresh
+            document.querySelector('h1').classList.add('hidden'); // Hide header logo
 
             skipCount = 0; // Reset skip count for new turn
             currentRoundCorrect = 0; // Reset correct count for new round
@@ -2265,6 +2589,7 @@
         function gameOver() {
             stopTimer();
             document.body.classList.remove('game-active'); // Re-enable pull-to-refresh
+            document.querySelector('h1').classList.remove('hidden'); // Show header logo
 
             const sortedPlayers = Object.entries(playerScores)
                 .sort((a, b) => b[1] - a[1]);
