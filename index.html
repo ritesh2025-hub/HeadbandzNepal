@@ -890,6 +890,46 @@
             margin-bottom: 20px;
         }
 
+        /* iPad / Tablet styles */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .card-display {
+                min-height: 550px;
+            }
+
+            .card-image {
+                min-height: 550px;
+                font-size: 160px;
+            }
+
+            .card-image.emoji-fallback {
+                font-size: 160px;
+            }
+
+            .card-name {
+                font-size: 2.2em;
+            }
+
+            .action-buttons button {
+                width: 200px;
+                height: 90px;
+                font-size: 1.6em;
+            }
+
+            .game-info-bar {
+                font-size: 1.3em;
+                padding: 18px 25px;
+            }
+
+            .header-logo {
+                width: 130px;
+                height: 130px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -1273,6 +1313,19 @@
                 </p>
             </div>
 
+            <div class="category-section">
+                <h2 class="section-title">प्रति राउन्ड समय</h2>
+                <div class="input-group">
+                    <input type="number" id="timeInput" value="60" min="30" max="180" placeholder="सेकेन्ड">
+                    <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
+                        सेकेन्ड
+                    </label>
+                </div>
+                <p style="color: #718096; font-size: 14px; margin-top: 10px;">
+                    प्रत्येक खेलाडीले यति सेकेन्ड समय पाउनेछ (३० - १८० सेकेन्ड)
+                </p>
+            </div>
+
             <div class="start-game-section">
                 <button class="btn-primary" onclick="startGame()" style="font-size: 20px; padding: 15px 40px;">
                     खेल सुरु गर्नुहोस् 🎮
@@ -1287,7 +1340,7 @@
                 <h2>🎯 तयार हुनुहोस्!</h2>
                 <div class="ready-player-name" id="readyPlayerName"></div>
                 <div class="ready-motivation" id="readyMotivation"></div>
-                <div class="ready-instructions">
+                <div class="ready-instructions" id="readyInstructions">
                     तपाईंसँग <strong>1 मिनेट</strong> छ<br>
                     सकेसम्म धेरै अनुमान लगाउनुहोस्!
                 </div>
@@ -1304,6 +1357,12 @@
                     <div class="card-category" id="cardCategory"></div>
                     <div class="card-image" id="cardImage"></div>
                     <div class="card-name" id="cardName"></div>
+                    <div id="countdownOverlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 100;">
+                        <div style="text-align: center;">
+                            <div id="countdownNumber" style="font-size: 120px; font-weight: bold; color: white; text-shadow: 0 0 30px rgba(255,255,255,0.8);"></div>
+                            <div id="countdownMessage" style="font-size: 24px; color: white; margin-top: 20px;">अर्को शब्द आउँदैछ...</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="game-info-bar">
@@ -1606,12 +1665,16 @@
         let cards = [];
         let timer = null;
         let timeRemaining = 60;
+        let roundTime = 60; // Configurable time per round
         let playerScores = {};
         let playerRounds = {};
         let maxRounds = 5;
         let totalRoundsPlayed = 0;
         let skipCount = 0;
         let preloadedImage = null;
+        let playerRoundDetails = {}; // Track detailed stats per round
+        let currentRoundCorrect = 0; // Track correct answers in current round
+        let currentRoundSkipped = 0; // Track skips in current round
 
         function addPlayer() {
             const input = document.getElementById('playerNameInput');
@@ -1680,6 +1743,11 @@
             maxRounds = parseInt(document.getElementById('roundsInput').value) || 5;
             if (maxRounds < 1) maxRounds = 1;
 
+            // Read time configuration
+            roundTime = parseInt(document.getElementById('timeInput').value) || 60;
+            if (roundTime < 30) roundTime = 30;
+            if (roundTime > 180) roundTime = 180;
+
             cards = [];
             selectedCategories.forEach(category => {
                 gameData[category].forEach(item => {
@@ -1697,6 +1765,7 @@
 
             players.forEach(player => {
                 playerRounds[player] = 0;
+                playerRoundDetails[player] = []; // Initialize detailed tracking
             });
 
             document.getElementById('setupSection').style.display = 'none';
@@ -1724,9 +1793,25 @@
             const randomMotivation = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
             const currentRound = playerRounds[currentPlayer] + 1;
 
+            // Format time display
+            const timeMinutes = Math.floor(roundTime / 60);
+            const timeSeconds = roundTime % 60;
+            let timeDisplay;
+            if (timeMinutes > 0 && timeSeconds > 0) {
+                timeDisplay = `${timeMinutes} मिनेट ${timeSeconds} सेकेन्ड`;
+            } else if (timeMinutes > 0) {
+                timeDisplay = `${timeMinutes} मिनेट`;
+            } else {
+                timeDisplay = `${timeSeconds} सेकेन्ड`;
+            }
+
             document.getElementById('readyPlayerName').textContent = currentPlayer;
             document.getElementById('readyMotivation').textContent = randomMotivation;
             document.getElementById('readyRoundIndicator').textContent = `राउन्ड ${currentRound} / ${maxRounds}`;
+            document.getElementById('readyInstructions').innerHTML = `
+                तपाईंसँग <strong>${timeDisplay}</strong> छ<br>
+                सकेसम्म धेरै अनुमान लगाउनुहोस्!
+            `;
             document.getElementById('readyScreen').style.display = 'flex';
         }
 
@@ -1783,6 +1868,8 @@
         function startPlayerTurn() {
             document.getElementById('readyScreen').style.display = 'none';
             skipCount = 0; // Reset skip count for new turn
+            currentRoundCorrect = 0; // Reset correct count for new round
+            currentRoundSkipped = 0; // Reset skipped count for new round
 
             // Re-enable skip button
             document.getElementById('skipButton').disabled = false;
@@ -1798,19 +1885,28 @@
             const card = cards[currentCardIndex];
             const currentPlayer = players[currentPlayerIndex];
 
-            displayCard(card);
-            document.getElementById('cardName').textContent = card.name;
-            document.getElementById('cardCategory').textContent = card.category;
+            // Set up the display but don't show card content yet
             document.getElementById('currentPlayerName').textContent = currentPlayer;
             document.getElementById('currentScore').textContent = playerScores[currentPlayer];
             document.getElementById('currentRounds').textContent = `${playerRounds[currentPlayer]} / ${maxRounds}`;
 
-            startTimer();
+            // Initialize timer display but don't start yet
+            timeRemaining = roundTime;
+            updateTimerDisplay();
+
+            // Show initial countdown before revealing first card
+            showCountdown(() => {
+                // After countdown, show the card and start timer
+                displayCard(card);
+                document.getElementById('cardName').textContent = card.name;
+                document.getElementById('cardCategory').textContent = card.category;
+                startTimer();
+            }, 'तयार हुनुहोस्... 🎯');
         }
 
         function startTimer() {
             stopTimer();
-            timeRemaining = 60;
+            timeRemaining = roundTime; // Use configured time
             updateTimerDisplay();
 
             timer = setInterval(() => {
@@ -1842,6 +1938,60 @@
             document.getElementById('timerDisplay').classList.remove('warning');
         }
 
+        function pauseTimer() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+
+        function resumeTimer() {
+            if (timer) return; // Already running
+
+            timer = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 10) {
+                    document.getElementById('timerDisplay').classList.add('warning');
+                } else {
+                    document.getElementById('timerDisplay').classList.remove('warning');
+                }
+
+                if (timeRemaining <= 0) {
+                    stopTimer();
+                    playTimeUpSound();
+                    setTimeout(() => {
+                        alert('समय समाप्त भयो! अर्को खेलाडीको पालो');
+                        nextPlayer();
+                    }, 100);
+                }
+            }, 1000);
+        }
+
+        function showCountdown(callback, message = 'अर्को शब्द आउँदैछ...') {
+            const overlay = document.getElementById('countdownOverlay');
+            const numberDisplay = document.getElementById('countdownNumber');
+            const messageDisplay = document.getElementById('countdownMessage');
+
+            messageDisplay.textContent = message;
+            overlay.style.display = 'flex';
+
+            let count = 5;
+            numberDisplay.textContent = count;
+
+            const countdownInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    numberDisplay.textContent = count;
+                } else {
+                    clearInterval(countdownInterval);
+                    overlay.style.display = 'none';
+                    if (callback) callback();
+                }
+            }, 1000);
+        }
+
         function updateTimerDisplay() {
             const minutes = Math.floor(timeRemaining / 60);
             const seconds = timeRemaining % 60;
@@ -1849,7 +1999,7 @@
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
             // Update progress bar
-            const progress = (timeRemaining / 60) * 100;
+            const progress = (timeRemaining / roundTime) * 100; // Use configured time
             const progressBar = document.getElementById('timeProgress');
             if (progressBar) {
                 progressBar.style.width = progress + '%';
@@ -1883,14 +2033,43 @@
             }, 600);
         }
 
+        function disableButtons() {
+            document.getElementById('skipButton').disabled = true;
+            document.getElementById('skipButton').style.opacity = '0.5';
+            document.querySelectorAll('.btn-correct').forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+            });
+        }
+
+        function enableButtons() {
+            if (skipCount < 1) {
+                document.getElementById('skipButton').disabled = false;
+                document.getElementById('skipButton').style.opacity = '1';
+                document.getElementById('skipButton').style.cursor = 'pointer';
+            }
+            document.querySelectorAll('.btn-correct').forEach(btn => {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            });
+        }
+
         function correctGuess() {
             const currentPlayer = players[currentPlayerIndex];
             playerScores[currentPlayer]++;
+            currentRoundCorrect++; // Track correct answer for this round
             document.getElementById('currentScore').textContent = playerScores[currentPlayer];
             flashScreen('#48bb78');
             showScoreAnimation();
             playSuccessSound();
-            nextCard();
+            disableButtons();
+            pauseTimer(); // Pause the main timer
+
+            showCountdown(() => {
+                nextCard();
+                enableButtons();
+                resumeTimer(); // Resume the main timer
+            });
         }
 
         function skipCard() {
@@ -1898,12 +2077,20 @@
                 return;
             }
             skipCount++;
+            currentRoundSkipped++; // Track skip for this round
             document.getElementById('skipButton').disabled = true;
             document.getElementById('skipButton').style.opacity = '0.5';
             document.getElementById('skipButton').style.cursor = 'not-allowed';
             document.getElementById('skipCounter').textContent = '0';
             flashScreen('#ed8936');
-            nextCard();
+            disableButtons();
+            pauseTimer(); // Pause the main timer
+
+            showCountdown(() => {
+                nextCard();
+                enableButtons();
+                resumeTimer(); // Resume the main timer
+            });
         }
 
         function nextCard() {
@@ -1930,7 +2117,16 @@
         function nextPlayer() {
             stopTimer();
 
-            playerRounds[players[currentPlayerIndex]]++;
+            // Save round details for current player
+            const currentPlayer = players[currentPlayerIndex];
+            const roundNumber = playerRounds[currentPlayer] + 1;
+            playerRoundDetails[currentPlayer].push({
+                round: roundNumber,
+                correct: currentRoundCorrect,
+                skipped: currentRoundSkipped
+            });
+
+            playerRounds[currentPlayer]++;
 
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 
@@ -1961,12 +2157,35 @@
             const sortedPlayers = Object.entries(playerScores)
                 .sort((a, b) => b[1] - a[1]);
 
-            const scoresHTML = sortedPlayers.map((entry, index) => `
-                <div class="score-item">
-                    <span><strong>${index + 1}. ${entry[0]}</strong></span>
-                    <span style="font-size: 1.2em; color: #DC143C;">${entry[1]} अंक</span>
-                </div>
-            `).join('');
+            const scoresHTML = sortedPlayers.map((entry, index) => {
+                const playerName = entry[0];
+                const playerScore = entry[1];
+                const roundDetails = playerRoundDetails[playerName];
+
+                // Create round-by-round breakdown
+                const detailsHTML = roundDetails.map(detail => `
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                        <span>राउन्ड ${detail.round}:</span>
+                        <span style="color: #48bb78;">✓ ${detail.correct}</span>
+                        <span style="color: #ed8936;">छोडियो ${detail.skipped}</span>
+                    </div>
+                `).join('');
+
+                return `
+                    <div class="score-item" style="display: block;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 10px 0;" onclick="toggleDetails('details-${index}')">
+                            <span><strong>${index + 1}. ${playerName}</strong></span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 1.2em; color: #DC143C;">${playerScore} अंक</span>
+                                <span id="arrow-${index}" style="transition: transform 0.3s;">▼</span>
+                            </div>
+                        </div>
+                        <div id="details-${index}" style="display: none; padding-left: 10px; margin-top: 10px; background: #f7fafc; border-radius: 8px; padding: 10px;">
+                            ${detailsHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
 
             document.getElementById('cardDisplay').innerHTML = `
                 <div class="game-over">
@@ -1976,13 +2195,33 @@
                     </p>
                     <div class="final-scores">
                         <h3 style="margin-bottom: 15px; color: #DC143C;">अन्तिम स्कोर</h3>
+                        <p style="font-size: 0.85em; color: #718096; margin-bottom: 10px;">विवरण हेर्न खेलाडीको नाममा क्लिक गर्नुहोस्</p>
                         ${scoresHTML}
                     </div>
-                    <button class="btn-primary" onclick="restartGame()" style="font-size: 18px; padding: 12px 30px; margin-top: 20px;">
-                        फेरि खेल्नुहोस्
-                    </button>
+                    <p style="color: #718096; margin-top: 30px; font-size: 0.9em;">
+                        १० सेकेन्डमा पृष्ठ पुनः लोड हुनेछ...
+                    </p>
                 </div>
             `;
+
+            // Auto-reload page after 10 seconds
+            setTimeout(() => {
+                location.reload();
+            }, 10000);
+        }
+
+        function toggleDetails(detailsId) {
+            const details = document.getElementById(detailsId);
+            const arrowId = detailsId.replace('details-', 'arrow-');
+            const arrow = document.getElementById(arrowId);
+
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                details.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            }
         }
 
         function endGame() {
@@ -1999,9 +2238,13 @@
             cards = [];
             playerScores = {};
             playerRounds = {};
+            playerRoundDetails = {};
             totalRoundsPlayed = 0;
             maxRounds = 5;
+            roundTime = 60;
             skipCount = 0;
+            currentRoundCorrect = 0;
+            currentRoundSkipped = 0;
 
             document.getElementById('setupSection').style.display = 'block';
             document.getElementById('gameSection').style.display = 'none';
