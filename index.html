@@ -821,10 +821,13 @@
 
         .info-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 5px;
             white-space: nowrap;
             min-height: 50px;
+            text-align: center;
         }
 
         .info-label {
@@ -1057,22 +1060,51 @@
             }
 
             .game-info-bar {
-                gap: 10px;
-                padding: 8px 10px;
-                font-size: 0.9em;
+                gap: 5px;
+                padding: 6px 8px;
+                font-size: 0.75em;
                 border-radius: 10px;
+                flex-wrap: nowrap;
             }
 
             .info-item {
-                min-height: 40px;
+                min-height: 35px;
+                flex-direction: column;
+                gap: 2px;
+                min-width: 0;
             }
 
             .info-label {
-                font-size: 0.8em;
+                font-size: 0.75em;
+                white-space: nowrap;
             }
 
             .info-value {
-                font-size: 1.1em;
+                font-size: 0.95em;
+                white-space: nowrap;
+            }
+
+            .timer-value {
+                font-size: 0.85em !important;
+            }
+
+            /* Compact timer on mobile */
+            .info-item:nth-child(2) > div {
+                gap: 3px !important;
+            }
+
+            .info-item:nth-child(2) > div > div:last-child {
+                width: 60px !important;
+                height: 4px !important;
+            }
+
+            /* Compact score display */
+            .info-item:nth-child(3) .info-value {
+                font-size: 0.9em !important;
+            }
+
+            .info-item:nth-child(3) .info-value span {
+                font-size: 0.85em !important;
             }
 
             .action-buttons {
@@ -1326,15 +1358,6 @@
     <!-- Flash Overlay -->
     <div id="flashOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; opacity: 0; transition: opacity 0.3s;"></div>
 
-    <!-- Password Modal -->
-    <div id="passwordModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); z-index: 10000; display: none; align-items: center; justify-content: center;">
-        <div style="background: linear-gradient(135deg, #DC143C 0%, #003893 100%); padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
-            <h2 style="color: white; margin-bottom: 20px; font-size: 1.8em;">🔒 पासवर्ड प्रविष्ट गर्नुहोस्</h2>
-            <input type="password" id="passwordInput" placeholder="पासवर्ड" style="width: 100%; padding: 15px; font-size: 1.2em; border: none; border-radius: 10px; margin-bottom: 20px; text-align: center;">
-            <div id="passwordError" style="color: #ffcccb; margin-bottom: 15px; display: none;">गलत पासवर्ड! कृपया पुन: प्रयास गर्नुहोस्।</div>
-            <button onclick="checkPassword()" style="background: #48bb78; color: white; padding: 15px 40px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%;">प्रवेश गर्नुहोस्</button>
-        </div>
-    </div>
 
     <!-- Reset Confirmation Modal -->
     <div id="resetModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center; overflow-y: auto; padding: 10px;">
@@ -1639,7 +1662,7 @@
             <div class="category-section">
                 <h2 class="section-title">राउन्ड संख्या</h2>
                 <div class="input-group">
-                    <input type="number" id="roundsInput" value="5" min="1" max="20" placeholder="राउन्ड संख्या">
+                    <input type="number" id="roundsInput" value="3" min="1" max="20" placeholder="राउन्ड संख्या">
                     <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
                         प्रति खेलाडी राउन्ड
                     </label>
@@ -1652,14 +1675,20 @@
             <div class="category-section">
                 <h2 class="section-title">प्रति राउन्ड समय</h2>
                 <div class="input-group">
-                    <input type="number" id="timeInput" value="60" min="30" max="180" placeholder="सेकेन्ड">
+                    <input type="number" id="timeInput" value="90" min="30" max="300" placeholder="सेकेन्ड" step="5">
                     <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
                         सेकेन्ड
                     </label>
                 </div>
                 <p style="color: #718096; font-size: 14px; margin-top: 10px;">
-                    प्रत्येक खेलाडीले यति सेकेन्ड समय पाउनेछ (३० - १८० सेकेन्ड)
+                    प्रत्येक खेलाडीले यति सेकेन्ड समय पाउनेछ (३० - ३०० सेकेन्ड)
                 </p>
+                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                    <button class="btn-secondary" onclick="setTime(60)" style="flex: 1; min-width: 100px; padding: 8px;">१ मिनेट</button>
+                    <button class="btn-secondary" onclick="setTime(90)" style="flex: 1; min-width: 100px; padding: 8px;">१.५ मिनेट</button>
+                    <button class="btn-secondary" onclick="setTime(120)" style="flex: 1; min-width: 100px; padding: 8px;">२ मिनेट</button>
+                    <button class="btn-secondary" onclick="setTime(180)" style="flex: 1; min-width: 100px; padding: 8px;">३ मिनेट</button>
+                </div>
             </div>
 
             <div class="start-game-section">
@@ -1691,6 +1720,7 @@
             <div class="game-layout">
                 <div class="card-display" id="cardDisplay">
                     <div class="card-category" id="cardCategory"></div>
+                    <button class="issue-report-btn" id="issueReportBtn" onclick="reportIssue()" style="display: none;">⚠️ Report Issue</button>
                     <div class="card-image" id="cardImage"></div>
                     <div class="card-name" id="cardName"></div>
                     <div id="countdownOverlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 100;">
@@ -1983,9 +2013,7 @@
                 { name: 'सुन्तला', emoji: '🍊', imageUrl: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=800&q=80' },
                 { name: 'अंगुर', emoji: '🍇', imageUrl: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80' },
                 { name: 'आँप', emoji: '🥭', imageUrl: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&q=80' },
-                { name: 'तरबूज', emoji: '🍉', imageUrl: 'https://images.unsplash.com/photo-1589984662646-e7b2e4962ec7?w=800&q=80' },
                 { name: 'स्ट्रबेरी', emoji: '🍓', imageUrl: 'https://images.unsplash.com/photo-1543528176-61b239494933?w=800&q=80' },
-                { name: 'अनानास', emoji: '🍍', imageUrl: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80' },
                 { name: 'किवी', emoji: '🥝', imageUrl: 'https://images.unsplash.com/photo-1585059895524-72359e06133a?w=800&q=80' },
                 { name: 'नरिवल', emoji: '🥥', imageUrl: 'https://images.unsplash.com/photo-1525258686769-94e18e6e379f?w=800&q=80' }
             ],
@@ -1997,7 +2025,6 @@
                 { name: 'प्याज', emoji: '🧅', imageUrl: 'https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80' },
                 { name: 'बिन्स', emoji: '🫘', imageUrl: 'https://images.unsplash.com/photo-1611170802031-1e1b5d31d2ee?w=800&q=80' },
                 { name: 'ब्रोकाउली', emoji: '🥦', imageUrl: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&q=80' },
-                { name: 'काँक्रो', emoji: '🥒', imageUrl: 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=800&q=80' },
                 { name: 'मकै', emoji: '🌽', imageUrl: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=800&q=80' },
                 { name: 'लसुन', emoji: '🧄', imageUrl: 'https://images.unsplash.com/photo-1566174102924-1e37f6e0a5cc?w=800&q=80' }
             ],
@@ -2008,7 +2035,6 @@
                 { name: 'टेनिस', emoji: '🎾', imageUrl: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&q=80' },
                 { name: 'ब्याडमिन्टन', emoji: '🏸', imageUrl: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&q=80' },
                 { name: 'भलिबल', emoji: '🏐', imageUrl: 'https://images.unsplash.com/photo-1592656094267-764a45160876?w=800&q=80' },
-                { name: 'तैराकी', emoji: '🏊', imageUrl: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&q=80' },
                 { name: 'बक्सिङ', emoji: '🥊', imageUrl: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80' },
                 { name: 'योग', emoji: '🧘', imageUrl: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80' },
                 { name: 'दौड', emoji: '🏃', imageUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80' }
@@ -2016,35 +2042,23 @@
             flowers: [
                 { name: 'गुलाब', emoji: '🌹', imageUrl: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=800&q=80' },
                 { name: 'सूर्यमुखी', emoji: '🌻', imageUrl: 'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=800&q=80' },
-                { name: 'लिली', emoji: '🌺', imageUrl: 'https://images.unsplash.com/photo-1501250987900-211028be2c82?w=800&q=80' },
                 { name: 'गेंदा', emoji: '🌼', imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80' },
-                { name: 'कमल', emoji: '🪷', imageUrl: 'https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?w=800&q=80' },
                 { name: 'गुलाफशेर', emoji: '🌸', imageUrl: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=800&q=80' },
-                { name: 'ट्युलिप', emoji: '🌷', imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80' },
                 { name: 'ज्यास्मिन', emoji: '🤍', imageUrl: 'https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?w=800&q=80' },
-                { name: 'आर्किड', emoji: '💜', imageUrl: 'https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?w=800&q=80' },
-                { name: 'डहेलिया', emoji: '🌺', imageUrl: 'https://images.unsplash.com/photo-1597002251761-54a2f0e6b3b0?w=800&q=80' }
+                { name: 'आर्किड', emoji: '💜', imageUrl: 'https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?w=800&q=80' }
             ],
             birds: [
                 { name: 'चिल', emoji: '🦅', imageUrl: 'https://images.unsplash.com/photo-1520087619250-584c0cbd35e8?w=800&q=80' },
                 { name: 'परेवा', emoji: '🕊️', imageUrl: 'https://images.unsplash.com/photo-1551859616-b966f1039e3f?w=800&q=80' },
-                { name: 'मोर', emoji: '🦚', imageUrl: 'https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?w=800&q=80' },
-                { name: 'काग', emoji: '🦅', imageUrl: 'https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=800&q=80' },
                 { name: 'सुगा', emoji: '🦜', imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&q=80' },
-                { name: 'कोइली', emoji: '🐦', imageUrl: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&q=80' },
-                { name: 'बत्तख', emoji: '🦆', imageUrl: 'https://images.unsplash.com/photo-1568641852-c6eb98162c7b?w=800&q=80' },
                 { name: 'हंस', emoji: '🦢', imageUrl: 'https://images.unsplash.com/photo-1568378780196-a9a0b7d55a2e?w=800&q=80' },
                 { name: 'चिडिया', emoji: '🐦', imageUrl: 'https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=800&q=80' },
                 { name: 'उल्लू', emoji: '🦉', imageUrl: 'https://images.unsplash.com/photo-1573921470445-2c0e1d024e97?w=800&q=80' }
             ],
             sea_creatures: [
-                { name: 'ह्वेल', emoji: '🐋', imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80' },
                 { name: 'शार्क', emoji: '🦈', imageUrl: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800&q=80' },
-                { name: 'डल्फिन', emoji: '🐬', imageUrl: 'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=800&q=80' },
                 { name: 'अक्टोपस', emoji: '🐙', imageUrl: 'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?w=800&q=80' },
                 { name: 'जेलीफिस', emoji: '🪼', imageUrl: 'https://images.unsplash.com/photo-1496108493455-c88c6b52726a?w=800&q=80' },
-                { name: 'सी हर्स', emoji: '🐴', imageUrl: 'https://images.unsplash.com/photo-1534088568595-a3ce6a791f74?w=800&q=80' },
-                { name: 'स्टारफिस', emoji: '⭐', imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80' },
                 { name: 'केकडा', emoji: '🦀', imageUrl: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=800&q=80' },
                 { name: 'झिंगा', emoji: '🦐', imageUrl: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=800&q=80' },
                 { name: 'कछुवा', emoji: '🐢', imageUrl: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800&q=80' }
@@ -2083,7 +2097,37 @@
             'खेल जिताउनुहोस्! 🎮',
             'तपाईं उत्कृष्ट हुनुहुन्छ! ⭐',
             'ध्यान केन्द्रित गर्नुहोस्! 🎪',
-            'सफलता नजिकै छ! 🚀'
+            'सफलता नजिकै छ! 🚀',
+            'आजको चाम्पियन तपाईं! 🥇',
+            'डर नमान्ने, जित्ने! 💥',
+            'दिमाग चलाउने बेला भयो! 🤔',
+            'यो राउन्ड तपाईंको! 🎯',
+            'तयार छु भन्नुहोस्! 💪',
+            'फर्कन्छु जितेर! 🦸',
+            'मस्त खेल्ने बेला! 🎉',
+            'अब देखाउने बेला! ⚡',
+            'तपाईंको नाम इतिहासमा! 📜',
+            'चुपचाप जित्ने! 🤫',
+            'दिमाग तातेको छ! 🔥',
+            'यसपालि रेकर्ड तोड्ने! 📈',
+            'जिउँदो किंवदन्ती! 👑',
+            'सोच्ने शक्ति अनलिमिटेड! 🌟',
+            'यो खेल तपाईंको पकेट! 🎒',
+            'आज त धमाल गर्ने! 🎊',
+            'तपाईं नै बस! 🚌',
+            'दिमाग को बत्ती बालौं! 💡',
+            'यो त सजिलै! 😎',
+            'तपाईंको खेल तपाईंको नियम! 👊',
+            'आज को दिन तपाईंको! ☀️',
+            'मज्जाले जित्ने! 😄',
+            'एकदमै लाग्यो! 🎯',
+            'बस अब त गर्नै पर्यो! 💯',
+            'कसैले रोक्न सक्दैन! 🛡️',
+            'तपाईं त प्रो हुनुहुन्छ! 🎮',
+            'यो त माया लाग्यो! ❤️',
+            'दिमाग फुल चार्ज! 🔋',
+            'बिजुली जस्तै फास्ट! ⚡',
+            'तपाईं नै सुपरस्टार! 🌟'
         ];
 
         let players = [];
@@ -2091,17 +2135,19 @@
         let currentCardIndex = 0;
         let cards = [];
         let timer = null;
-        let timeRemaining = 60;
-        let roundTime = 60; // Configurable time per round
+        let timeRemaining = 90;
+        let roundTime = 90; // Configurable time per round (default 1 minute 30 seconds)
         let playerScores = {};
         let playerRounds = {};
-        let maxRounds = 5;
+        let maxRounds = 3; // Default 3 rounds per player
         let totalRoundsPlayed = 0;
         let skipCount = 0;
         let preloadedImage = null;
         let playerRoundDetails = {}; // Track detailed stats per round
         let currentRoundCorrect = 0; // Track correct answers in current round
         let currentRoundSkipped = 0; // Track skips in current round
+        let reportedIssues = []; // Track cards with image issues
+        let currentCardReported = false; // Track if current card is reported
 
         function addPlayer() {
             const input = document.getElementById('playerNameInput');
@@ -2167,13 +2213,13 @@
                 return;
             }
 
-            maxRounds = parseInt(document.getElementById('roundsInput').value) || 5;
+            maxRounds = parseInt(document.getElementById('roundsInput').value) || 3;
             if (maxRounds < 1) maxRounds = 1;
 
             // Read time configuration
-            roundTime = parseInt(document.getElementById('timeInput').value) || 60;
+            roundTime = parseInt(document.getElementById('timeInput').value) || 90;
             if (roundTime < 30) roundTime = 30;
-            if (roundTime > 180) roundTime = 180;
+            if (roundTime > 300) roundTime = 300;
 
             cards = [];
             selectedCategories.forEach(category => {
@@ -2290,6 +2336,23 @@
                 cardImageElement.classList.add('emoji-fallback');
             }
 
+            // Show issue report button and update its state
+            const issueBtn = document.getElementById('issueReportBtn');
+            issueBtn.style.display = 'block';
+
+            // Check if current card is already reported
+            currentCardReported = reportedIssues.some(issue =>
+                issue.name === card.name && issue.category === card.category
+            );
+
+            if (currentCardReported) {
+                issueBtn.classList.add('reported');
+                issueBtn.textContent = '✓ Reported';
+            } else {
+                issueBtn.classList.remove('reported');
+                issueBtn.textContent = '⚠️ Report Issue';
+            }
+
             // Preload next image in background
             preloadNextImage();
         }
@@ -2345,8 +2408,9 @@
                 timeRemaining--;
                 updateTimerDisplay();
 
-                if (timeRemaining <= 10) {
+                if (timeRemaining <= 10 && timeRemaining > 0) {
                     document.getElementById('timerDisplay').classList.add('warning');
+                    playCountdownBeep(); // Play beep for each second from 10 to 1
                 } else {
                     document.getElementById('timerDisplay').classList.remove('warning');
                 }
@@ -2384,8 +2448,9 @@
                 timeRemaining--;
                 updateTimerDisplay();
 
-                if (timeRemaining <= 10) {
+                if (timeRemaining <= 10 && timeRemaining > 0) {
                     document.getElementById('timerDisplay').classList.add('warning');
+                    playCountdownBeep(); // Play beep for each second from 10 to 1
                 } else {
                     document.getElementById('timerDisplay').classList.remove('warning');
                 }
@@ -2409,8 +2474,9 @@
             messageDisplay.textContent = message;
             overlay.style.display = 'flex';
 
-            // Disable buttons during countdown
+            // Disable buttons and hide issue report button during countdown
             disableButtons();
+            document.getElementById('issueReportBtn').style.display = 'none';
 
             let count = 3;
             numberDisplay.textContent = count;
@@ -2641,6 +2707,12 @@
                 </div>
             `;
 
+            // Print reported issues to console
+            if (reportedIssues.length > 0) {
+                console.log('\n🎮 GAME OVER - Printing reported issues:\n');
+                printIssues();
+            }
+
             // Auto-reload page after 10 seconds
             setTimeout(() => {
                 location.reload();
@@ -2730,8 +2802,8 @@
             playerRounds = {};
             playerRoundDetails = {};
             totalRoundsPlayed = 0;
-            maxRounds = 5;
-            roundTime = 60;
+            maxRounds = 3;
+            roundTime = 90;
             skipCount = 0;
             currentRoundCorrect = 0;
             currentRoundSkipped = 0;
@@ -2741,7 +2813,8 @@
             document.getElementById('readyScreen').style.display = 'none';
             document.getElementById('playersList').innerHTML = '';
             document.getElementById('playerNameInput').value = '';
-            document.getElementById('roundsInput').value = '5';
+            document.getElementById('roundsInput').value = '3';
+            document.getElementById('timeInput').value = '90';
 
             document.querySelectorAll('.category-card input[type="checkbox"]').forEach(cb => {
                 cb.checked = true;
@@ -2784,26 +2857,31 @@
             oscillator.stop(audioContext.currentTime + 0.5);
         }
 
-        function startFromSplash() {
-            document.getElementById('passwordModal').style.display = 'flex';
-            document.getElementById('passwordInput').focus();
+        function playCountdownBeep() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 600;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.15);
         }
 
-        function checkPassword() {
-            const password = document.getElementById('passwordInput').value;
-            if (password === 'NepaliPass') {
-                document.getElementById('passwordModal').style.display = 'none';
-                document.body.classList.remove('splash-active');
-                document.getElementById('splashScreen').classList.add('hidden');
+        function startFromSplash() {
+            document.body.classList.remove('splash-active');
+            document.getElementById('splashScreen').classList.add('hidden');
 
-                // Show welcome screen
-                document.getElementById('welcomeScreen').classList.add('active');
-                document.getElementById('welcomeScreen').classList.remove('hidden');
-            } else {
-                document.getElementById('passwordError').style.display = 'block';
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus();
-            }
+            // Show welcome screen
+            document.getElementById('welcomeScreen').classList.add('active');
+            document.getElementById('welcomeScreen').classList.remove('hidden');
         }
 
         function closeWelcome() {
@@ -2823,6 +2901,93 @@
             });
         }
 
+        function setTime(seconds) {
+            document.getElementById('timeInput').value = seconds;
+        }
+
+        function reportIssue() {
+            if (currentCardIndex >= cards.length) return;
+
+            const card = cards[currentCardIndex];
+            const issueBtn = document.getElementById('issueReportBtn');
+
+            // Toggle report state
+            if (currentCardReported) {
+                // Remove from reported issues
+                reportedIssues = reportedIssues.filter(issue =>
+                    !(issue.name === card.name && issue.category === card.category)
+                );
+                currentCardReported = false;
+                issueBtn.classList.remove('reported');
+                issueBtn.textContent = '⚠️ Report Issue';
+                console.log(`✓ Removed issue report for: ${card.name} (${card.category})`);
+            } else {
+                // Add to reported issues
+                reportedIssues.push({
+                    name: card.name,
+                    category: card.category,
+                    imageUrl: card.imageUrl || null,
+                    imageFile: card.imageFile || null,
+                    emoji: card.emoji
+                });
+                currentCardReported = true;
+                issueBtn.classList.add('reported');
+                issueBtn.textContent = '✓ Reported';
+                console.log(`⚠️ Reported issue for: ${card.name} (${card.category})`);
+            }
+
+            // Print current count
+            console.log(`Total issues reported: ${reportedIssues.length}`);
+        }
+
+        // Console command to print all reported issues
+        function printIssues() {
+            if (reportedIssues.length === 0) {
+                console.log('No issues reported yet.');
+                return;
+            }
+
+            console.log('\n========================================');
+            console.log(`REPORTED IMAGE ISSUES (${reportedIssues.length} items)`);
+            console.log('========================================\n');
+
+            // Group by category
+            const byCategory = {};
+            reportedIssues.forEach(issue => {
+                if (!byCategory[issue.category]) {
+                    byCategory[issue.category] = [];
+                }
+                byCategory[issue.category].push(issue);
+            });
+
+            // Print grouped
+            Object.keys(byCategory).sort().forEach(category => {
+                console.log(`\n${category}:`);
+                byCategory[category].forEach(issue => {
+                    const source = issue.imageUrl ? 'imageUrl' : (issue.imageFile ? 'imageFile' : 'emoji only');
+                    console.log(`  - ${issue.name} (${source})`);
+                });
+            });
+
+            console.log('\n========================================');
+            console.log('Copy-paste format for removal:');
+            console.log('========================================\n');
+
+            reportedIssues.forEach(issue => {
+                console.log(`{ name: '${issue.name}', category: '${issue.category}' },`);
+            });
+
+            console.log('\n');
+        }
+
+        // Make printIssues available globally
+        window.printIssues = printIssues;
+
+        // Log info about issue reporting feature
+        console.log('%c🎮 Issue Reporting Feature Enabled', 'color: #DC143C; font-size: 16px; font-weight: bold;');
+        console.log('%cClick the "⚠️ Report Issue" button on any card to mark images that don\'t match.', 'color: #718096; font-size: 12px;');
+        console.log('%cType printIssues() in console anytime to see the list of reported issues.', 'color: #48bb78; font-size: 12px;');
+        console.log(' ');
 
         document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -2830,11 +2995,6 @@
             }
         });
 
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
 
         document.getElementById('resetConfirmInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -2902,26 +3062,8 @@
             }
         }, { passive: true });
 
-        // Check for admin URL parameter
-        function checkAdminAccess() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('admin')) {
-                // Skip password screen
-                document.getElementById('passwordModal').style.display = 'none';
-                document.body.classList.remove('splash-active');
-                document.getElementById('splashScreen').classList.add('hidden');
-
-                // Show welcome screen
-                document.getElementById('welcomeScreen').classList.add('active');
-                document.getElementById('welcomeScreen').classList.remove('hidden');
-            }
-        }
-
         // Prevent scrolling on load
         document.body.classList.add('splash-active');
-
-        // Check for admin access on page load
-        checkAdminAccess();
     </script>
 </body>
 </html>
