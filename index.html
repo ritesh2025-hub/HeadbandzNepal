@@ -2235,6 +2235,12 @@
             if (roundTime < 30) roundTime = 30;
             if (roundTime > 300) roundTime = 300;
 
+            // Read countdown configuration
+            countdownDuration = parseInt(document.getElementById('countdownInput').value);
+            if (isNaN(countdownDuration)) countdownDuration = 3;
+            if (countdownDuration < 0) countdownDuration = 0;
+            if (countdownDuration > 5) countdownDuration = 5;
+
             cards = [];
             selectedCategories.forEach(category => {
                 gameData[category].forEach(item => {
@@ -2481,6 +2487,14 @@
         }
 
         function showCountdown(callback, message = 'अर्को शब्द आउँदैछ...') {
+            // If countdown is disabled, call callback immediately with a small delay for visual transition
+            if (countdownDuration === 0) {
+                setTimeout(() => {
+                    if (callback) callback();
+                }, 100);
+                return;
+            }
+
             const overlay = document.getElementById('countdownOverlay');
             const numberDisplay = document.getElementById('countdownNumber');
             const messageDisplay = document.getElementById('countdownMessage');
@@ -2492,7 +2506,7 @@
             disableButtons();
             document.getElementById('issueReportBtn').style.display = 'none';
 
-            let count = 3;
+            let count = countdownDuration;
             numberDisplay.textContent = count;
 
             const countdownInterval = setInterval(() => {
@@ -2818,6 +2832,7 @@
             totalRoundsPlayed = 0;
             maxRounds = 3;
             roundTime = 90;
+            countdownDuration = 3;
             skipCount = 0;
             currentRoundCorrect = 0;
             currentRoundSkipped = 0;
@@ -2829,6 +2844,7 @@
             document.getElementById('playerNameInput').value = '';
             document.getElementById('roundsInput').value = '3';
             document.getElementById('timeInput').value = '90';
+            document.getElementById('countdownInput').value = '3';
 
             document.querySelectorAll('.category-card input[type="checkbox"]').forEach(cb => {
                 cb.checked = true;
