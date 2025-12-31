@@ -18,6 +18,11 @@
                 url('images/logo.jpg') center/cover fixed;
             min-height: 100vh;
             padding: 20px;
+            overscroll-behavior-y: contain; /* Prevent pull-to-refresh */
+        }
+
+        body.game-active {
+            overscroll-behavior: none; /* Disable pull-to-refresh during game */
         }
 
         .container {
@@ -65,7 +70,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
+            z-index: 2500;
             align-items: center;
             justify-content: center;
         }
@@ -454,6 +459,17 @@
             }
         }
 
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
         @media (max-width: 768px) {
             .welcome-content {
                 padding: 30px 20px;
@@ -826,7 +842,6 @@
 
         .action-buttons button {
             font-size: 1.5em;
-            width: 180px;
             height: 80px;
             border-radius: 15px;
             display: flex;
@@ -845,6 +860,7 @@
         .btn-correct {
             background: #48bb78;
             color: white;
+            width: 360px; /* Twice the size of skip button */
         }
 
         .btn-correct:hover {
@@ -856,6 +872,7 @@
         .btn-skip {
             background: #ed8936;
             color: white;
+            width: 180px;
         }
 
         .btn-skip:hover {
@@ -910,9 +927,16 @@
             }
 
             .action-buttons button {
-                width: 200px;
                 height: 90px;
                 font-size: 1.6em;
+            }
+
+            .btn-correct {
+                width: 400px; /* Twice the size for tablets */
+            }
+
+            .btn-skip {
+                width: 200px;
             }
 
             .game-info-bar {
@@ -992,15 +1016,21 @@
 
             .action-buttons {
                 gap: 15px;
-                flex-direction: column;
+                flex-direction: row;
             }
 
             .action-buttons button {
-                width: 100%;
-                max-width: 300px;
                 height: 70px;
                 font-size: 1.3em;
                 padding: 15px 20px;
+            }
+
+            .btn-correct {
+                flex: 2; /* Correct button takes twice the space */
+            }
+
+            .btn-skip {
+                flex: 1; /* Skip button takes half the space */
             }
 
             button {
@@ -1116,6 +1146,73 @@
         </div>
     </div>
 
+    <!-- Reset Confirmation Modal -->
+    <div id="resetModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center;">
+        <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 500px; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700;">
+            <div style="font-size: 4em; margin-bottom: 20px; animation: pulse 1s infinite;">⚠️</div>
+            <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">चेतावनी!</h2>
+            <p style="color: white; font-size: 1.3em; margin-bottom: 15px; line-height: 1.6;">
+                यदि तपाईंले खेल समाप्त गर्नुभयो भने<br>
+                <strong style="color: #FFD700; font-size: 1.2em;">सबै प्रगति हराउनेछ!</strong>
+            </p>
+            <p style="color: #ffcccb; font-size: 1.1em; margin-bottom: 25px;">
+                सबै स्कोर र राउन्ड रिसेट हुनेछन्
+            </p>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px dashed #FFD700;">
+                <p style="color: white; margin-bottom: 15px; font-size: 1.1em;">
+                    पुष्टि गर्न, तल <strong style="color: #FFD700; font-size: 1.3em;">RESET</strong> टाइप गर्नुहोस्:
+                </p>
+                <input type="text" id="resetConfirmInput" placeholder="RESET टाइप गर्नुहोस्" style="width: 100%; padding: 15px; font-size: 1.2em; border: 3px solid #FFD700; border-radius: 10px; margin-bottom: 15px; text-align: center; text-transform: uppercase; font-weight: bold; background: white; color: #DC143C;">
+                <div id="resetError" style="color: #ffcccb; margin-bottom: 10px; display: none; font-weight: bold; background: rgba(255,0,0,0.3); padding: 10px; border-radius: 5px;">
+                    गलत! "RESET" टाइप गर्नुहोस्
+                </div>
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <button onclick="cancelReset()" style="flex: 1; background: #48bb78; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                    ❌ रद्द गर्नुहोस्
+                </button>
+                <button onclick="confirmReset()" style="flex: 1; background: #8B0000; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; border: 2px solid #FFD700;">
+                    ✓ पुष्टि गर्नुहोस्
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refresh Confirmation Modal -->
+    <div id="refreshModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center;">
+        <div style="background: linear-gradient(135deg, #FF4500 0%, #DC143C 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 550px; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700;">
+            <div style="font-size: 5em; margin-bottom: 20px; animation: pulse 1s infinite;">🔄</div>
+            <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2.2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">पेज रिफ्रेश चेतावनी!</h2>
+            <p style="color: white; font-size: 1.4em; margin-bottom: 15px; line-height: 1.6; font-weight: bold;">
+                यदि तपाईंले पेज रिफ्रेश गर्नुभयो भने<br>
+                <strong style="color: #FFD700; font-size: 1.3em; text-decoration: underline;">सबै खेल प्रगति हराउनेछ!</strong>
+            </p>
+            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                <p style="color: #FFD700; font-size: 1.2em; margin: 0; font-weight: bold;">⚠️ सबै स्कोर, राउन्ड र समय रिसेट हुनेछ ⚠️</p>
+            </div>
+            <p style="color: white; font-size: 1.1em; margin-bottom: 25px;">
+                के तपाईं निश्चित हुनुहुन्छ?
+            </p>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px dashed #FFD700;">
+                <p style="color: white; margin-bottom: 15px; font-size: 1.1em;">
+                    पुष्टि गर्न, तल <strong style="color: #FFD700; font-size: 1.3em;">REFRESH</strong> टाइप गर्नुहोस्:
+                </p>
+                <input type="text" id="refreshConfirmInput" placeholder="REFRESH टाइप गर्नुहोस्" style="width: 100%; padding: 15px; font-size: 1.2em; border: 3px solid #FFD700; border-radius: 10px; margin-bottom: 15px; text-align: center; text-transform: uppercase; font-weight: bold; background: white; color: #DC143C;">
+                <div id="refreshError" style="color: #ffcccb; margin-bottom: 10px; display: none; font-weight: bold; background: rgba(255,0,0,0.3); padding: 10px; border-radius: 5px;">
+                    गलत! "REFRESH" टाइप गर्नुहोस्
+                </div>
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <button onclick="cancelRefresh()" style="flex: 1; background: #48bb78; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                    ❌ रद्द गर्नुहोस्
+                </button>
+                <button onclick="confirmRefresh()" style="flex: 1; background: #DC143C; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; border: 2px solid #FFD700;">
+                    🔄 रिफ्रेश गर्नुहोस्
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Splash Screen -->
     <div class="splash-screen" id="splashScreen">
         <div class="splash-content">
@@ -1189,7 +1286,14 @@
                 <div class="important-note">
                     <div class="important-note-title">⚠️ महत्वपूर्ण सुझाव</div>
                     <div class="important-note-text">
-                        <strong>सबै वर्ग छान्नुहोस्!</strong> यदि तपाईंले सबै ८ वर्गहरू छान्नुभयो भने खेल धेरै रोमाञ्चक हुन्छ। किनभने खेलाडीलाई थाहा हुँदैन कि शब्द कुन वर्गको हो!
+                        <strong>सबै वर्ग छान्नुहोस्!</strong> यदि तपाईंले सबै १२ वर्गहरू छान्नुभयो भने खेल धेरै रोमाञ्चक हुन्छ। किनभने खेलाडीलाई थाहा हुँदैन कि शब्द कुन वर्गको हो!
+                    </div>
+                </div>
+
+                <div class="important-note" style="background: #ffe6e6; border: 2px solid #dc143c; margin-top: 15px;">
+                    <div class="important-note-title" style="color: #dc143c;">🚫 ध्यान दिनुहोस्</div>
+                    <div class="important-note-text" style="color: #8b0000;">
+                        <strong>खेल खेल्दा पेज रिफ्रेश नगर्नुहोस्!</strong> रिफ्रेश गर्नुभयो भने सबै प्रगति हराउनेछ।
                     </div>
                 </div>
             </div>
@@ -1330,12 +1434,6 @@
                 <button class="btn-primary" onclick="startGame()" style="font-size: 20px; padding: 15px 40px;">
                     खेल सुरु गर्नुहोस् 🎮
                 </button>
-                <button class="btn-warning" onclick="clearGameData()" style="font-size: 14px; padding: 10px 20px; margin-top: 15px;">
-                    🗑️ खेल डाटा रिसेट गर्नुहोस्
-                </button>
-                <p id="savedGameNotice" style="color: #48bb78; font-size: 14px; margin-top: 10px; display: none;">
-                    ✓ सुरक्षित खेल फेला पर्‍यो! तपाईं जहाँबाट छोड्नुभयो त्यहाँबाट जारी राख्न सक्नुहुन्छ।
-                </p>
             </div>
         </div>
 
@@ -1350,7 +1448,7 @@
                     तपाईंसँग <strong>1 मिनेट</strong> छ<br>
                     सकेसम्म धेरै अनुमान लगाउनुहोस्!
                 </div>
-                <button class="start-turn-btn" onclick="startPlayerTurn()">
+                <button class="start-turn-btn" id="startTurnButton" onclick="startPlayerTurn()">
                     सुरु गर्नुहोस् 🚀
                 </button>
             </div>
@@ -1702,7 +1800,6 @@
             input.value = '';
             renderPlayers();
             hideError();
-            saveGameState();
         }
 
         function removePlayer(playerName) {
@@ -1710,7 +1807,6 @@
             delete playerScores[playerName];
             delete playerRounds[playerName];
             renderPlayers();
-            saveGameState();
         }
 
         function renderPlayers() {
@@ -1779,7 +1875,6 @@
             document.getElementById('setupSection').style.display = 'none';
             document.getElementById('gameSection').style.display = 'block';
 
-            saveGameState();
             showReadyScreen();
         }
 
@@ -1821,7 +1916,9 @@
                 तपाईंसँग <strong>${timeDisplay}</strong> छ<br>
                 सकेसम्म धेरै अनुमान लगाउनुहोस्!
             `;
-            document.getElementById('readyScreen').style.display = 'flex';
+
+            const readyScreen = document.getElementById('readyScreen');
+            readyScreen.style.display = 'flex';
         }
 
         function preloadNextImage() {
@@ -1876,11 +1973,13 @@
 
         function startPlayerTurn() {
             document.getElementById('readyScreen').style.display = 'none';
+            document.body.classList.add('game-active'); // Prevent pull-to-refresh
+
             skipCount = 0; // Reset skip count for new turn
             currentRoundCorrect = 0; // Reset correct count for new round
             currentRoundSkipped = 0; // Reset skipped count for new round
 
-            // Re-enable skip button
+            // Set up skip button
             document.getElementById('skipButton').disabled = false;
             document.getElementById('skipButton').style.opacity = '1';
             document.getElementById('skipButton').style.cursor = 'pointer';
@@ -1899,7 +1998,6 @@
             document.getElementById('currentScore').textContent = playerScores[currentPlayer];
             document.getElementById('currentRounds').textContent = `${playerRounds[currentPlayer]} / ${maxRounds}`;
 
-            // Initialize timer display but don't start yet
             timeRemaining = roundTime;
             updateTimerDisplay();
 
@@ -1909,13 +2007,14 @@
                 displayCard(card);
                 document.getElementById('cardName').textContent = card.name;
                 document.getElementById('cardCategory').textContent = card.category;
+                enableButtons(); // Re-enable buttons after countdown
                 startTimer();
             }, 'तयार हुनुहोस्... 🎯');
         }
 
         function startTimer() {
             stopTimer();
-            timeRemaining = roundTime; // Use configured time
+            // Don't reset timeRemaining here - it's already set in startPlayerTurn()
             updateTimerDisplay();
 
             timer = setInterval(() => {
@@ -1986,7 +2085,10 @@
             messageDisplay.textContent = message;
             overlay.style.display = 'flex';
 
-            let count = 5;
+            // Disable buttons during countdown
+            disableButtons();
+
+            let count = 3;
             numberDisplay.textContent = count;
 
             const countdownInterval = setInterval(() => {
@@ -2073,7 +2175,6 @@
             playSuccessSound();
             disableButtons();
             pauseTimer(); // Pause the main timer
-            saveGameState();
 
             showCountdown(() => {
                 nextCard();
@@ -2095,7 +2196,6 @@
             flashScreen('#ed8936');
             disableButtons();
             pauseTimer(); // Pause the main timer
-            saveGameState();
 
             showCountdown(() => {
                 nextCard();
@@ -2159,13 +2259,12 @@
                 currentCardIndex = 0;
             }
 
-            saveGameState();
             showReadyScreen();
         }
 
         function gameOver() {
             stopTimer();
-            localStorage.removeItem('nepaliHeadbandz'); // Clear saved game when game ends
+            document.body.classList.remove('game-active'); // Re-enable pull-to-refresh
 
             const sortedPlayers = Object.entries(playerScores)
                 .sort((a, b) => b[1] - a[1]);
@@ -2238,14 +2337,66 @@
         }
 
         function endGame() {
-            if (confirm('के तपाईं निश्चित हुनुहुन्छ कि तपाईं खेल समाप्त गर्न चाहनुहुन्छ?')) {
+            // Show custom reset modal instead of simple confirm
+            document.getElementById('resetModal').style.display = 'flex';
+            document.getElementById('resetConfirmInput').value = '';
+            document.getElementById('resetError').style.display = 'none';
+            document.getElementById('resetConfirmInput').focus();
+        }
+
+        function cancelReset() {
+            document.getElementById('resetModal').style.display = 'none';
+            document.getElementById('resetConfirmInput').value = '';
+            document.getElementById('resetError').style.display = 'none';
+        }
+
+        function confirmReset() {
+            const input = document.getElementById('resetConfirmInput').value.trim().toUpperCase();
+            if (input === 'RESET') {
+                document.getElementById('resetModal').style.display = 'none';
                 gameOver();
+            } else {
+                document.getElementById('resetError').style.display = 'block';
+                document.getElementById('resetConfirmInput').value = '';
+                document.getElementById('resetConfirmInput').focus();
+            }
+        }
+
+        function showRefreshModal() {
+            pauseTimer(); // Pause the game timer
+            document.getElementById('refreshModal').style.display = 'flex';
+            document.getElementById('refreshConfirmInput').value = '';
+            document.getElementById('refreshError').style.display = 'none';
+            document.getElementById('refreshConfirmInput').focus();
+        }
+
+        function cancelRefresh() {
+            document.getElementById('refreshModal').style.display = 'none';
+            document.getElementById('refreshConfirmInput').value = '';
+            document.getElementById('refreshError').style.display = 'none';
+
+            // Show countdown before resuming game
+            disableButtons();
+            showCountdown(() => {
+                enableButtons();
+                resumeTimer(); // Resume the game timer
+            }, 'खेल जारी छ... 🔄');
+        }
+
+        function confirmRefresh() {
+            const input = document.getElementById('refreshConfirmInput').value.trim().toUpperCase();
+            if (input === 'REFRESH') {
+                document.getElementById('refreshModal').style.display = 'none';
+                location.reload();
+            } else {
+                document.getElementById('refreshError').style.display = 'block';
+                document.getElementById('refreshConfirmInput').value = '';
+                document.getElementById('refreshConfirmInput').focus();
             }
         }
 
         function restartGame() {
             stopTimer();
-            localStorage.removeItem('nepaliHeadbandz'); // Clear saved game
             players = [];
             currentPlayerIndex = 0;
             currentCardIndex = 0;
@@ -2320,16 +2471,9 @@
                 document.body.classList.remove('splash-active');
                 document.getElementById('splashScreen').classList.add('hidden');
 
-                // Try to load saved game
-                const hasLoadedGame = loadGameState();
-
-                if (!hasLoadedGame) {
-                    // No saved game, show welcome screen
-                    document.getElementById('welcomeScreen').classList.add('active');
-                } else {
-                    // Game loaded, skip welcome screen
-                    document.getElementById('welcomeScreen').classList.remove('active');
-                }
+                // Show welcome screen
+                document.getElementById('welcomeScreen').classList.add('active');
+                document.getElementById('welcomeScreen').classList.remove('hidden');
             } else {
                 document.getElementById('passwordError').style.display = 'block';
                 document.getElementById('passwordInput').value = '';
@@ -2354,117 +2498,6 @@
             });
         }
 
-        // ========== LocalStorage Functions ==========
-        function saveGameState() {
-            const gameState = {
-                players: players,
-                currentPlayerIndex: currentPlayerIndex,
-                currentCardIndex: currentCardIndex,
-                cards: cards,
-                timeRemaining: timeRemaining,
-                roundTime: roundTime,
-                playerScores: playerScores,
-                playerRounds: playerRounds,
-                playerRoundDetails: playerRoundDetails,
-                maxRounds: maxRounds,
-                totalRoundsPlayed: totalRoundsPlayed,
-                skipCount: skipCount,
-                currentRoundCorrect: currentRoundCorrect,
-                currentRoundSkipped: currentRoundSkipped,
-                isGameInProgress: document.getElementById('gameSection').style.display !== 'none',
-                timestamp: Date.now()
-            };
-
-            try {
-                localStorage.setItem('nepaliHeadbandz', JSON.stringify(gameState));
-            } catch (e) {
-                console.error('Failed to save game state:', e);
-            }
-        }
-
-        function loadGameState() {
-            try {
-                const saved = localStorage.getItem('nepaliHeadbandz');
-                if (!saved) return false;
-
-                const gameState = JSON.parse(saved);
-
-                // Check if save is less than 24 hours old
-                const hoursSinceSave = (Date.now() - gameState.timestamp) / (1000 * 60 * 60);
-                if (hoursSinceSave > 24) {
-                    localStorage.removeItem('nepaliHeadbandz');
-                    return false;
-                }
-
-                // Restore game state
-                players = gameState.players || [];
-                currentPlayerIndex = gameState.currentPlayerIndex || 0;
-                currentCardIndex = gameState.currentCardIndex || 0;
-                cards = gameState.cards || [];
-                timeRemaining = gameState.timeRemaining || 60;
-                roundTime = gameState.roundTime || 60;
-                playerScores = gameState.playerScores || {};
-                playerRounds = gameState.playerRounds || {};
-                playerRoundDetails = gameState.playerRoundDetails || {};
-                maxRounds = gameState.maxRounds || 5;
-                totalRoundsPlayed = gameState.totalRoundsPlayed || 0;
-                skipCount = gameState.skipCount || 0;
-                currentRoundCorrect = gameState.currentRoundCorrect || 0;
-                currentRoundSkipped = gameState.currentRoundSkipped || 0;
-
-                // If game was in progress, restore UI
-                if (gameState.isGameInProgress && players.length > 0) {
-                    document.getElementById('setupSection').style.display = 'none';
-                    document.getElementById('gameSection').style.display = 'block';
-                    document.getElementById('savedGameNotice').style.display = 'block';
-
-                    // Restore players list in setup for later
-                    renderPlayers();
-
-                    // Restore game UI
-                    const currentPlayer = players[currentPlayerIndex];
-                    const card = cards[currentCardIndex];
-
-                    if (card) {
-                        displayCard(card);
-                        document.getElementById('cardName').textContent = card.name;
-                        document.getElementById('cardCategory').textContent = card.category;
-                    }
-
-                    document.getElementById('currentPlayerName').textContent = currentPlayer;
-                    document.getElementById('currentScore').textContent = playerScores[currentPlayer];
-                    document.getElementById('currentRounds').textContent = `${playerRounds[currentPlayer]} / ${maxRounds}`;
-                    document.getElementById('skipCounter').textContent = (1 - skipCount).toString();
-
-                    // Update skip button state
-                    if (skipCount >= 1) {
-                        document.getElementById('skipButton').disabled = true;
-                        document.getElementById('skipButton').style.opacity = '0.5';
-                        document.getElementById('skipButton').style.cursor = 'not-allowed';
-                    }
-
-                    updateTimerDisplay();
-
-                    // Show ready screen instead of auto-starting
-                    document.getElementById('gameSection').style.display = 'none';
-                    showReadyScreen();
-                }
-
-                return true;
-            } catch (e) {
-                console.error('Failed to load game state:', e);
-                localStorage.removeItem('nepaliHeadbandz');
-                return false;
-            }
-        }
-
-        function clearGameData() {
-            if (confirm('के तपाईं सुरक्षित गरिएको खेल डाटा मेटाउन चाहनुहुन्छ?')) {
-                localStorage.removeItem('nepaliHeadbandz');
-                document.getElementById('savedGameNotice').style.display = 'none';
-                alert('खेल डाटा सफलतापूर्वक मेटाइयो!');
-            }
-        }
 
         document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -2478,8 +2511,92 @@
             }
         });
 
+        document.getElementById('resetConfirmInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                confirmReset();
+            }
+        });
+
+        document.getElementById('refreshConfirmInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                confirmRefresh();
+            }
+        });
+
+        // Intercept refresh keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Check multiple conditions for refresh keys
+            const isF5 = e.key === 'F5' || e.keyCode === 116;
+            const isCtrlR = (e.ctrlKey && (e.key === 'r' || e.key === 'R' || e.keyCode === 82));
+            const isCmdR = (e.metaKey && (e.key === 'r' || e.key === 'R' || e.keyCode === 82));
+
+            if (isF5 || isCtrlR || isCmdR) {
+                const gameInProgress = document.getElementById('gameSection').style.display !== 'none' ||
+                                       document.getElementById('readyScreen').style.display === 'flex';
+
+                if (gameInProgress && players.length > 0) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showRefreshModal();
+                    return false;
+                }
+            }
+        }, true); // Use capture phase
+
+        // Prevent pull-to-refresh on mobile
+        let touchStartY = 0;
+        let touchMoveY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].pageY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', function(e) {
+            touchMoveY = e.touches[0].pageY;
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+            const gameInProgress = document.getElementById('gameSection').style.display !== 'none' ||
+                                   document.getElementById('readyScreen').style.display === 'flex';
+
+            // If user is at the top and pulling down during game
+            if (gameInProgress && players.length > 0 && scrollTop === 0 && touchMoveY > touchStartY) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', function(e) {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const pullDistance = touchMoveY - touchStartY;
+
+            const gameInProgress = document.getElementById('gameSection').style.display !== 'none' ||
+                                   document.getElementById('readyScreen').style.display === 'flex';
+
+            // If pulled down more than 100px at top of page during game, show modal
+            if (gameInProgress && players.length > 0 && scrollTop === 0 && pullDistance > 100) {
+                showRefreshModal();
+            }
+        }, { passive: true });
+
+        // Check for admin URL parameter
+        function checkAdminAccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('admin')) {
+                // Skip password screen
+                document.getElementById('passwordModal').style.display = 'none';
+                document.body.classList.remove('splash-active');
+                document.getElementById('splashScreen').classList.add('hidden');
+
+                // Show welcome screen
+                document.getElementById('welcomeScreen').classList.add('active');
+                document.getElementById('welcomeScreen').classList.remove('hidden');
+            }
+        }
+
         // Prevent scrolling on load
         document.body.classList.add('splash-active');
+
+        // Check for admin access on page load
+        checkAdminAccess();
     </script>
 </body>
 </html>
