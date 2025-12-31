@@ -1202,13 +1202,9 @@
                 margin-bottom: 15px !important;
             }
 
-            #refreshModalContent > p:nth-of-type(1) {
+            #refreshModalContent > p {
                 font-size: 1em !important;
                 margin-bottom: 10px !important;
-            }
-
-            #refreshModalContent > p:nth-of-type(1) strong {
-                font-size: 1.1em !important;
             }
 
             #refreshModalContent > div:nth-of-type(2) {
@@ -1218,31 +1214,6 @@
 
             #refreshModalContent > div:nth-of-type(2) p {
                 font-size: 0.95em !important;
-            }
-
-            #refreshModalContent > p:nth-of-type(2) {
-                font-size: 1em !important;
-                margin-bottom: 15px !important;
-            }
-
-            #refreshModalContent > div:nth-of-type(3) {
-                padding: 15px !important;
-                margin-bottom: 15px !important;
-            }
-
-            #refreshModalContent > div:nth-of-type(3) p {
-                font-size: 0.95em !important;
-                margin-bottom: 10px !important;
-            }
-
-            #refreshModalContent > div:nth-of-type(3) p strong {
-                font-size: 1.1em !important;
-            }
-
-            #refreshConfirmInput {
-                padding: 12px !important;
-                font-size: 1em !important;
-                margin-bottom: 10px !important;
             }
 
             #refreshModalContent > div:last-child {
@@ -1274,30 +1245,6 @@
             #resetModalContent > p {
                 font-size: 1em !important;
                 margin-bottom: 15px !important;
-            }
-
-            #resetModalContent > p strong {
-                font-size: 1.1em !important;
-            }
-
-            #resetModalContent > div:nth-of-type(2) {
-                padding: 15px !important;
-                margin-bottom: 15px !important;
-            }
-
-            #resetModalContent > div:nth-of-type(2) p {
-                font-size: 0.95em !important;
-                margin-bottom: 10px !important;
-            }
-
-            #resetModalContent > div:nth-of-type(2) p strong {
-                font-size: 1.1em !important;
-            }
-
-            #resetConfirmInput {
-                padding: 12px !important;
-                font-size: 1em !important;
-                margin-bottom: 10px !important;
             }
 
             #resetModalContent > div:last-child {
@@ -1363,29 +1310,20 @@
     <div id="resetModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center; overflow-y: auto; padding: 10px;">
         <div id="resetModalContent" style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700; margin: auto;">
             <div style="font-size: 4em; margin-bottom: 20px; animation: pulse 1s infinite;">⚠️</div>
-            <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">चेतावनी!</h2>
+            <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">खेल समाप्त गर्नुहुन्छ?</h2>
             <p style="color: white; font-size: 1.3em; margin-bottom: 15px; line-height: 1.6;">
                 यदि तपाईंले खेल समाप्त गर्नुभयो भने<br>
                 <strong style="color: #FFD700; font-size: 1.2em;">सबै प्रगति हराउनेछ!</strong>
             </p>
-            <p style="color: #ffcccb; font-size: 1.1em; margin-bottom: 25px;">
+            <p style="color: #ffcccb; font-size: 1.1em; margin-bottom: 30px;">
                 सबै स्कोर र राउन्ड रिसेट हुनेछन्
             </p>
-            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px dashed #FFD700;">
-                <p style="color: white; margin-bottom: 15px; font-size: 1.1em;">
-                    पुष्टि गर्न, तल <strong style="color: #FFD700; font-size: 1.3em;">RESET</strong> टाइप गर्नुहोस्:
-                </p>
-                <input type="text" id="resetConfirmInput" placeholder="RESET टाइप गर्नुहोस्" style="width: 100%; padding: 15px; font-size: 1.2em; border: 3px solid #FFD700; border-radius: 10px; margin-bottom: 15px; text-align: center; text-transform: uppercase; font-weight: bold; background: white; color: #DC143C;">
-                <div id="resetError" style="color: #ffcccb; margin-bottom: 10px; display: none; font-weight: bold; background: rgba(255,0,0,0.3); padding: 10px; border-radius: 5px;">
-                    गलत! "RESET" टाइप गर्नुहोस्
-                </div>
-            </div>
             <div style="display: flex; gap: 15px;">
                 <button onclick="cancelReset()" style="flex: 1; background: #48bb78; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
-                    ❌ रद्द गर्नुहोस्
+                    रद्द गर्नुहोस्
                 </button>
                 <button onclick="confirmReset()" style="flex: 1; background: #8B0000; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; border: 2px solid #FFD700;">
-                    ✓ पुष्टि गर्नुहोस्
+                    समाप्त गर्नुहोस्
                 </button>
             </div>
         </div>
@@ -1395,32 +1333,20 @@
     <div id="refreshModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000; display: none; align-items: center; justify-content: center; overflow-y: auto; padding: 10px;">
         <div id="refreshModalContent" style="background: linear-gradient(135deg, #FF4500 0%, #DC143C 100%); padding: 50px 40px; border-radius: 20px; text-align: center; max-width: 550px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 3px solid #FFD700; margin: auto;">
             <div style="font-size: 5em; margin-bottom: 20px; animation: pulse 1s infinite;">🔄</div>
-            <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2.2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">पेज रिफ्रेश चेतावनी!</h2>
+            <h2 style="color: #FFD700; margin-bottom: 20px; font-size: 2.2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">पेज रिफ्रेश गर्नुहुन्छ?</h2>
             <p style="color: white; font-size: 1.4em; margin-bottom: 15px; line-height: 1.6; font-weight: bold;">
                 यदि तपाईंले पेज रिफ्रेश गर्नुभयो भने<br>
                 <strong style="color: #FFD700; font-size: 1.3em; text-decoration: underline;">सबै खेल प्रगति हराउनेछ!</strong>
             </p>
-            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 20px 0;">
+            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 20px 0 30px 0;">
                 <p style="color: #FFD700; font-size: 1.2em; margin: 0; font-weight: bold;">⚠️ सबै स्कोर, राउन्ड र समय रिसेट हुनेछ ⚠️</p>
-            </div>
-            <p style="color: white; font-size: 1.1em; margin-bottom: 25px;">
-                के तपाईं निश्चित हुनुहुन्छ?
-            </p>
-            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px dashed #FFD700;">
-                <p style="color: white; margin-bottom: 15px; font-size: 1.1em;">
-                    पुष्टि गर्न, तल <strong style="color: #FFD700; font-size: 1.3em;">REFRESH</strong> टाइप गर्नुहोस्:
-                </p>
-                <input type="text" id="refreshConfirmInput" placeholder="REFRESH टाइप गर्नुहोस्" style="width: 100%; padding: 15px; font-size: 1.2em; border: 3px solid #FFD700; border-radius: 10px; margin-bottom: 15px; text-align: center; text-transform: uppercase; font-weight: bold; background: white; color: #DC143C;">
-                <div id="refreshError" style="color: #ffcccb; margin-bottom: 10px; display: none; font-weight: bold; background: rgba(255,0,0,0.3); padding: 10px; border-radius: 5px;">
-                    गलत! "REFRESH" टाइप गर्नुहोस्
-                </div>
             </div>
             <div style="display: flex; gap: 15px;">
                 <button onclick="cancelRefresh()" style="flex: 1; background: #48bb78; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
-                    ❌ रद्द गर्नुहोस्
+                    रद्द गर्नुहोस्
                 </button>
                 <button onclick="confirmRefresh()" style="flex: 1; background: #DC143C; color: white; padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; border: 2px solid #FFD700;">
-                    🔄 रिफ्रेश गर्नुहोस्
+                    रिफ्रेश गर्नुहोस्
                 </button>
             </div>
         </div>
@@ -1654,6 +1580,12 @@
                         <label>
                             <input type="checkbox" value="sea_creatures" checked>
                             🐋 समुद्री जीवहरू
+                        </label>
+                    </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="appliances" checked>
+                            🔌 उपकरणहरू
                         </label>
                     </div>
                 </div>
@@ -1920,7 +1852,35 @@
                 { name: 'सफा टेम्पो', emoji: '🚐', imageFile: 'safa-tempo.jpg' },
                 { name: 'सुन', emoji: '🪙', imageFile: 'gold.jpg' },
                 { name: 'बिबाह', emoji: '💒', imageFile: 'wedding.jpg' },
-                { name: 'भीटेन', emoji: '🎤', imageFile: 'vten.jpg' }
+                { name: 'भीटेन', emoji: '🎤', imageFile: 'vten.jpg' },
+                { name: 'बालेन शाह', emoji: '🏛️', imageUrl: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/7d8f/live/477da020-8e18-11f0-8bee-8501c5d73579.jpg.webp' },
+                { name: 'प्रियंका कार्की', emoji: '🎬', imageUrl: 'https://artistsimages.b-cdn.net/priyanka-karki/priyanka-karki-1.jpg' },
+                { name: 'स्वस्तिमा खड्का', emoji: '🎬', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJoQaeTNKfh0ibOv9Q8uWoe2fvgJSjSfi9w&s' },
+                { name: 'पल शाह', emoji: '🎬', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsNhpSGyhttTiGjMv2zMcqtCzeuUsiN9YEg&s' },
+                { name: 'लौरे', emoji: '🎤', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThaNz0U7o4KdWfmLlNa9Fk7dzJurBD90svXw&s' },
+                { name: 'याम बुद्ध', emoji: '🎤', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Rapperyammabuddha.png' },
+                { name: 'गिरिष खतिवडा', emoji: '😂', imageUrl: 'https://i.ytimg.com/vi/Hlp7eAnlEaM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnIGjasT6tS8m77hpi6wm01an9Ag' },
+                { name: 'जीतु नेपाल', emoji: '😂', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxEFW-6BtczXi2jg66TdPLZaDl6vvTxMXaMw&s' },
+                { name: 'दीपक राज गिरी', emoji: '🎭', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRuTIFJk1cJLkqp_uYrpYsgZc0eTMdyppjdg&s' },
+                { name: 'केदार घिमिरे', emoji: '🎭', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqljsnNggVddVzGV4pH7e1cSrNJi4_5piT9A&s' },
+                { name: 'नम्रता श्रेष्ठ', emoji: '🎬', imageUrl: 'https://pbs.twimg.com/profile_images/3602745636/cb9ff3a7e911bd2d2cbf4c4e42644f4a.jpeg' },
+                { name: 'रेखा थापा', emoji: '🎬', imageUrl: 'https://www.lensnepal.com/files/profiles/rekha-thapa.jpg' },
+                { name: 'साज्जन राज वैद्य', emoji: '🎸', imageUrl: 'https://i.scdn.co/image/ab67616d0000b27363ab3d245ef5f337843d1634' },
+                { name: 'बर्तिका ईम राई', emoji: '🎤', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/83/Bartika_Eam_Rai.png' },
+                { name: 'प्रशान्त तामाङ', emoji: '🎸', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Prashant_Tamang_03.jpg' },
+                { name: 'युनिक पोएट', emoji: '🎤', imageUrl: 'https://liftedasia.com/assets/content_images/uniq-660.png' },
+                { name: 'टोयोटा', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFgcu7yRxXvktyojYLDiarXabfcW8T_8E0cA&s' },
+                { name: 'सुजुकी', emoji: '🚗', imageUrl: 'https://images.drivespark.com/webp/fit-in/450x350/car-image/car/16963439-maruti_jimny.jpg' },
+                { name: 'हुन्डाई', emoji: '🚗', imageUrl: 'https://nepalauto.com/wp-content/uploads/2025/04/hyundai-creta-800x534.jpg' },
+                { name: 'निसान', emoji: '🚗', imageUrl: 'https://images.drivespark.com/webp/fit-in/450x350/car-image/car/15324022-nissan_x_trail.jpg' },
+                { name: 'होन्डा', emoji: '🚗', imageUrl: 'https://di-uploads-pod14.dealerinspire.com/hondaeastcincy/uploads/2023/02/2302-Honda-Accord-Hybrid-Thumb.jpg' },
+                { name: 'टाटा', emoji: '🚗', imageUrl: 'https://www.jagranimages.com/images/2025/10/30/article/image/TML-Commercial-Vehicles-Rebrands-as-Tata-Motors-1761829696547.webp' },
+                { name: 'महिन्द्रा', emoji: '🚗', imageUrl: 'https://imgd.aeplcdn.com/272x153/n/cw/ec/40432/scorpio-n-exterior-right-front-three-quarter-4.png?isig=0&q=80' },
+                { name: 'किया', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyZ5ic6oPuoLYW07ozjygPMZ0Qr_X-IcbJ0w&s' },
+                { name: 'मर्सिडिज बेन्ज', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-HTjFx-UNFJmUnExc4lXGrXQkI2Jm1YvXYA&s' },
+                { name: 'बीएमडब्लू', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSJMih4eVRVesztlsjVJXjxt1bviQK5iM_zg&s' },
+                { name: 'रोल्स रोयस', emoji: '🚗', imageUrl: 'https://www.meroauto.com/wp-content/themes/meroauto_custom_thm/inc/timthumb.php?src=https://www.meroauto.com/wp-content/uploads/2019/12/rolls-royes.jpg&w=750&h=450' },
+                { name: 'रेन्ज रोभर', emoji: '🚙', imageUrl: 'https://media.sobizcdn.com/biznessnews.com/media-file/images/2025/04/1745907849-S42Wd.jpg' }
             ],
             flags: [
                 { name: 'नेपाल', emoji: '🇳🇵', imageFile: 'flag-nepal.jpg' },
@@ -1999,26 +1959,37 @@
                 { name: 'कीलियन एमब्याप्पे', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT75C5vXQUZ1dMa44ZqZuvJptOhSePdEn1kzQ&s' },
                 { name: 'राफेल नडाल', emoji: '🎾', imageUrl: 'https://i.guim.co.uk/img/static/sys-images/Sport/Pix/pictures/2009/5/22/1242992420041/Rafael-Nadal-001.jpg?width=465&dpr=1&s=none&crop=none' },
                 { name: 'मुहम्मद अली', emoji: '🥊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB8C2dkHgMCWDUF138xb_EfueyOfAUwhjoIA&s' },
-                { name: 'माइक टायसन', emoji: '🥊', imageUrl: 'https://m.media-amazon.com/images/I/71tBZQF9FoL._AC_UF894,1000_QL80_.jpg' }
+                { name: 'माइक टायसन', emoji: '🥊', imageUrl: 'https://m.media-amazon.com/images/I/71tBZQF9FoL._AC_UF894,1000_QL80_.jpg' },
+                { name: 'नेमार', emoji: '⚽', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg/250px-Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg' },
+                { name: 'एम.एस. धोनी', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRETmhB1cTR399RIrnNsAIBqxAPsdMsJddTIg&s' },
+                { name: 'सचिन तेन्दुलकर', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2GNad6-MCEKDFG1q7zmlF_oaiUcdI_4WyFg&s' },
+                { name: 'टाइगर वुड्स', emoji: '⛳', imageUrl: 'https://cdn.britannica.com/35/197935-050-A7E61875/Tiger-Woods-2002.jpg' },
+                { name: 'सिमोन बाइल्स', emoji: '🤸', imageUrl: 'https://img.olympics.com/images/image/private/t_1-1_300/f_auto/primary/bpg1hewhmku06znwbbnk' },
+                { name: 'फ्लोयड मेवेदर', emoji: '🥊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfh5qZiK5iQVsHa3UPrFzo-DG-fVuFPleqOg&s' },
+                { name: 'कोबे ब्रायन्ट', emoji: '🏀', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjbg4Zcmmn-woYHh37q7j4SCGcoYeZjHxtbg&s' },
+                { name: 'नोभाक जोकोभिच', emoji: '🎾', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Novak_Djokovic_Queen%27s_Club_2018.jpg/250px-Novak_Djokovic_Queen%27s_Club_2018.jpg' },
+                { name: 'पारस खड्का', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsfrk5p8-cudt23ROg0EEeGOMsi_Wvf2m7Q&s' },
+                { name: 'संदीप लामिछाने', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgUXEgNyckL6UGI89rfkyc-CY-35rvXyZsZA&s' },
+                { name: 'दीपक बिष्ट', emoji: '⚽', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Dipak_Bista1.jpg' },
+                { name: 'किरण चेम्जोङ', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-S7AzlgswhEUYcg9ntKlameT0rTwZCDIfmQ&s' }
             ],
             professions: [
                 { name: 'डाक्टर', emoji: '👨‍⚕️', imageUrl: 'https://cdn.prod.website-files.com/66bd394eedeb9d6ee29898c6/682f5450a046c241920c1e6f_Three%20doctors%20standing%20side%20by%20side%2C%20crossing%20their%20arms.jpg' },
                 { name: 'शिक्षक', emoji: '👩‍🏫', imageUrl: 'https://images.bhaskarassets.com/web2images/521/2025/12/18/orig_origorigcapture16521362651748045022_1766014617.jpg' },
                 { name: 'इन्जिनियर', emoji: '👷', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQePCVmdmFv26b0gt_uISu7ffgRgAwUZoOsFA&s' },
-                { name: 'पाइलट', emoji: '👨‍✈️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIK7ZpueRCrX3tLUb9hi7K73qI9Um69zh6dA&s' },
-                { name: 'फोटोग्राफर', emoji: '📷', imageUrl: 'https://www.training.com.au/wp-content/uploads/Photographer.jpeg' }
+                { name: 'पाइलट', emoji: '👨‍✈️', imageUrl: 'https://english.pardafas.com/wp-content/uploads/2023/06/Vijay-Lama.jpg' },
+                { name: 'फोटोग्राफर', emoji: '📷', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbEaSmI8nOsCIeRPl2kb0p38mee7QO0YFz5w&s' }
             ],
             vehicles: [
                 { name: 'कार', emoji: '🚗', imageUrl: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80' },
                 { name: 'बस', emoji: '🚌', imageUrl: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800&q=80' },
-                { name: 'मोटरसाइकल', emoji: '🏍️', imageUrl: 'https://images.unsplash.com/photo-1558981408-db0ecd8a1ee4?w=800&q=80' },
+                { name: 'मोटरसाइकल', emoji: '🏍️', imageUrl: 'https://res.cloudinary.com/jerrick/image/upload/v1738320142/679ca90ee16f01001d9718a5.jpg' },
                 { name: 'साइकल', emoji: '🚲', imageUrl: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=80' },
-                { name: 'हवाइजहाज', emoji: '✈️', imageUrl: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' },
-                { name: 'रेल', emoji: '🚂', imageUrl: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800&q=80' },
-                { name: 'ट्रक', emoji: '🚛', imageUrl: 'https://images.unsplash.com/photo-1519003300449-424ad0405076?w=800&q=80' },
-                { name: 'हेलिकप्टर', emoji: '🚁', imageUrl: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=800&q=80' },
-                { name: 'जहाज', emoji: '🚢', imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80' },
-                { name: 'रिक्सा', emoji: '🛺', imageUrl: 'https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800&q=80' }
+                { name: 'हवाइजहाज', emoji: '✈️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuo1oUT5QU10MzJk_x4y7kFX3Ya5gZMfys4w&s' },
+                { name: 'रेल', emoji: '🚂', imageUrl: 'https://nepalinfrastructuresummit.com.np/storage/images/page_managers/66bb17ff1fd5a.png' },
+                { name: 'ट्रक', emoji: '🚛', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_oStpH93GHWqnMhdFdQHJh3lUttm1XY6nkw&s' },
+                { name: 'हेलिकप्टर', emoji: '🚁', imageUrl: 'https://media.nepaltrekadventures.com/uploads/img/ebc-helicopter-tour-blog-1.webp' },
+                { name: 'रिक्सा', emoji: '🛺', imageUrl: 'https://c8.alamy.com/comp/FT6K8H/nepal-kathmandu-rickshaw-driver-looking-for-a-passenger-FT6K8H.jpg' }
             ],
             fruits: [
                 { name: 'स्याउ', emoji: '🍎', imageUrl: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=800&q=80' },
@@ -2028,53 +1999,60 @@
                 { name: 'आँप', emoji: '🥭', imageUrl: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&q=80' },
                 { name: 'स्ट्रबेरी', emoji: '🍓', imageUrl: 'https://images.unsplash.com/photo-1543528176-61b239494933?w=800&q=80' },
                 { name: 'किवी', emoji: '🥝', imageUrl: 'https://images.unsplash.com/photo-1585059895524-72359e06133a?w=800&q=80' },
-                { name: 'नरिवल', emoji: '🥥', imageUrl: 'https://images.unsplash.com/photo-1525258686769-94e18e6e379f?w=800&q=80' }
+                { name: 'नरिवल', emoji: '🥥', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGPDdC_25G3lDybDleuxjeeB_5iwuEQKazGw&s' }
             ],
             vegetables: [
                 { name: 'टमाटर', emoji: '🍅', imageUrl: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80' },
                 { name: 'गाजर', emoji: '🥕', imageUrl: 'https://images.unsplash.com/photo-1447175008436-054170c2e979?w=800&q=80' },
-                { name: 'बन्दागोभी', emoji: '🥬', imageUrl: 'https://images.unsplash.com/photo-1594282557831-61c5c08f5d1e?w=800&q=80' },
+                { name: 'बन्दागोभी', emoji: '🥬', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyz5KcmEoje3VB9Bsyf-i-IgpNNp1Nl5KL1w&s' },
                 { name: 'आलु', emoji: '🥔', imageUrl: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80' },
                 { name: 'प्याज', emoji: '🧅', imageUrl: 'https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80' },
-                { name: 'बिन्स', emoji: '🫘', imageUrl: 'https://images.unsplash.com/photo-1611170802031-1e1b5d31d2ee?w=800&q=80' },
                 { name: 'ब्रोकाउली', emoji: '🥦', imageUrl: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&q=80' },
-                { name: 'मकै', emoji: '🌽', imageUrl: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=800&q=80' },
-                { name: 'लसुन', emoji: '🧄', imageUrl: 'https://images.unsplash.com/photo-1566174102924-1e37f6e0a5cc?w=800&q=80' }
+                { name: 'मकै', emoji: '🌽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT00K20ybe9aeixn3m46kI14OlBkOkry_28XQ&s' },
+                { name: 'लसुन', emoji: '🧄', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpMXXz-SC-Q-0WUsNzaEdCXSW2hgWEwtjXcQ&s' }
             ],
             sports: [
                 { name: 'फुटबल', emoji: '⚽', imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80' },
-                { name: 'क्रिकेट', emoji: '🏏', imageUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80' },
+                { name: 'क्रिकेट', emoji: '🏏', imageUrl: 'https://www.aljazeera.com/wp-content/uploads/2023/09/GettyImages-1645011567-1-1695793343.jpg?resize=770%2C513&quality=80' },
                 { name: 'बास्केटबल', emoji: '🏀', imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80' },
                 { name: 'टेनिस', emoji: '🎾', imageUrl: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&q=80' },
                 { name: 'ब्याडमिन्टन', emoji: '🏸', imageUrl: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&q=80' },
-                { name: 'भलिबल', emoji: '🏐', imageUrl: 'https://images.unsplash.com/photo-1592656094267-764a45160876?w=800&q=80' },
-                { name: 'बक्सिङ', emoji: '🥊', imageUrl: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80' },
-                { name: 'योग', emoji: '🧘', imageUrl: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80' },
-                { name: 'दौड', emoji: '🏃', imageUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80' }
+                { name: 'भलिबल', emoji: '🏐', imageUrl: 'https://i.ytimg.com/vi/aJcEpeg_6MY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCJTr3C2v66ZizCksOdjSlCPz08TA' },
+                { name: 'बक्सिङ', emoji: '🥊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX2_tH-0or85WdYCRgBPV1p2rAG__pfgd7Yw&s' },
+                { name: 'योग', emoji: '🧘', imageUrl: 'https://filmsofnepal.com/wp-content/uploads/2012/09/Karishma_in_yoga_posture.jpg' },
+                { name: 'दौड', emoji: '🏃', imageUrl: 'https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_xl_2x/f_auto/primary/ys3lrczfsxrb60wqxrez' }
             ],
             flowers: [
-                { name: 'गुलाब', emoji: '🌹', imageUrl: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=800&q=80' },
+                { name: 'गुलाब', emoji: '🌹', imageUrl: 'https://cf-img-a-in.tosshub.com/sites/visualstory/wp/2024/10/rose-plant-.png?size=*:900' },
                 { name: 'सूर्यमुखी', emoji: '🌻', imageUrl: 'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=800&q=80' },
-                { name: 'गेंदा', emoji: '🌼', imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80' },
-                { name: 'गुलाफशेर', emoji: '🌸', imageUrl: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=800&q=80' },
                 { name: 'ज्यास्मिन', emoji: '🤍', imageUrl: 'https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?w=800&q=80' },
-                { name: 'आर्किड', emoji: '💜', imageUrl: 'https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?w=800&q=80' }
+                { name: 'आर्किड', emoji: '💜', imageUrl: 'https://i.redd.it/new-orchid-it-looks-like-a-phalaenopsis-hybrid-any-advice-v0-y2qojdkq6jlb1.jpg?width=3468&format=pjpg&auto=webp&s=26de4bb7b1a6407bf1f6a0e28a7f7b5beb15ca64' }
             ],
             birds: [
-                { name: 'चिल', emoji: '🦅', imageUrl: 'https://images.unsplash.com/photo-1520087619250-584c0cbd35e8?w=800&q=80' },
-                { name: 'परेवा', emoji: '🕊️', imageUrl: 'https://images.unsplash.com/photo-1551859616-b966f1039e3f?w=800&q=80' },
-                { name: 'सुगा', emoji: '🦜', imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&q=80' },
-                { name: 'हंस', emoji: '🦢', imageUrl: 'https://images.unsplash.com/photo-1568378780196-a9a0b7d55a2e?w=800&q=80' },
-                { name: 'चिडिया', emoji: '🐦', imageUrl: 'https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=800&q=80' },
-                { name: 'उल्लू', emoji: '🦉', imageUrl: 'https://images.unsplash.com/photo-1573921470445-2c0e1d024e97?w=800&q=80' }
+                { name: 'चिल', emoji: '🦅', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoA4lJpahIIpyuGX2hlAtnjFj4PdqveeXJXQ&s' },
+                { name: 'परेवा', emoji: '🕊️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNVqNOivd1s0tOedAOOeLQK0DRd97eTYdOdA&s' },
+                { name: 'सुगा', emoji: '🦜', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrMj-5vLh6mA58_RDpZbXP28T-bzmJmNL3vg&s' },
+                { name: 'हंस', emoji: '🦢', imageUrl: 'https://i.natgeofe.com/k/7ce14b7f-df35-4881-95ae-650bce0adf4d/mallard-male-standing_square.jpg' },
+                { name: 'उल्लू', emoji: '🦉', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2mVJwyf84krVqbcKnn8akgmUAGpsRPjQG7w&s' }
             ],
             sea_creatures: [
-                { name: 'शार्क', emoji: '🦈', imageUrl: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800&q=80' },
-                { name: 'अक्टोपस', emoji: '🐙', imageUrl: 'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?w=800&q=80' },
-                { name: 'जेलीफिस', emoji: '🪼', imageUrl: 'https://images.unsplash.com/photo-1496108493455-c88c6b52726a?w=800&q=80' },
-                { name: 'केकडा', emoji: '🦀', imageUrl: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=800&q=80' },
-                { name: 'झिंगा', emoji: '🦐', imageUrl: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=800&q=80' },
-                { name: 'कछुवा', emoji: '🐢', imageUrl: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800&q=80' }
+                { name: 'शार्क', emoji: '🦈', imageUrl: 'https://www.fisheries.noaa.gov/s3//styles/original/s3/2023-06/750x500-Great-White-iStock.jpg?itok=3a9bkD5M' },
+                { name: 'अक्टोपस', emoji: '🐙', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdc9tn2rTx-FitmWLYPb09vfymZwA7lBO4_g&s' },
+                { name: 'जेलीफिस', emoji: '🪼', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc6xBwcSA58sIKs90u6aVMrn8KWHsYmzFeEg&s' },
+                { name: 'केकडा', emoji: '🦀', imageUrl: 'https://file-cdn.mercyforanimals.org/mercy4animals.wpengine.com/sites/517/2023/10/Pixabay-Crab-on-beach.jpg' }
+            ],
+            appliances: [
+                { name: 'फ्रिज', emoji: '🧊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT03-PrIExY5oLQ4rkVTyoGpMAQE2B8ZflYvQ&s' },
+                { name: 'टिभी', emoji: '📺', imageUrl: 'https://target.scene7.com/is/image/Target/GUEST_4a02279f-c93a-4c1d-865d-bc640caa66b1' },
+                { name: 'वासिङ मसिन', emoji: '🧺', imageUrl: 'https://techpana.prixacdn.net/media/albums/samsung-washing-machine_T8KpJOsrci.jpg' },
+                { name: 'माइक्रोवेभ', emoji: '📻', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9KkIMRF4zrsQ6gcERnDAX6SDCnC0uWMnwIg&s' },
+                { name: 'एयर कन्डिसनर', emoji: '❄️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOi0dyEMcDy_NDvvLdkvKA5iRLPf1miPsSqw&s' },
+                { name: 'भ्याकुम क्लिनर', emoji: '🧹', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmUkG3ARVeTroMywy5I9SY7lpVn_-wl9Tdgw&s' },
+                { name: 'प्रेसर कुकर', emoji: '🍲', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Pressure_cooker.jpg' },
+                { name: 'इन्डक्सन', emoji: '🔥', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnr2ksjng4TXUh5Ch6KCUh28vXX5Yp_Zzb0g&s' },
+                { name: 'मिक्सर ग्राइन्डर', emoji: '🥤', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2HgBA5vR-PetbeNXGJF9li-0ns1gHo8gQ1g&s' },
+                { name: 'आयरन', emoji: '👔', imageUrl: 'https://i.ebayimg.com/images/g/O-4AAOSwJ~dfjqNk/s-l1200.jpg' },
+                { name: 'हेयर ड्रायर', emoji: '💨', imageUrl: 'https://static01.nyt.com/images/2013/07/21/magazine/21wmt/mag-21WMT-t_CA0-articleLarge.jpg?quality=75&auto=webp&disable=upscale' }
             ]
         };
 
@@ -2097,7 +2075,8 @@
             sports: 'खेलकुदहरू',
             flowers: 'फूलहरू',
             birds: 'चराहरू',
-            sea_creatures: 'समुद्री जीवहरू'
+            sea_creatures: 'समुद्री जीवहरू',
+            appliances: 'उपकरणहरू'
         };
 
         const motivationalPhrases = [
@@ -2762,43 +2741,36 @@
         }
 
         function endGame() {
-            // Show custom reset modal instead of simple confirm
+            // Pause timer and show reset modal
+            pauseTimer();
+            document.getElementById('refreshModal').style.display = 'none'; // Ensure refresh modal is hidden
             document.getElementById('resetModal').style.display = 'flex';
-            document.getElementById('resetConfirmInput').value = '';
-            document.getElementById('resetError').style.display = 'none';
-            document.getElementById('resetConfirmInput').focus();
         }
 
         function cancelReset() {
             document.getElementById('resetModal').style.display = 'none';
-            document.getElementById('resetConfirmInput').value = '';
-            document.getElementById('resetError').style.display = 'none';
+
+            // Show countdown before resuming game
+            disableButtons();
+            showCountdown(() => {
+                enableButtons();
+                resumeTimer(); // Resume the game timer
+            }, 'खेल जारी छ... 🔄');
         }
 
         function confirmReset() {
-            const input = document.getElementById('resetConfirmInput').value.trim().toUpperCase();
-            if (input === 'RESET') {
-                document.getElementById('resetModal').style.display = 'none';
-                gameOver();
-            } else {
-                document.getElementById('resetError').style.display = 'block';
-                document.getElementById('resetConfirmInput').value = '';
-                document.getElementById('resetConfirmInput').focus();
-            }
+            document.getElementById('resetModal').style.display = 'none';
+            gameOver();
         }
 
         function showRefreshModal() {
             pauseTimer(); // Pause the game timer
+            document.getElementById('resetModal').style.display = 'none'; // Ensure reset modal is hidden
             document.getElementById('refreshModal').style.display = 'flex';
-            document.getElementById('refreshConfirmInput').value = '';
-            document.getElementById('refreshError').style.display = 'none';
-            document.getElementById('refreshConfirmInput').focus();
         }
 
         function cancelRefresh() {
             document.getElementById('refreshModal').style.display = 'none';
-            document.getElementById('refreshConfirmInput').value = '';
-            document.getElementById('refreshError').style.display = 'none';
 
             // Show countdown before resuming game
             disableButtons();
@@ -2809,15 +2781,8 @@
         }
 
         function confirmRefresh() {
-            const input = document.getElementById('refreshConfirmInput').value.trim().toUpperCase();
-            if (input === 'REFRESH') {
-                document.getElementById('refreshModal').style.display = 'none';
-                location.reload();
-            } else {
-                document.getElementById('refreshError').style.display = 'block';
-                document.getElementById('refreshConfirmInput').value = '';
-                document.getElementById('refreshConfirmInput').focus();
-            }
+            document.getElementById('refreshModal').style.display = 'none';
+            location.reload();
         }
 
         function restartGame() {
@@ -3022,19 +2987,6 @@
         document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 addPlayer();
-            }
-        });
-
-
-        document.getElementById('resetConfirmInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                confirmReset();
-            }
-        });
-
-        document.getElementById('refreshConfirmInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                confirmRefresh();
             }
         });
 
