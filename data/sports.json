@@ -1,0 +1,11 @@
+[
+  { "name": "फुटबल", "emoji": "⚽", "imageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80" },
+  { "name": "क्रिकेट", "emoji": "🏏", "imageUrl": "https://www.aljazeera.com/wp-content/uploads/2023/09/GettyImages-1645011567-1-1695793343.jpg?resize=770%2C513&quality=80" },
+  { "name": "बास्केटबल", "emoji": "🏀", "imageUrl": "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80" },
+  { "name": "टेनिस", "emoji": "🎾", "imageUrl": "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&q=80" },
+  { "name": "ब्याडमिन्टन", "emoji": "🏸", "imageUrl": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&q=80" },
+  { "name": "भलिबल", "emoji": "🏐", "imageUrl": "https://i.ytimg.com/vi/aJcEpeg_6MY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCJTr3C2v66ZizCksOdjSlCPz08TA" },
+  { "name": "बक्सिङ", "emoji": "🥊", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX2_tH-0or85WdYCRgBPV1p2rAG__pfgd7Yw&s" },
+  { "name": "योग", "emoji": "🧘", "imageUrl": "https://filmsofnepal.com/wp-content/uploads/2012/09/Karishma_in_yoga_posture.jpg" },
+  { "name": "दौड", "emoji": "🏃", "imageUrl": "https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_xl_2x/f_auto/primary/ys3lrczfsxrb60wqxrez" }
+]

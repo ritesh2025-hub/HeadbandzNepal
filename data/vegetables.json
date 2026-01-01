@@ -1,0 +1,10 @@
+[
+  { "name": "टमाटर", "emoji": "🍅", "imageUrl": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80" },
+  { "name": "गाजर", "emoji": "🥕", "imageUrl": "https://images.unsplash.com/photo-1447175008436-054170c2e979?w=800&q=80" },
+  { "name": "बन्दागोभी", "emoji": "🥬", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyz5KcmEoje3VB9Bsyf-i-IgpNNp1Nl5KL1w&s" },
+  { "name": "आलु", "emoji": "🥔", "imageUrl": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80" },
+  { "name": "प्याज", "emoji": "🧅", "imageUrl": "https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80" },
+  { "name": "ब्रोकाउली", "emoji": "🥦", "imageUrl": "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&q=80" },
+  { "name": "मकै", "emoji": "🌽", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT00K20ybe9aeixn3m46kI14OlBkOkry_28XQ&s" },
+  { "name": "लसुन", "emoji": "🧄", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpMXXz-SC-Q-0WUsNzaEdCXSW2hgWEwtjXcQ&s" }
+]

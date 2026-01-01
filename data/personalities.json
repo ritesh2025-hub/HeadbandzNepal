@@ -1,0 +1,15 @@
+[
+  { "name": "गौतम बुद्ध", "emoji": "☸️", "imageFile": "gautam-buddha.jpg" },
+  { "name": "पृथ्वीनारायण शाह", "emoji": "👑", "imageFile": "prithvi-narayan-shah.jpg" },
+  { "name": "लक्ष्मी प्रसाद देवकोटा", "emoji": "✍️", "imageFile": "laxmi-prasad-devkota.jpg" },
+  { "name": "नारायण गोपाल", "emoji": "🎤", "imageFile": "narayan-gopal.jpg" },
+  { "name": "कुमारी", "emoji": "👸", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Kumari.jpg.nepal.jpg" },
+  { "name": "भानुभक्त आचार्य", "emoji": "✒️", "imageFile": "bhanubhakta-acharya.jpg" },
+  { "name": "अरनिको", "emoji": "🏛️", "imageFile": "araniko.jpg" },
+  { "name": "तेन्जिङ नोर्गे", "emoji": "🏔️", "imageFile": "tenzing-norgay.jpg" },
+  { "name": "मदन कृष्ण श्रेष्ठ", "emoji": "🎭", "imageFile": "madan-krishna-shrestha.jpg" },
+  { "name": "हरि बंश आचार्य", "emoji": "🎸", "imageFile": "hari-bansha-acharya.jpg" },
+  { "name": "दुर्गेश थापा", "emoji": "👨", "imageFile": "durgesh-thapa.jpg" },
+  { "name": "केपी ओली", "emoji": "🧑‍💼", "imageFile": "kp-oli.jpg" },
+  { "name": "गिरिजा प्रसाद", "emoji": "👔", "imageFile": "girija-prasad.jpg" }
+]

@@ -1,0 +1,13 @@
+[
+  { "name": "दशैं", "emoji": "🎉", "imageFile": "dashain.jpg" },
+  { "name": "तिहार", "emoji": "🪔", "imageFile": "tihar.jpg" },
+  { "name": "होली", "emoji": "🎨", "imageFile": "holi.jpg" },
+  { "name": "लोसार", "emoji": "🎊", "imageFile": "losar.jpg" },
+  { "name": "तीज", "emoji": "💃", "imageFile": "teej.jpg" },
+  { "name": "छठ", "emoji": "🌅", "imageFile": "chhath.jpg" },
+  { "name": "गाईजात्रा", "emoji": "🐄", "imageFile": "gai-jatra.jpg" },
+  { "name": "जनाई पूर्णिमा", "emoji": "🧵", "imageFile": "janai-purnima.jpg" },
+  { "name": "माघे संक्रान्ती", "emoji": "🍯", "imageFile": "maghe-sankranti.jpg" },
+  { "name": "शिवरात्रि", "emoji": "🔱", "imageFile": "shivaratri.jpg" },
+  { "name": "बिबाह", "emoji": "💒", "imageFile": "wedding.jpg" }
+]

@@ -1,0 +1,20 @@
+[
+  { "name": "सगरमाथा", "emoji": "🏔️", "imageUrl": "https://media.istockphoto.com/id/478627080/photo/evening-view-of-ama-dablam.jpg?s=612x612&w=0&k=20&c=GLKvtQt1JVoOB4yR2WI86_fYOmG8WObeZP_QV_gFG_0=" },
+  { "name": "पशुपतिनाथ", "emoji": "🛕", "imageFile": "pashupatinath.jpg" },
+  { "name": "पाटन", "emoji": "🏛️", "imageFile": "patan.jpg" },
+  { "name": "लुम्बिनी", "emoji": "🕉️", "imageFile": "lumbini.jpg" },
+  { "name": "पोखरा", "emoji": "🏞️", "imageFile": "pokhara.jpg" },
+  { "name": "चितवन", "emoji": "🦏", "imageFile": "chitwan.jpg" },
+  { "name": "अन्नपूर्ण", "emoji": "⛰️", "imageFile": "annapurna.jpg" },
+  { "name": "स्वयम्भूनाथ", "emoji": "🙏", "imageFile": "swayambhunath.jpg" },
+  { "name": "बौद्धनाथ", "emoji": "☸️", "imageFile": "boudhanath.jpg" },
+  { "name": "रारा ताल", "emoji": "🏞️", "imageFile": "rara-lake.jpg" },
+  { "name": "काठमाडौं", "emoji": "🏙️", "imageFile": "kathmandu.jpg" },
+  { "name": "भक्तपुर", "emoji": "🏯", "imageFile": "bhaktapur.jpg" },
+  { "name": "मनकामना", "emoji": "🙏", "imageFile": "manakamana.jpg" },
+  { "name": "मुक्तिनाथ", "emoji": "🕉️", "imageFile": "muktinath.jpg" },
+  { "name": "फेवा ताल", "emoji": "🛶", "imageFile": "fewa-lake.jpg" },
+  { "name": "नागरकोट", "emoji": "🌄", "imageFile": "nagarkot.jpg" },
+  { "name": "धरहरा", "emoji": "🗼", "imageFile": "dharahara.jpg" },
+  { "name": "कीर्तिपुर", "emoji": "🏘️", "imageFile": "kirtipur.jpg" }
+]

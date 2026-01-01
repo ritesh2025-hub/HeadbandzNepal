@@ -1,0 +1,8 @@
+[
+  { "name": "चिल", "emoji": "🦅", "imageFile": "eagle.jpg" },
+  { "name": "चरा", "emoji": "🦅", "imageFile": "bird.jpg" },
+  { "name": "परेवा", "emoji": "🕊️", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNVqNOivd1s0tOedAOOeLQK0DRd97eTYdOdA&s" },
+  { "name": "सुगा", "emoji": "🦜", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrMj-5vLh6mA58_RDpZbXP28T-bzmJmNL3vg&s" },
+  { "name": "हंस", "emoji": "🦢", "imageUrl": "https://i.natgeofe.com/k/7ce14b7f-df35-4881-95ae-650bce0adf4d/mallard-male-standing_square.jpg" },
+  { "name": "उल्लू", "emoji": "🦉", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2mVJwyf84krVqbcKnn8akgmUAGpsRPjQG7w&s" }
+]

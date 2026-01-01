@@ -1,0 +1,18 @@
+[
+  { "name": "ढोल", "emoji": "🥁", "imageUrl": "https://t4.ftcdn.net/jpg/04/96/24/41/360_F_496244143_AhFB2gha3lXb0kfB8oXDRQ5NyhZB6GIq.jpg" },
+  { "name": "खुकुरी", "emoji": "🔪", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Polished_kukri_noBG.jpg/500px-Polished_kukri_noBG.jpg" },
+  { "name": "टोपी", "emoji": "🧢", "imageFile": "dhaka-topi.jpg" },
+  { "name": "मदल", "emoji": "🪘", "imageFile": "madal.jpg" },
+  { "name": "बाँसुरी", "emoji": "🎵", "imageFile": "bansuri.jpg" },
+  { "name": "किताब", "emoji": "📚", "imageFile": "book.jpg" },
+  { "name": "फोन", "emoji": "📱", "imageFile": "phone.jpg" },
+  { "name": "घडी", "emoji": "⌚", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrrvRWDpRts3ffsdJKXCCqzfSaLNGc2Bxc5g&s" },
+  { "name": "झोला", "emoji": "🎒", "imageFile": "bag.jpg" },
+  { "name": "ढाका कपडा", "emoji": "🧵", "imageFile": "dhaka-fabric.jpg" },
+  { "name": "झोलुङ्गे पुल", "emoji": "🌉", "imageFile": "suspension-bridge.jpg" },
+  { "name": "घण्टी", "emoji": "🔔", "imageFile": "bell.jpg" },
+  { "name": "दियो", "emoji": "🪔", "imageFile": "lamp.jpg" },
+  { "name": "चुरा", "emoji": "💍", "imageUrl": "https://jewelemarket.com/cdn/shop/files/10744672RD_3eef267e-6bbe-4f97-849e-2a9829589d69_600x.jpg" },
+  { "name": "नौबजे बाजा", "emoji": "🎺", "imageFile": "naumati-baja.jpg" },
+  { "name": "सुन", "emoji": "🪙", "imageFile": "gold.jpg" }
+]

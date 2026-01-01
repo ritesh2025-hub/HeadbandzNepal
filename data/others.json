@@ -1,0 +1,20 @@
+[
+  { "name": "शिशान बानिया", "emoji": "🎤", "imageFile": "shishan-baniya.jpg" },
+  { "name": "श्रीनखला खतिवडा", "emoji": "👩", "imageFile": "shrinkhala-khatiwada.jpg" },
+  { "name": "च्यातप्याते", "emoji": "🎭", "imageFile": "chatpatye.jpg" },
+  { "name": "मछिन्द्रनाथ", "emoji": "🙏", "imageFile": "machindranath.jpg" },
+  { "name": "काले दाइ", "emoji": "😎", "imageFile": "kale-dai.jpg" },
+  { "name": "दर्पण छाया", "emoji": "📺", "imageFile": "darpan-chaya.jpg" },
+  { "name": "लौरे", "emoji": "🎤", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThaNz0U7o4KdWfmLlNa9Fk7dzJurBD90svXw&s" },
+  { "name": "याम बुद्ध", "emoji": "🎤", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Rapperyammabuddha.png" },
+  { "name": "गिरिष खतिवडा", "emoji": "😂", "imageUrl": "https://i.ytimg.com/vi/Hlp7eAnlEaM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnIGjasT6tS8m77hpi6wm01an9Ag" },
+  { "name": "जीतु नेपाल", "emoji": "😂", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxEFW-6BtczXi2jg66TdPLZaDl6vvTxMXaMw&s" },
+  { "name": "दीपक राज गिरी", "emoji": "🎭", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRuTIFJk1cJLkqp_uYrpYsgZc0eTMdyppjdg&s" },
+  { "name": "केदार घिमिरे", "emoji": "🎭", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqljsnNggVddVzGV4pH7e1cSrNJi4_5piT9A&s" },
+  { "name": "साज्जन राज वैद्य", "emoji": "🎸", "imageUrl": "https://i.scdn.co/image/ab67616d0000b27363ab3d245ef5f337843d1634" },
+  { "name": "बर्तिका ईम राई", "emoji": "🎤", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/83/Bartika_Eam_Rai.png" },
+  { "name": "प्रशान्त तामाङ", "emoji": "🎸", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Prashant_Tamang_03.jpg" },
+  { "name": "युनिक पोएट", "emoji": "🎤", "imageUrl": "https://liftedasia.com/assets/content_images/uniq-660.png" },
+  { "name": "भीटेन", "emoji": "🎤", "imageFile": "vten.jpg" },
+  { "name": "बालेन शाह", "emoji": "🏛️", "imageUrl": "https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/7d8f/live/477da020-8e18-11f0-8bee-8501c5d73579.jpg.webp" }
+]

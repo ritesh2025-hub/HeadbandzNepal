@@ -772,40 +772,6 @@
             color: #DC143C;
         }
 
-        .issue-report-btn {
-            position: absolute;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(220, 20, 60, 0.9);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.9em;
-            z-index: 20;
-            transition: all 0.3s;
-        }
-
-        .issue-report-btn:hover {
-            background: rgba(220, 20, 60, 1);
-            transform: scale(1.05);
-        }
-
-        .issue-report-btn.reported {
-            background: rgba(237, 137, 54, 0.9);
-        }
-
-        @media (max-width: 768px) {
-            .issue-report-btn {
-                bottom: 60px;
-                right: 10px;
-                padding: 6px 12px;
-                font-size: 0.8em;
-            }
-        }
-
         .game-info-bar {
             background: white;
             border-radius: 15px;
@@ -1665,7 +1631,6 @@
             <div class="game-layout">
                 <div class="card-display" id="cardDisplay">
                     <div class="card-category" id="cardCategory"></div>
-                    <button class="issue-report-btn" id="issueReportBtn" onclick="reportIssue()" style="display: none;">⚠️ Report Issue</button>
                     <div class="card-image" id="cardImage"></div>
                     <div class="card-name" id="cardName"></div>
                     <div id="countdownOverlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 100;">
@@ -1717,347 +1682,62 @@
     </div>
 
     <script>
-        const gameData = {
-            animals: [
-                { name: 'बाघ', emoji: '🐯', imageFile: 'tiger.jpg' },
-                { name: 'हात्ती', emoji: '🐘', imageFile: 'elephant.jpg' },
-                { name: 'बाँदर', emoji: '🐵', imageFile: 'monkey.jpg' },
-                { name: 'गाई', emoji: '🐄', imageFile: 'cow.jpg' },
-                { name: 'भालु', emoji: '🐻', imageFile: 'bear.jpg' },
-                { name: 'हिरण', emoji: '🦌', imageFile: 'deer.jpg' },
-                { name: 'गैंडा', emoji: '🦏', imageFile: 'rhino.jpg' },
-                { name: 'सर्प', emoji: '🐍', imageFile: 'snake.jpg' },
-                { name: 'चरा', emoji: '🦅', imageFile: 'bird.jpg' },
-                { name: 'माछा', emoji: '🐟', imageFile: 'fish.jpg' },
-                { name: 'कुकुर', emoji: '🐕', imageFile: 'dog.jpg' },
-                { name: 'बिरालो', emoji: '🐈', imageFile: 'cat.jpg' },
-                { name: 'सिंह', emoji: '🦁', imageFile: 'lion.jpg' },
-                { name: 'पाण्डा', emoji: '🐼', imageFile: 'panda.jpg' },
-                { name: 'भेडा', emoji: '🐑', imageFile: 'sheep.jpg' },
-                { name: 'बाख्रा', emoji: '🐐', imageFile: 'goat.jpg' },
-                { name: 'खरायो', emoji: '🐇', imageFile: 'rabbit.jpg' },
-                { name: 'याक', emoji: '🦌', imageFile: 'yak.jpg' },
-                { name: 'चिल', emoji: '🦅', imageFile: 'eagle.jpg' },
-                { name: 'भ्यागुता', emoji: '🐸', imageFile: 'frog.jpg' }
-            ],
-            food: [
-                { name: 'मोमो', emoji: '🥟', imageFile: 'momo.jpg' },
-                { name: 'Jhol मोमो', emoji: '🥟', imageUrl: 'https://junifoods.com/wp-content/uploads/2024/06/Spicy-Tomato-Jhol-Momo-%E0%A4%9F%E0%A4%AE%E0%A4%BE%E0%A4%9F%E0%A4%B0-%E0%A4%85%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A4%95%E0%A5%8B-%E0%A4%9D%E0%A5%8B%E0%A4%B2-%E0%A4%AE%E0%A5%8B%E0%A4%AE%E0%A5%8B-1-300x300.jpg' },
-                { name: 'Fried मोमो', emoji: '🥟', imageUrl: 'https://i.ytimg.com/vi/dNhgr9w7Y6g/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBX66hdQIfXhL35NSZVXGC5TKo8wg' },
-                { name: 'दालभात', emoji: '🍚', imageFile: 'dalbhat.jpg' },
-                { name: 'सेलरोटी', emoji: '🍩', imageFile: 'sel-roti.jpg' },
-                { name: 'चोयला', emoji: '🍖', imageFile: 'choyla.jpg' },
-                { name: 'बारा', emoji: '🥞', imageFile: 'bara.jpg' },
-                { name: 'चाट', emoji: '🥗', imageFile: 'chaat.jpg' },
-                { name: 'समोसा', emoji: '🥙', imageFile: 'samosa.jpg' },
-                { name: 'जलेबी', emoji: '🧡', imageFile: 'jalebi.jpg' },
-                { name: 'लस्सी', emoji: '🥛', imageFile: 'lassi.jpg' },
-                { name: 'चाउमिन', emoji: '🍜', imageFile: 'chowmein.jpg' },
-                { name: 'पानीपुरी', emoji: '🫓', imageFile: 'panipuri.jpg' },
-                { name: 'छोयला', emoji: '🍗', imageFile: 'chhoyela.jpg' },
-                { name: 'भटमास', emoji: '🥜', imageFile: 'bhatmas.jpg' },
-                { name: 'गुन्द्रुक', emoji: '🥬', imageFile: 'gundruk.jpg' },
-                { name: 'ढिडो', emoji: '🥣', imageFile: 'dhido.jpg' },
-                { name: 'यमरी', emoji: '🥟', imageFile: 'yomari.jpg' },
-                { name: 'वडा', emoji: '🍘', imageFile: 'wada.jpg' },
-                { name: 'आलुदम', emoji: '🥔', imageFile: 'aludam.jpg' },
-                { name: 'खीर', emoji: '🍮', imageFile: 'kheer.jpg' },
-                { name: 'पकौडा', emoji: '🥙', imageFile: 'pakoda.jpg' },
-                { name: 'चटामरी', emoji: '🥞', imageUrl: 'https://i.ytimg.com/vi/h0rXQI7xS5A/maxresdefault.jpg' },
-                { name: 'लखामरी', emoji: '🍪', imageFile: 'lakhamari.jpg' },
-                { name: 'चुरपी', emoji: '🧀', imageFile: 'chhurpi.jpg' },
-                { name: 'थुक्पा', emoji: '🍲', imageFile: 'thukpa.jpg' },
-                { name: 'पुरी तरकारी', emoji: '🥘', imageFile: 'puri-tarkari.jpg' },
-                { name: 'राजमा', emoji: '🫘', imageFile: 'rajma.jpg' }
-            ],
-            objects: [
-                { name: 'ढोल', emoji: '🥁', imageUrl: 'https://t4.ftcdn.net/jpg/04/96/24/41/360_F_496244143_AhFB2gha3lXb0kfB8oXDRQ5NyhZB6GIq.jpg' },
-                { name: 'खुकुरी', emoji: '🔪', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Polished_kukri_noBG.jpg/500px-Polished_kukri_noBG.jpg' },
-                { name: 'टोपी', emoji: '🧢', imageFile: 'dhaka-topi.jpg' },
-                { name: 'मदल', emoji: '🪘', imageFile: 'madal.jpg' },
-                { name: 'बाँसुरी', emoji: '🎵', imageFile: 'bansuri.jpg' },
-                { name: 'किताब', emoji: '📚', imageFile: 'book.jpg' },
-                { name: 'फोन', emoji: '📱', imageFile: 'phone.jpg' },
-                { name: 'घडी', emoji: '⌚', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrrvRWDpRts3ffsdJKXCCqzfSaLNGc2Bxc5g&s' },
-                { name: 'झोला', emoji: '🎒', imageFile: 'bag.jpg' },
-                { name: 'ढाका कपडा', emoji: '🧵', imageFile: 'dhaka-fabric.jpg' },
-                { name: 'झोलुङ्गे पुल', emoji: '🌉', imageFile: 'suspension-bridge.jpg' },
-                { name: 'घण्टी', emoji: '🔔', imageFile: 'bell.jpg' },
-                { name: 'दियो', emoji: '🪔', imageFile: 'lamp.jpg' },
-                { name: 'चुरा', emoji: '💍', imageUrl: 'https://jewelemarket.com/cdn/shop/files/10744672RD_3eef267e-6bbe-4f97-849e-2a9829589d69_600x.jpg' },
-                { name: 'नौबजे बाजा', emoji: '🎺', imageFile: 'naumati-baja.jpg' }
-            ],
-            festivals: [
-                { name: 'दशैं', emoji: '🎉', imageFile: 'dashain.jpg' },
-                { name: 'तिहार', emoji: '🪔', imageFile: 'tihar.jpg' },
-                { name: 'होली', emoji: '🎨', imageFile: 'holi.jpg' },
-                { name: 'लोसार', emoji: '🎊', imageFile: 'losar.jpg' },
-                { name: 'तीज', emoji: '💃', imageFile: 'teej.jpg' },
-                { name: 'छठ', emoji: '🌅', imageFile: 'chhath.jpg' },
-                { name: 'गाईजात्रा', emoji: '🐄', imageFile: 'gai-jatra.jpg' },
-                { name: 'जनाई पूर्णिमा', emoji: '🧵', imageFile: 'janai-purnima.jpg' },
-                { name: 'माघे संक्रान्ती', emoji: '🍯', imageFile: 'maghe-sankranti.jpg' },
-                { name: 'शिवरात्रि', emoji: '🔱', imageFile: 'shivaratri.jpg' },
-            ],
-            personalities: [
-                { name: 'गौतम बुद्ध', emoji: '☸️', imageFile: 'gautam-buddha.jpg' },
-                { name: 'पृथ्वीनारायण शाह', emoji: '👑', imageFile: 'prithvi-narayan-shah.jpg' },
-                { name: 'लक्ष्मी प्रसाद देवकोटा', emoji: '✍️', imageFile: 'laxmi-prasad-devkota.jpg' },
-                { name: 'नारायण गोपाल', emoji: '🎤', imageFile: 'narayan-gopal.jpg' },
-                { name: 'कुमारी', emoji: '👸', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f0/Kumari.jpg.nepal.jpg' },
-                { name: 'संदीप लामिछाने', emoji: '🏏', imageFile: 'sandeep-lamichhane.jpg' },
-                { name: 'भानुभक्त आचार्य', emoji: '✒️', imageFile: 'bhanubhakta-acharya.jpg' },
-                { name: 'अरनिको', emoji: '🏛️', imageFile: 'araniko.jpg' },
-                { name: 'तेन्जिङ नोर्गे', emoji: '🏔️', imageFile: 'tenzing-norgay.jpg' },
-                { name: 'पारस खड्का', emoji: '🏏', imageFile: 'paras-khadka.jpg' },
-                { name: 'मदन कृष्ण श्रेष्ठ', emoji: '🎭', imageFile: 'madan-krishna-shrestha.jpg' },
-                { name: 'हरि बंश आचार्य', emoji: '🎸', imageFile: 'hari-bansha-acharya.jpg' },
-                { name: 'भुवन केसी', emoji: '🎬', imageFile: 'bhuwan-kc.jpg' }
-            ],
-            places: [
-                { name: 'सगरमाथा', emoji: '🏔️', imageUrl: 'https://media.istockphoto.com/id/478627080/photo/evening-view-of-ama-dablam.jpg?s=612x612&w=0&k=20&c=GLKvtQt1JVoOB4yR2WI86_fYOmG8WObeZP_QV_gFG_0=' },
-                { name: 'पशुपतिनाथ', emoji: '🛕', imageFile: 'pashupatinath.jpg' },
-                { name: 'पाटन', emoji: '🏛️', imageFile: 'patan.jpg' },
-                { name: 'लुम्बिनी', emoji: '🕉️', imageFile: 'lumbini.jpg' },
-                { name: 'पोखरा', emoji: '🏞️', imageFile: 'pokhara.jpg' },
-                { name: 'चितवन', emoji: '🦏', imageFile: 'chitwan.jpg' },
-                { name: 'अन्नपूर्ण', emoji: '⛰️', imageFile: 'annapurna.jpg' },
-                { name: 'स्वयम्भूनाथ', emoji: '🙏', imageFile: 'swayambhunath.jpg' },
-                { name: 'बौद्धनाथ', emoji: '☸️', imageFile: 'boudhanath.jpg' },
-                { name: 'रारा ताल', emoji: '🏞️', imageFile: 'rara-lake.jpg' },
-                { name: 'काठमाडौं', emoji: '🏙️', imageFile: 'kathmandu.jpg' },
-                { name: 'भक्तपुर', emoji: '🏯', imageFile: 'bhaktapur.jpg' },
-                { name: 'मनकामना', emoji: '🙏', imageFile: 'manakamana.jpg' },
-                { name: 'मुक्तिनाथ', emoji: '🕉️', imageFile: 'muktinath.jpg' },
-                { name: 'फेवा ताल', emoji: '🛶', imageFile: 'fewa-lake.jpg' },
-                { name: 'नागरकोट', emoji: '🌄', imageFile: 'nagarkot.jpg' },
-                { name: 'धरहरा', emoji: '🗼', imageFile: 'dharahara.jpg' }
-            ],
-            others: [
-                { name: 'दुर्गेश थापा', emoji: '👨', imageFile: 'durgesh-thapa.jpg' },
-                { name: 'केपी ओली', emoji: '🧑‍💼', imageFile: 'kp-oli.jpg' },
-                { name: 'शिशान बानिया', emoji: '🎤', imageFile: 'shishan-baniya.jpg' },
-                { name: 'श्रीनखला खतिवडा', emoji: '👩', imageFile: 'shrinkhala-khatiwada.jpg' },
-                { name: 'च्यातप्याते', emoji: '🎭', imageFile: 'chatpatye.jpg' },
-                { name: 'बुढो साइकल', emoji: '🚲', imageFile: 'budho-cycle.jpg' },
-                { name: 'मछिन्द्रनाथ', emoji: '🙏', imageFile: 'machindranath.jpg' },
-                { name: 'काले दाइ', emoji: '😎', imageFile: 'kale-dai.jpg' },
-                { name: 'दर्पण छाया', emoji: '📺', imageFile: 'darpan-chaya.jpg' },
-                { name: 'कीर्तिपुर', emoji: '🏘️', imageFile: 'kirtipur.jpg' },
-                { name: 'शेर्पा', emoji: '🧗', imageFile: 'sherpa.jpg' },
-                { name: 'तोङ्बा', emoji: '🍺', imageFile: 'tongba.jpg' },
-                { name: 'पण्डित', emoji: '🧙', imageFile: 'pandit.jpg' },
-                { name: 'अनमोल केसी', emoji: '🎬', imageFile: 'anmol-kc.jpg' },
-                { name: 'गिरिजा प्रसाद', emoji: '👔', imageFile: 'girija-prasad.jpg' },
-                { name: 'सफा टेम्पो', emoji: '🚐', imageFile: 'safa-tempo.jpg' },
-                { name: 'सुन', emoji: '🪙', imageFile: 'gold.jpg' },
-                { name: 'बिबाह', emoji: '💒', imageFile: 'wedding.jpg' },
-                { name: 'भीटेन', emoji: '🎤', imageFile: 'vten.jpg' },
-                { name: 'बालेन शाह', emoji: '🏛️', imageUrl: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/7d8f/live/477da020-8e18-11f0-8bee-8501c5d73579.jpg.webp' },
-                { name: 'प्रियंका कार्की', emoji: '🎬', imageUrl: 'https://artistsimages.b-cdn.net/priyanka-karki/priyanka-karki-1.jpg' },
-                { name: 'स्वस्तिमा खड्का', emoji: '🎬', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJoQaeTNKfh0ibOv9Q8uWoe2fvgJSjSfi9w&s' },
-                { name: 'पल शाह', emoji: '🎬', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsNhpSGyhttTiGjMv2zMcqtCzeuUsiN9YEg&s' },
-                { name: 'लौरे', emoji: '🎤', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThaNz0U7o4KdWfmLlNa9Fk7dzJurBD90svXw&s' },
-                { name: 'याम बुद्ध', emoji: '🎤', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Rapperyammabuddha.png' },
-                { name: 'गिरिष खतिवडा', emoji: '😂', imageUrl: 'https://i.ytimg.com/vi/Hlp7eAnlEaM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnIGjasT6tS8m77hpi6wm01an9Ag' },
-                { name: 'जीतु नेपाल', emoji: '😂', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxEFW-6BtczXi2jg66TdPLZaDl6vvTxMXaMw&s' },
-                { name: 'दीपक राज गिरी', emoji: '🎭', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRuTIFJk1cJLkqp_uYrpYsgZc0eTMdyppjdg&s' },
-                { name: 'केदार घिमिरे', emoji: '🎭', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqljsnNggVddVzGV4pH7e1cSrNJi4_5piT9A&s' },
-                { name: 'नम्रता श्रेष्ठ', emoji: '🎬', imageUrl: 'https://pbs.twimg.com/profile_images/3602745636/cb9ff3a7e911bd2d2cbf4c4e42644f4a.jpeg' },
-                { name: 'रेखा थापा', emoji: '🎬', imageUrl: 'https://www.lensnepal.com/files/profiles/rekha-thapa.jpg' },
-                { name: 'साज्जन राज वैद्य', emoji: '🎸', imageUrl: 'https://i.scdn.co/image/ab67616d0000b27363ab3d245ef5f337843d1634' },
-                { name: 'बर्तिका ईम राई', emoji: '🎤', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/83/Bartika_Eam_Rai.png' },
-                { name: 'प्रशान्त तामाङ', emoji: '🎸', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Prashant_Tamang_03.jpg' },
-                { name: 'युनिक पोएट', emoji: '🎤', imageUrl: 'https://liftedasia.com/assets/content_images/uniq-660.png' },
-                { name: 'टोयोटा', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFgcu7yRxXvktyojYLDiarXabfcW8T_8E0cA&s' },
-                { name: 'सुजुकी', emoji: '🚗', imageUrl: 'https://images.drivespark.com/webp/fit-in/450x350/car-image/car/16963439-maruti_jimny.jpg' },
-                { name: 'हुन्डाई', emoji: '🚗', imageUrl: 'https://nepalauto.com/wp-content/uploads/2025/04/hyundai-creta-800x534.jpg' },
-                { name: 'निसान', emoji: '🚗', imageUrl: 'https://images.drivespark.com/webp/fit-in/450x350/car-image/car/15324022-nissan_x_trail.jpg' },
-                { name: 'होन्डा', emoji: '🚗', imageUrl: 'https://di-uploads-pod14.dealerinspire.com/hondaeastcincy/uploads/2023/02/2302-Honda-Accord-Hybrid-Thumb.jpg' },
-                { name: 'टाटा', emoji: '🚗', imageUrl: 'https://www.jagranimages.com/images/2025/10/30/article/image/TML-Commercial-Vehicles-Rebrands-as-Tata-Motors-1761829696547.webp' },
-                { name: 'महिन्द्रा', emoji: '🚗', imageUrl: 'https://imgd.aeplcdn.com/272x153/n/cw/ec/40432/scorpio-n-exterior-right-front-three-quarter-4.png?isig=0&q=80' },
-                { name: 'किया', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyZ5ic6oPuoLYW07ozjygPMZ0Qr_X-IcbJ0w&s' },
-                { name: 'मर्सिडिज बेन्ज', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-HTjFx-UNFJmUnExc4lXGrXQkI2Jm1YvXYA&s' },
-                { name: 'बीएमडब्लू', emoji: '🚗', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSJMih4eVRVesztlsjVJXjxt1bviQK5iM_zg&s' },
-                { name: 'रोल्स रोयस', emoji: '🚗', imageUrl: 'https://www.meroauto.com/wp-content/themes/meroauto_custom_thm/inc/timthumb.php?src=https://www.meroauto.com/wp-content/uploads/2019/12/rolls-royes.jpg&w=750&h=450' },
-                { name: 'रेन्ज रोभर', emoji: '🚙', imageUrl: 'https://media.sobizcdn.com/biznessnews.com/media-file/images/2025/04/1745907849-S42Wd.jpg' }
-            ],
-            flags: [
-                { name: 'नेपाल', emoji: '🇳🇵', imageFile: 'flag-nepal.jpg' },
-                { name: 'भारत', emoji: '🇮🇳', imageFile: 'flag-india.jpg' },
-                { name: 'चीन', emoji: '🇨🇳', imageFile: 'flag-china.jpg' },
-                { name: 'जापान', emoji: '🇯🇵', imageFile: 'flag-japan.jpg' },
-                { name: 'अमेरिका', emoji: '🇺🇸', imageFile: 'flag-usa.jpg' },
-                { name: 'बेलायत', emoji: '🇬🇧', imageFile: 'flag-uk.jpg' },
-                { name: 'अष्ट्रेलिया', emoji: '🇦🇺', imageFile: 'flag-australia.jpg' },
-                { name: 'दक्षिण कोरिया', emoji: '🇰🇷', imageFile: 'flag-south-korea.jpg' },
-                { name: 'बंगलादेश', emoji: '🇧🇩', imageFile: 'flag-bangladesh.jpg' },
-                { name: 'पाकिस्तान', emoji: '🇵🇰', imageFile: 'flag-pakistan.jpg' },
-                { name: 'श्रीलंका', emoji: '🇱🇰', imageFile: 'flag-sri-lanka.jpg' },
-                { name: 'भुटान', emoji: '🇧🇹', imageFile: 'flag-bhutan.jpg' },
-                { name: 'थाइल्याण्ड', emoji: '🇹🇭', imageFile: 'flag-thailand.jpg' },
-                { name: 'मलेसिया', emoji: '🇲🇾', imageFile: 'flag-malaysia.jpg' },
-                { name: 'सिंगापुर', emoji: '🇸🇬', imageFile: 'flag-singapore.jpg' },
-                { name: 'जर्मनी', emoji: '🇩🇪', imageFile: 'flag-germany.jpg' },
-                { name: 'फ्रान्स', emoji: '🇫🇷', imageFile: 'flag-france.jpg' },
-                { name: 'क्यानडा', emoji: '🇨🇦', imageFile: 'flag-canada.jpg' },
-                { name: 'ब्राजिल', emoji: '🇧🇷', imageFile: 'flag-brazil.jpg' },
-                { name: 'रसिया', emoji: '🇷🇺', imageFile: 'flag-russia.jpg' }
-            ],
-            world_places: [
-                // Example entries with external URLs - you can replace these URLs with any image URL
-                { name: 'एफिल टावर', emoji: '🗼', imageUrl: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800' },
-                { name: 'स्ट्याच्यु अफ लिबर्टी', emoji: '🗽', imageUrl: 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800' },
-                { name: 'ताज महल', emoji: '🕌', imageUrl: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800' },
-                { name: 'कोलोसियम', emoji: '🏛️', imageUrl: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800' },
-                { name: 'ग्रेट वाल अफ चाइना', emoji: '🏯', imageUrl: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800' },
-                { name: 'बुर्ज खलिफा', emoji: '🏙️', imageUrl: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800' },
-                { name: 'सिडनी ओपेरा हाउस', emoji: '🎭', imageUrl: 'https://images.unsplash.com/photo-1523059623039-a9ed027e7fad?w=800' },
-                { name: 'माचु पिचु', emoji: '⛰️', imageUrl: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=800' },
-                { name: 'पिरामिड अफ गिजा', emoji: '🔺', imageUrl: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800' },
-                { name: 'बिग बेन', emoji: '🕰️', imageUrl: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800' },
-                { name: 'माउन्ट फुजी', emoji: '🗻', imageUrl: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800' },
-                { name: 'नायगरा फल्स', emoji: '💦', imageUrl: 'https://images.unsplash.com/photo-1489447068241-b3490214e879?w=800' },
-                { name: 'सान्टोरिनी', emoji: '🏝️', imageUrl: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800' },
-                { name: 'ग्रान्ड क्यान्यन', emoji: '🏜️', imageUrl: 'https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=800' },
-                { name: 'पेट्रा', emoji: '🏛️', imageUrl: 'https://images.unsplash.com/photo-1579606032821-4e6161c81bd3?w=800' }
-            ],
-            movie_stars: [
-                // PASTE YOUR IMAGE URLs HERE (right-click image → copy image address)
-                { name: 'शाहरुख खान', emoji: '⭐', imageUrl: 'https://img.punjabkesari.in/multimedia/914/0/0X0/0/static.punjabkesari.in/2024_12image_17_54_232787637shahrukh-ll.jpg' }, // Paste URL between quotes
-                { name: 'सलमान खान', emoji: '🎬', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Salman_Khan_in_2023_%281%29_%28cropped%29.jpg/500px-Salman_Khan_in_2023_%281%29_%28cropped%29.jpg' },
-                { name: 'आमिर खान', emoji: '🎭', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_FMjpg_UX1000_.jpg' },
-                { name: 'दीपिका पादुकोण', emoji: '👸', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmEXXW_2IgRhb3bJtRmynok_rANjbvWBBDtG3zCSkKj2j4c61zpw3dBXiN6dMQ4dSEJ0FFEoMPlsXIfZf-Lc5J4g8SrM9zUcFQLk6GaVE&s=10' },
-                { name: 'प्रियंका चोपडा', emoji: '🌟', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZlBG6M9CVIWqte3MFeT0I869Ic_cpA7Npi6qR6cZTGMu32pqXmkESDrO81PZcY8q-JC_lIIG8t989gBy_6QJcY85E2OrXbfmc5_Jkig&s=10' },
-                { name: 'आलिया भट', emoji: '💫', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alia_Bhatt_2016.jpg/250px-Alia_Bhatt_2016.jpg' },
-                { name: 'रणबीर कपूर', emoji: '🎪', imageUrl: 'https://cdn.siasat.com/wp-content/uploads/2024/09/Ranbir-Kapoor-1.jpg' },
-                { name: 'कटरिना कैफ', emoji: '✨', imageUrl: 'https://i.pinimg.com/736x/0c/dc/cc/0cdccc12d49541d3b92764341aacb700.jpg' },
-                { name: 'अक्षय कुमार', emoji: '🦸', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsG_FRCBTUv_9IDfT3YmXOWdjrW93lPklakg&s' },
-                { name: 'अजय देवगन', emoji: '🎥', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJgxMfF1ofDc0M_h_QCOI3m7jOnCZtWsCAhw&s' },
-                { name: 'ऋतिक रोशन', emoji: '💃', imageUrl: 'https://pbs.twimg.com/media/ErTTbXdUcAAWyu5.jpg' },
-                { name: 'राजेश हमाल', emoji: '🇳🇵', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsKDlEpXq-kpNWwsMZ-Tml6AHRb59WpKK17Q&s' },
-                // Hollywood Stars
-                { name: 'टम क्रुज', emoji: '🚁', imageUrl: 'https://cdn.britannica.com/11/185311-050-31E5BD65/Tom-Cruise-Top-Gun-Tony-Scott.jpg' },
-                { name: 'लियोनार्डो डिक्याप्रियो', emoji: '🌊', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_FMjpg_UX1000_.jpg' },
-                { name: 'ड्वेन जोन्सन', emoji: '💪', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3wfXs7PHOuU21K9tlBzvutD0Gh0DE8_bV_g&s' },
-                { name: 'स्कारलेट जोहानसन', emoji: '👩', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLKoj0Csu_gN-4Lem1Y2zjaxxQvEopXKN-A&s' },
-                { name: 'रबर्ट डाउनी जुनियर', emoji: '🦾', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-xnZVm4o9JOojh-8ed3jJvGx321MUiNbjw&s' },
-                { name: 'टम ह्यांक्स', emoji: '🎖️', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg/250px-Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg' },
-                { name: 'विल स्मिथ', emoji: '👊', imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/777882a/2147483647/strip/true/crop/5220x3700+0+0/resize/1200x851!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F9a%2F5d%2F9fa87c8743ffbdf346ce3a8830f2%2F936361-la-et-show-94th-academy-awards-2196.jpg' },
-                { name: 'एन्जेलिना जोली', emoji: '👼', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNjcxYzIyZWItZWRiOS00ODliLWI3ZTEtZTA4NTg4OGQwZDY1XkEyXkFqcGc@._V1_.jpg' }
-            ],
-            athletes: [
-                // PASTE YOUR IMAGE URLs HERE
-                { name: 'क्रिस्टियानो रोनाल्डो', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVieHozTmpGgdDFFYxj9tskHfNiH3AUSxl5g&s' },
-                { name: 'लियोनल मेस्सी', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeu2Z4ie86F85LJo1xBKmnekC9JZRQejNooQ&s' },
-                { name: 'विराट कोहली', emoji: '🏏', imageUrl: 'https://hindibusinessstandard.imagibyte.sortdcdn.net/wp-content/uploads/2024/05/virat-kohli-rcb-300x214.jpg?size=800' },
-                { name: 'लेब्रोन जेम्स', emoji: '🏀', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg' },
-                { name: 'सेरेना विलियम्स', emoji: '🎾', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjB5PxTVgxCMdAhP0n4JuWl4-cJ3poGqVbnA&s' },
-                { name: 'रोजर फेडरर', emoji: '🎾', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Roger_Federer_2015_%28cropped%29.jpg' },
-                { name: 'माइकल जोर्डन', emoji: '🏀', imageUrl: 'https://cdn.britannica.com/96/195196-050-3909D5BD/Michael-Jordan-1988.jpg' },
-                { name: 'उसेन बोल्ट', emoji: '🏃', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMDRLjbRDoR4UrFmluT8KMSGeKAT_fDxz6-A&s' },
-                { name: 'कीलियन एमब्याप्पे', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT75C5vXQUZ1dMa44ZqZuvJptOhSePdEn1kzQ&s' },
-                { name: 'राफेल नडाल', emoji: '🎾', imageUrl: 'https://i.guim.co.uk/img/static/sys-images/Sport/Pix/pictures/2009/5/22/1242992420041/Rafael-Nadal-001.jpg?width=465&dpr=1&s=none&crop=none' },
-                { name: 'मुहम्मद अली', emoji: '🥊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB8C2dkHgMCWDUF138xb_EfueyOfAUwhjoIA&s' },
-                { name: 'माइक टायसन', emoji: '🥊', imageUrl: 'https://m.media-amazon.com/images/I/71tBZQF9FoL._AC_UF894,1000_QL80_.jpg' },
-                { name: 'नेमार', emoji: '⚽', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg/250px-Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg' },
-                { name: 'एम.एस. धोनी', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRETmhB1cTR399RIrnNsAIBqxAPsdMsJddTIg&s' },
-                { name: 'सचिन तेन्दुलकर', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2GNad6-MCEKDFG1q7zmlF_oaiUcdI_4WyFg&s' },
-                { name: 'टाइगर वुड्स', emoji: '⛳', imageUrl: 'https://cdn.britannica.com/35/197935-050-A7E61875/Tiger-Woods-2002.jpg' },
-                { name: 'सिमोन बाइल्स', emoji: '🤸', imageUrl: 'https://img.olympics.com/images/image/private/t_1-1_300/f_auto/primary/bpg1hewhmku06znwbbnk' },
-                { name: 'फ्लोयड मेवेदर', emoji: '🥊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfh5qZiK5iQVsHa3UPrFzo-DG-fVuFPleqOg&s' },
-                { name: 'कोबे ब्रायन्ट', emoji: '🏀', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjbg4Zcmmn-woYHh37q7j4SCGcoYeZjHxtbg&s' },
-                { name: 'नोभाक जोकोभिच', emoji: '🎾', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Novak_Djokovic_Queen%27s_Club_2018.jpg/250px-Novak_Djokovic_Queen%27s_Club_2018.jpg' },
-                { name: 'पारस खड्का', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsfrk5p8-cudt23ROg0EEeGOMsi_Wvf2m7Q&s' },
-                { name: 'संदीप लामिछाने', emoji: '🏏', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgUXEgNyckL6UGI89rfkyc-CY-35rvXyZsZA&s' },
-                { name: 'दीपक बिष्ट', emoji: '⚽', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Dipak_Bista1.jpg' },
-                { name: 'किरण चेम्जोङ', emoji: '⚽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-S7AzlgswhEUYcg9ntKlameT0rTwZCDIfmQ&s' }
-            ],
-            professions: [
-                { name: 'डाक्टर', emoji: '👨‍⚕️', imageUrl: 'https://cdn.prod.website-files.com/66bd394eedeb9d6ee29898c6/682f5450a046c241920c1e6f_Three%20doctors%20standing%20side%20by%20side%2C%20crossing%20their%20arms.jpg' },
-                { name: 'शिक्षक', emoji: '👩‍🏫', imageUrl: 'https://images.bhaskarassets.com/web2images/521/2025/12/18/orig_origorigcapture16521362651748045022_1766014617.jpg' },
-                { name: 'इन्जिनियर', emoji: '👷', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQePCVmdmFv26b0gt_uISu7ffgRgAwUZoOsFA&s' },
-                { name: 'पाइलट', emoji: '👨‍✈️', imageUrl: 'https://english.pardafas.com/wp-content/uploads/2023/06/Vijay-Lama.jpg' },
-                { name: 'फोटोग्राफर', emoji: '📷', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbEaSmI8nOsCIeRPl2kb0p38mee7QO0YFz5w&s' }
-            ],
-            vehicles: [
-                { name: 'कार', emoji: '🚗', imageUrl: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80' },
-                { name: 'बस', emoji: '🚌', imageUrl: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800&q=80' },
-                { name: 'मोटरसाइकल', emoji: '🏍️', imageUrl: 'https://res.cloudinary.com/jerrick/image/upload/v1738320142/679ca90ee16f01001d9718a5.jpg' },
-                { name: 'साइकल', emoji: '🚲', imageUrl: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=80' },
-                { name: 'हवाइजहाज', emoji: '✈️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuo1oUT5QU10MzJk_x4y7kFX3Ya5gZMfys4w&s' },
-                { name: 'रेल', emoji: '🚂', imageUrl: 'https://nepalinfrastructuresummit.com.np/storage/images/page_managers/66bb17ff1fd5a.png' },
-                { name: 'ट्रक', emoji: '🚛', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_oStpH93GHWqnMhdFdQHJh3lUttm1XY6nkw&s' },
-                { name: 'हेलिकप्टर', emoji: '🚁', imageUrl: 'https://media.nepaltrekadventures.com/uploads/img/ebc-helicopter-tour-blog-1.webp' },
-                { name: 'रिक्सा', emoji: '🛺', imageUrl: 'https://c8.alamy.com/comp/FT6K8H/nepal-kathmandu-rickshaw-driver-looking-for-a-passenger-FT6K8H.jpg' }
-            ],
-            fruits: [
-                { name: 'स्याउ', emoji: '🍎', imageUrl: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=800&q=80' },
-                { name: 'केरा', emoji: '🍌', imageUrl: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&q=80' },
-                { name: 'सुन्तला', emoji: '🍊', imageUrl: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=800&q=80' },
-                { name: 'अंगुर', emoji: '🍇', imageUrl: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80' },
-                { name: 'आँप', emoji: '🥭', imageUrl: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&q=80' },
-                { name: 'स्ट्रबेरी', emoji: '🍓', imageUrl: 'https://images.unsplash.com/photo-1543528176-61b239494933?w=800&q=80' },
-                { name: 'किवी', emoji: '🥝', imageUrl: 'https://images.unsplash.com/photo-1585059895524-72359e06133a?w=800&q=80' },
-                { name: 'नरिवल', emoji: '🥥', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGPDdC_25G3lDybDleuxjeeB_5iwuEQKazGw&s' }
-            ],
-            vegetables: [
-                { name: 'टमाटर', emoji: '🍅', imageUrl: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80' },
-                { name: 'गाजर', emoji: '🥕', imageUrl: 'https://images.unsplash.com/photo-1447175008436-054170c2e979?w=800&q=80' },
-                { name: 'बन्दागोभी', emoji: '🥬', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyz5KcmEoje3VB9Bsyf-i-IgpNNp1Nl5KL1w&s' },
-                { name: 'आलु', emoji: '🥔', imageUrl: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80' },
-                { name: 'प्याज', emoji: '🧅', imageUrl: 'https://images.unsplash.com/photo-1508747703725-719777637510?w=800&q=80' },
-                { name: 'ब्रोकाउली', emoji: '🥦', imageUrl: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&q=80' },
-                { name: 'मकै', emoji: '🌽', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT00K20ybe9aeixn3m46kI14OlBkOkry_28XQ&s' },
-                { name: 'लसुन', emoji: '🧄', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpMXXz-SC-Q-0WUsNzaEdCXSW2hgWEwtjXcQ&s' }
-            ],
-            sports: [
-                { name: 'फुटबल', emoji: '⚽', imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80' },
-                { name: 'क्रिकेट', emoji: '🏏', imageUrl: 'https://www.aljazeera.com/wp-content/uploads/2023/09/GettyImages-1645011567-1-1695793343.jpg?resize=770%2C513&quality=80' },
-                { name: 'बास्केटबल', emoji: '🏀', imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80' },
-                { name: 'टेनिस', emoji: '🎾', imageUrl: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&q=80' },
-                { name: 'ब्याडमिन्टन', emoji: '🏸', imageUrl: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&q=80' },
-                { name: 'भलिबल', emoji: '🏐', imageUrl: 'https://i.ytimg.com/vi/aJcEpeg_6MY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCJTr3C2v66ZizCksOdjSlCPz08TA' },
-                { name: 'बक्सिङ', emoji: '🥊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX2_tH-0or85WdYCRgBPV1p2rAG__pfgd7Yw&s' },
-                { name: 'योग', emoji: '🧘', imageUrl: 'https://filmsofnepal.com/wp-content/uploads/2012/09/Karishma_in_yoga_posture.jpg' },
-                { name: 'दौड', emoji: '🏃', imageUrl: 'https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_xl_2x/f_auto/primary/ys3lrczfsxrb60wqxrez' }
-            ],
-            flowers: [
-                { name: 'गुलाब', emoji: '🌹', imageUrl: 'https://cf-img-a-in.tosshub.com/sites/visualstory/wp/2024/10/rose-plant-.png?size=*:900' },
-                { name: 'सूर्यमुखी', emoji: '🌻', imageUrl: 'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=800&q=80' },
-                { name: 'ज्यास्मिन', emoji: '🤍', imageUrl: 'https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?w=800&q=80' },
-                { name: 'आर्किड', emoji: '💜', imageUrl: 'https://i.redd.it/new-orchid-it-looks-like-a-phalaenopsis-hybrid-any-advice-v0-y2qojdkq6jlb1.jpg?width=3468&format=pjpg&auto=webp&s=26de4bb7b1a6407bf1f6a0e28a7f7b5beb15ca64' }
-            ],
-            birds: [
-                { name: 'चिल', emoji: '🦅', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoA4lJpahIIpyuGX2hlAtnjFj4PdqveeXJXQ&s' },
-                { name: 'परेवा', emoji: '🕊️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNVqNOivd1s0tOedAOOeLQK0DRd97eTYdOdA&s' },
-                { name: 'सुगा', emoji: '🦜', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrMj-5vLh6mA58_RDpZbXP28T-bzmJmNL3vg&s' },
-                { name: 'हंस', emoji: '🦢', imageUrl: 'https://i.natgeofe.com/k/7ce14b7f-df35-4881-95ae-650bce0adf4d/mallard-male-standing_square.jpg' },
-                { name: 'उल्लू', emoji: '🦉', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2mVJwyf84krVqbcKnn8akgmUAGpsRPjQG7w&s' }
-            ],
-            sea_creatures: [
-                { name: 'शार्क', emoji: '🦈', imageUrl: 'https://www.fisheries.noaa.gov/s3//styles/original/s3/2023-06/750x500-Great-White-iStock.jpg?itok=3a9bkD5M' },
-                { name: 'अक्टोपस', emoji: '🐙', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdc9tn2rTx-FitmWLYPb09vfymZwA7lBO4_g&s' },
-                { name: 'जेलीफिस', emoji: '🪼', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc6xBwcSA58sIKs90u6aVMrn8KWHsYmzFeEg&s' },
-                { name: 'केकडा', emoji: '🦀', imageUrl: 'https://file-cdn.mercyforanimals.org/mercy4animals.wpengine.com/sites/517/2023/10/Pixabay-Crab-on-beach.jpg' }
-            ],
-            appliances: [
-                { name: 'फ्रिज', emoji: '🧊', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT03-PrIExY5oLQ4rkVTyoGpMAQE2B8ZflYvQ&s' },
-                { name: 'टिभी', emoji: '📺', imageUrl: 'https://target.scene7.com/is/image/Target/GUEST_4a02279f-c93a-4c1d-865d-bc640caa66b1' },
-                { name: 'वासिङ मसिन', emoji: '🧺', imageUrl: 'https://techpana.prixacdn.net/media/albums/samsung-washing-machine_T8KpJOsrci.jpg' },
-                { name: 'माइक्रोवेभ', emoji: '📻', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9KkIMRF4zrsQ6gcERnDAX6SDCnC0uWMnwIg&s' },
-                { name: 'एयर कन्डिसनर', emoji: '❄️', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOi0dyEMcDy_NDvvLdkvKA5iRLPf1miPsSqw&s' },
-                { name: 'भ्याकुम क्लिनर', emoji: '🧹', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmUkG3ARVeTroMywy5I9SY7lpVn_-wl9Tdgw&s' },
-                { name: 'प्रेसर कुकर', emoji: '🍲', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Pressure_cooker.jpg' },
-                { name: 'इन्डक्सन', emoji: '🔥', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnr2ksjng4TXUh5Ch6KCUh28vXX5Yp_Zzb0g&s' },
-                { name: 'मिक्सर ग्राइन्डर', emoji: '🥤', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2HgBA5vR-PetbeNXGJF9li-0ns1gHo8gQ1g&s' },
-                { name: 'आयरन', emoji: '👔', imageUrl: 'https://i.ebayimg.com/images/g/O-4AAOSwJ~dfjqNk/s-l1200.jpg' },
-                { name: 'हेयर ड्रायर', emoji: '💨', imageUrl: 'https://static01.nyt.com/images/2013/07/21/magazine/21wmt/mag-21WMT-t_CA0-articleLarge.jpg?quality=75&auto=webp&disable=upscale' }
-            ]
-        };
+        // Game data will be loaded dynamically from JSON files
+        let gameData = {};
+        let isDataLoaded = false;
+
+        // Load all category JSON files
+        async function loadGameData() {
+            const categories = [
+                'animals', 'birds', 'food', 'objects', 'festivals', 'personalities',
+                'places', 'flags', 'world_places', 'movie_stars', 'athletes',
+                'professions', 'vehicles', 'fruits', 'vegetables', 'sports',
+                'flowers', 'sea_creatures', 'appliances', 'others'
+            ];
+
+            const loadPromises = categories.map(async (category) => {
+                try {
+                    const response = await fetch(`data/${category}.json`);
+                    if (!response.ok) {
+                        console.error(`Failed to load ${category}.json:`, response.statusText);
+                        return { category, data: [] };
+                    }
+                    const data = await response.json();
+                    return { category, data };
+                } catch (error) {
+                    console.error(`Error loading ${category}.json:`, error);
+                    return { category, data: [] };
+                }
+            });
+
+            const results = await Promise.all(loadPromises);
+
+            // Build gameData object from loaded JSON files
+            results.forEach(({ category, data }) => {
+                gameData[category] = data;
+            });
+
+            isDataLoaded = true;
+            console.log('All game data loaded successfully!');
+            console.log(`Total categories: ${Object.keys(gameData).length}`);
+
+            // Calculate total items
+            let totalItems = 0;
+            Object.values(gameData).forEach(items => totalItems += items.length);
+            console.log(`Total items: ${totalItems}`);
+        }
+
+        // Call loadGameData on page load
+        loadGameData().catch(error => {
+            console.error('Failed to load game data:', error);
+            alert('खेलको डाटा लोड गर्न सकिएन। पृष्ठ पुनः लोड गर्नुहोस्।');
+        });
+
+        // Old embedded gameData removed - now loading from data/*.json files
 
         const categoryNames = {
             animals: 'जनावरहरू',
+            birds: 'चराहरू',
             food: 'खाना',
             objects: 'वस्तुहरू',
             festivals: 'चाडपर्वहरू',
@@ -2139,8 +1819,6 @@
         let playerRoundDetails = {}; // Track detailed stats per round
         let currentRoundCorrect = 0; // Track correct answers in current round
         let currentRoundSkipped = 0; // Track skips in current round
-        let reportedIssues = []; // Track cards with image issues
-        let currentCardReported = false; // Track if current card is reported
 
         function addPlayer() {
             const input = document.getElementById('playerNameInput');
@@ -2193,6 +1871,12 @@
         }
 
         function startGame() {
+            // Check if data is loaded
+            if (!isDataLoaded) {
+                showError('कृपया प्रतीक्षा गर्नुहोस्, डाटा लोड भइरहेको छ...');
+                return;
+            }
+
             if (players.length === 0) {
                 showError('कम्तिमा एक खेलाडी थप्नुहोस्!');
                 return;
@@ -2246,10 +1930,22 @@
             showReadyScreen();
         }
 
+        // Improved shuffle with multiple passes for better randomness
         function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+            // Perform Fisher-Yates shuffle multiple times for better distribution
+            for (let pass = 0; pass < 3; pass++) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            // Additional randomization: swap random pairs
+            const swapCount = Math.floor(array.length / 2);
+            for (let i = 0; i < swapCount; i++) {
+                const idx1 = Math.floor(Math.random() * array.length);
+                const idx2 = Math.floor(Math.random() * array.length);
+                [array[idx1], array[idx2]] = [array[idx2], array[idx1]];
             }
         }
 
@@ -2333,23 +2029,6 @@
                 // Emoji fallback
                 cardImageElement.textContent = card.emoji;
                 cardImageElement.classList.add('emoji-fallback');
-            }
-
-            // Show issue report button and update its state
-            const issueBtn = document.getElementById('issueReportBtn');
-            issueBtn.style.display = 'block';
-
-            // Check if current card is already reported
-            currentCardReported = reportedIssues.some(issue =>
-                issue.name === card.name && issue.category === card.category
-            );
-
-            if (currentCardReported) {
-                issueBtn.classList.add('reported');
-                issueBtn.textContent = '✓ Reported';
-            } else {
-                issueBtn.classList.remove('reported');
-                issueBtn.textContent = '⚠️ Report Issue';
             }
 
             // Preload next image in background
@@ -2481,9 +2160,8 @@
             messageDisplay.textContent = message;
             overlay.style.display = 'flex';
 
-            // Disable buttons and hide issue report button during countdown
+            // Disable buttons during countdown
             disableButtons();
-            document.getElementById('issueReportBtn').style.display = 'none';
 
             let count = countdownDuration;
             numberDisplay.textContent = count;
@@ -2714,12 +2392,6 @@
                 </div>
             `;
 
-            // Print reported issues to console
-            if (reportedIssues.length > 0) {
-                console.log('\n🎮 GAME OVER - Printing reported issues:\n');
-                printIssues();
-            }
-
             // Auto-reload page after 10 seconds
             setTimeout(() => {
                 location.reload();
@@ -2900,90 +2572,6 @@
             document.getElementById('timeInput').value = seconds;
         }
 
-        function reportIssue() {
-            if (currentCardIndex >= cards.length) return;
-
-            const card = cards[currentCardIndex];
-            const issueBtn = document.getElementById('issueReportBtn');
-
-            // Toggle report state
-            if (currentCardReported) {
-                // Remove from reported issues
-                reportedIssues = reportedIssues.filter(issue =>
-                    !(issue.name === card.name && issue.category === card.category)
-                );
-                currentCardReported = false;
-                issueBtn.classList.remove('reported');
-                issueBtn.textContent = '⚠️ Report Issue';
-                console.log(`✓ Removed issue report for: ${card.name} (${card.category})`);
-            } else {
-                // Add to reported issues
-                reportedIssues.push({
-                    name: card.name,
-                    category: card.category,
-                    imageUrl: card.imageUrl || null,
-                    imageFile: card.imageFile || null,
-                    emoji: card.emoji
-                });
-                currentCardReported = true;
-                issueBtn.classList.add('reported');
-                issueBtn.textContent = '✓ Reported';
-                console.log(`⚠️ Reported issue for: ${card.name} (${card.category})`);
-            }
-
-            // Print current count
-            console.log(`Total issues reported: ${reportedIssues.length}`);
-        }
-
-        // Console command to print all reported issues
-        function printIssues() {
-            if (reportedIssues.length === 0) {
-                console.log('No issues reported yet.');
-                return;
-            }
-
-            console.log('\n========================================');
-            console.log(`REPORTED IMAGE ISSUES (${reportedIssues.length} items)`);
-            console.log('========================================\n');
-
-            // Group by category
-            const byCategory = {};
-            reportedIssues.forEach(issue => {
-                if (!byCategory[issue.category]) {
-                    byCategory[issue.category] = [];
-                }
-                byCategory[issue.category].push(issue);
-            });
-
-            // Print grouped
-            Object.keys(byCategory).sort().forEach(category => {
-                console.log(`\n${category}:`);
-                byCategory[category].forEach(issue => {
-                    const source = issue.imageUrl ? 'imageUrl' : (issue.imageFile ? 'imageFile' : 'emoji only');
-                    console.log(`  - ${issue.name} (${source})`);
-                });
-            });
-
-            console.log('\n========================================');
-            console.log('Copy-paste format for removal:');
-            console.log('========================================\n');
-
-            reportedIssues.forEach(issue => {
-                console.log(`{ name: '${issue.name}', category: '${issue.category}' },`);
-            });
-
-            console.log('\n');
-        }
-
-        // Make printIssues available globally
-        window.printIssues = printIssues;
-
-        // Log info about issue reporting feature
-        console.log('%c🎮 Issue Reporting Feature Enabled', 'color: #DC143C; font-size: 16px; font-weight: bold;');
-        console.log('%cClick the "⚠️ Report Issue" button on any card to mark images that don\'t match.', 'color: #718096; font-size: 12px;');
-        console.log('%cType printIssues() in console anytime to see the list of reported issues.', 'color: #48bb78; font-size: 12px;');
-        console.log(' ');
-
         document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 addPlayer();
@@ -3040,9 +2628,14 @@
 
             // If pulled down more than 100px at top of page during game, show modal
             if (gameInProgress && players.length > 0 && scrollTop === 0 && pullDistance > 100) {
+                e.preventDefault();
                 showRefreshModal();
             }
-        }, { passive: true });
+
+            // Reset touch variables
+            touchStartY = 0;
+            touchMoveY = 0;
+        }, { passive: false });
 
         // Prevent scrolling on load
         document.body.classList.add('splash-active');

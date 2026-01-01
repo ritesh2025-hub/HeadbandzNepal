@@ -1,0 +1,9 @@
+[
+  { "name": "डाक्टर", "emoji": "👨‍⚕️", "imageUrl": "https://cdn.prod.website-files.com/66bd394eedeb9d6ee29898c6/682f5450a046c241920c1e6f_Three%20doctors%20standing%20side%20by%20side%2C%20crossing%20their%20arms.jpg" },
+  { "name": "शिक्षक", "emoji": "👩‍🏫", "imageUrl": "https://images.bhaskarassets.com/web2images/521/2025/12/18/orig_origorigcapture16521362651748045022_1766014617.jpg" },
+  { "name": "इन्जिनियर", "emoji": "👷", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQePCVmdmFv26b0gt_uISu7ffgRgAwUZoOsFA&s" },
+  { "name": "पाइलट", "emoji": "👨‍✈️", "imageUrl": "https://english.pardafas.com/wp-content/uploads/2023/06/Vijay-Lama.jpg" },
+  { "name": "फोटोग्राफर", "emoji": "📷", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbEaSmI8nOsCIeRPl2kb0p38mee7QO0YFz5w&s" },
+  { "name": "शेर्पा", "emoji": "🧗", "imageFile": "sherpa.jpg" },
+  { "name": "पण्डित", "emoji": "🧙", "imageFile": "pandit.jpg" }
+]

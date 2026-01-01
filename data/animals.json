@@ -1,0 +1,20 @@
+[
+  { "name": "बाघ", "emoji": "🐯", "imageFile": "tiger.jpg" },
+  { "name": "हात्ती", "emoji": "🐘", "imageFile": "elephant.jpg" },
+  { "name": "बाँदर", "emoji": "🐵", "imageFile": "monkey.jpg" },
+  { "name": "गाई", "emoji": "🐄", "imageFile": "cow.jpg" },
+  { "name": "भालु", "emoji": "🐻", "imageFile": "bear.jpg" },
+  { "name": "हिरण", "emoji": "🦌", "imageFile": "deer.jpg" },
+  { "name": "गैंडा", "emoji": "🦏", "imageFile": "rhino.jpg" },
+  { "name": "सर्प", "emoji": "🐍", "imageFile": "snake.jpg" },
+  { "name": "माछा", "emoji": "🐟", "imageFile": "fish.jpg" },
+  { "name": "कुकुर", "emoji": "🐕", "imageFile": "dog.jpg" },
+  { "name": "बिरालो", "emoji": "🐈", "imageFile": "cat.jpg" },
+  { "name": "सिंह", "emoji": "🦁", "imageFile": "lion.jpg" },
+  { "name": "पाण्डा", "emoji": "🐼", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Grosser_Panda.JPG" },
+  { "name": "भेडा", "emoji": "🐑", "imageFile": "sheep.jpg" },
+  { "name": "बाख्रा", "emoji": "🐐", "imageFile": "goat.jpg" },
+  { "name": "खरायो", "emoji": "🐇", "imageFile": "rabbit.jpg" },
+  { "name": "याक", "emoji": "🦌", "imageFile": "yak.jpg" },
+  { "name": "भ्यागुता", "emoji": "🐸", "imageFile": "frog.jpg" }
+]

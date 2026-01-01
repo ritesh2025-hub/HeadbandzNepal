@@ -1,0 +1,22 @@
+[
+  { "name": "नेपाल", "emoji": "🇳🇵", "imageFile": "flag-nepal.jpg" },
+  { "name": "भारत", "emoji": "🇮🇳", "imageFile": "flag-india.jpg" },
+  { "name": "चीन", "emoji": "🇨🇳", "imageFile": "flag-china.jpg" },
+  { "name": "जापान", "emoji": "🇯🇵", "imageFile": "flag-japan.jpg" },
+  { "name": "अमेरिका", "emoji": "🇺🇸", "imageFile": "flag-usa.jpg" },
+  { "name": "बेलायत", "emoji": "🇬🇧", "imageFile": "flag-uk.jpg" },
+  { "name": "अष्ट्रेलिया", "emoji": "🇦🇺", "imageFile": "flag-australia.jpg" },
+  { "name": "दक्षिण कोरिया", "emoji": "🇰🇷", "imageFile": "flag-south-korea.jpg" },
+  { "name": "बंगलादेश", "emoji": "🇧🇩", "imageFile": "flag-bangladesh.jpg" },
+  { "name": "पाकिस्तान", "emoji": "🇵🇰", "imageFile": "flag-pakistan.jpg" },
+  { "name": "श्रीलंका", "emoji": "🇱🇰", "imageFile": "flag-sri-lanka.jpg" },
+  { "name": "भुटान", "emoji": "🇧🇹", "imageFile": "flag-bhutan.jpg" },
+  { "name": "थाइल्याण्ड", "emoji": "🇹🇭", "imageFile": "flag-thailand.jpg" },
+  { "name": "मलेसिया", "emoji": "🇲🇾", "imageFile": "flag-malaysia.jpg" },
+  { "name": "सिंगापुर", "emoji": "🇸🇬", "imageFile": "flag-singapore.jpg" },
+  { "name": "जर्मनी", "emoji": "🇩🇪", "imageFile": "flag-germany.jpg" },
+  { "name": "फ्रान्स", "emoji": "🇫🇷", "imageFile": "flag-france.jpg" },
+  { "name": "क्यानडा", "emoji": "🇨🇦", "imageFile": "flag-canada.jpg" },
+  { "name": "ब्राजिल", "emoji": "🇧🇷", "imageFile": "flag-brazil.jpg" },
+  { "name": "रसिया", "emoji": "🇷🇺", "imageFile": "flag-russia.jpg" }
+]
