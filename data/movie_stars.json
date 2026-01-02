@@ -1,29 +1,146 @@
 [
-  { "name": "राजेश हमाल", "emoji": "🇳🇵", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsKDlEpXq-kpNWwsMZ-Tml6AHRb59WpKK17Q&s" },
-  { "name": "भुवन केसी", "emoji": "🎬", "imageFile": "bhuwan-kc.jpg" },
-  { "name": "अनमोल केसी", "emoji": "🎬", "imageFile": "anmol-kc.jpg" },
-  { "name": "प्रियंका कार्की", "emoji": "🎬", "imageUrl": "https://artistsimages.b-cdn.net/priyanka-karki/priyanka-karki-1.jpg" },
-  { "name": "स्वस्तिमा खड्का", "emoji": "🎬", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJoQaeTNKfh0ibOv9Q8uWoe2fvgJSjSfi9w&s" },
-  { "name": "पल शाह", "emoji": "🎬", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsNhpSGyhttTiGjMv2zMcqtCzeuUsiN9YEg&s" },
-  { "name": "नम्रता श्रेष्ठ", "emoji": "🎬", "imageUrl": "https://pbs.twimg.com/profile_images/3602745636/cb9ff3a7e911bd2d2cbf4c4e42644f4a.jpeg" },
-  { "name": "रेखा थापा", "emoji": "🎬", "imageUrl": "https://www.lensnepal.com/files/profiles/rekha-thapa.jpg" },
-  { "name": "शाहरुख खान", "emoji": "⭐", "imageUrl": "https://img.punjabkesari.in/multimedia/914/0/0X0/0/static.punjabkesari.in/2024_12image_17_54_232787637shahrukh-ll.jpg" },
-  { "name": "सलमान खान", "emoji": "🎬", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Salman_Khan_in_2023_%281%29_%28cropped%29.jpg/500px-Salman_Khan_in_2023_%281%29_%28cropped%29.jpg" },
-  { "name": "आमिर खान", "emoji": "🎭", "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_FMjpg_UX1000_.jpg" },
-  { "name": "दीपिका पादुकोण", "emoji": "👸", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmEXXW_2IgRhb3bJtRmynok_rANjbvWBBDtG3zCSkKj2j4c61zpw3dBXiN6dMQ4dSEJ0FFEoMPlsXIfZf-Lc5J4g8SrM9zUcFQLk6GaVE&s=10" },
-  { "name": "प्रियंका चोपडा", "emoji": "🌟", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZlBG6M9CVIWqte3MFeT0I869Ic_cpA7Npi6qR6cZTGMu32pqXmkESDrO81PZcY8q-JC_lIIG8t989gBy_6QJcY85E2OrXbfmc5_Jkig&s=10" },
-  { "name": "आलिया भट", "emoji": "💫", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alia_Bhatt_2016.jpg/250px-Alia_Bhatt_2016.jpg" },
-  { "name": "रणबीर कपूर", "emoji": "🎪", "imageUrl": "https://cdn.siasat.com/wp-content/uploads/2024/09/Ranbir-Kapoor-1.jpg" },
-  { "name": "कटरिना कैफ", "emoji": "✨", "imageUrl": "https://i.pinimg.com/736x/0c/dc/cc/0cdccc12d49541d3b92764341aacb700.jpg" },
-  { "name": "अक्षय कुमार", "emoji": "🦸", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsG_FRCBTUv_9IDfT3YmXOWdjrW93lPklakg&s" },
-  { "name": "अजय देवगन", "emoji": "🎥", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJgxMfF1ofDc0M_h_QCOI3m7jOnCZtWsCAhw&s" },
-  { "name": "ऋतिक रोशन", "emoji": "💃", "imageUrl": "https://m.media-amazon.com/images/S/pv-target-images/602f7cdf88443a6e1e2cc3e8a01b697b83e54279c8dc97a90366f2dc77d8eb01._SX300_.jpg" },
-  { "name": "टम क्रुज", "emoji": "🚁", "imageUrl": "https://cdn.britannica.com/11/185311-050-31E5BD65/Tom-Cruise-Top-Gun-Tony-Scott.jpg" },
-  { "name": "लियोनार्डो डिक्याप्रियो", "emoji": "🌊", "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_FMjpg_UX1000_.jpg" },
-  { "name": "ड्वेन जोन्सन", "emoji": "💪", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3wfXs7PHOuU21K9tlBzvutD0Gh0DE8_bV_g&s" },
-  { "name": "स्कारलेट जोहानसन", "emoji": "👩", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLKoj0Csu_gN-4Lem1Y2zjaxxQvEopXKN-A&s" },
-  { "name": "रबर्ट डाउनी जुनियर", "emoji": "🦾", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-xnZVm4o9JOojh-8ed3jJvGx321MUiNbjw&s" },
-  { "name": "टम ह्यांक्स", "emoji": "🎖️", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg/250px-Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg" },
-  { "name": "विल स्मिथ", "emoji": "👊", "imageUrl": "https://ca-times.brightspotcdn.com/dims4/default/777882a/2147483647/strip/true/crop/5220x3700+0+0/resize/1200x851!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F9a%2F5d%2F9fa87c8743ffbdf346ce3a8830f2%2F936361-la-et-show-94th-academy-awards-2196.jpg" },
-  { "name": "एन्जेलिना जोली", "emoji": "👼", "imageUrl": "https://m.media-amazon.com/images/M/MV5BNjcxYzIyZWItZWRiOS00ODliLWI3ZTEtZTA4NTg4OGQwZDY1XkEyXkFqcGc@._V1_.jpg" }
+  {
+    "name": "राजेश हमाल",
+    "emoji": "🇳🇵",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsKDlEpXq-kpNWwsMZ-Tml6AHRb59WpKK17Q&s"
+  },
+  {
+    "name": "भुवन केसी",
+    "emoji": "🎬",
+    "imageFile": "bhuwan-kc.jpg"
+  },
+  {
+    "name": "अनमोल केसी",
+    "emoji": "🎬",
+    "imageUrls": [
+      "images/anmol-kc.jpg",
+      "https://pbs.twimg.com/profile_images/1010175718112628736/RjEcXArJ_400x400.jpg"
+    ]
+  },
+  {
+    "name": "प्रियंका कार्की",
+    "emoji": "🎬",
+    "imageUrls": [
+      "https://artistsimages.b-cdn.net/priyanka-karki/priyanka-karki-1.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkYod5v2mFj_WZjArj1mv1h4M34leTP33kMHycrDpdB6oMaOXF5bSt7_tTrzrGU5YX20rix13rgYticaKzr90xDwwbWKuL9IEGFcx5uWU&s=10"
+    ]
+  },
+  {
+    "name": "स्वस्तिमा खड्का",
+    "emoji": "🎬",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJoQaeTNKfh0ibOv9Q8uWoe2fvgJSjSfi9w&s"
+  },
+  {
+    "name": "पल शाह",
+    "emoji": "🎬",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsNhpSGyhttTiGjMv2zMcqtCzeuUsiN9YEg&s"
+  },
+  {
+    "name": "नम्रता श्रेष्ठ",
+    "emoji": "🎬",
+    "imageUrl": "https://pbs.twimg.com/profile_images/3602745636/cb9ff3a7e911bd2d2cbf4c4e42644f4a.jpeg"
+  },
+  {
+    "name": "रेखा थापा",
+    "emoji": "🎬",
+    "imageUrl": "https://www.lensnepal.com/files/profiles/rekha-thapa.jpg"
+  },
+  {
+    "name": "शाहरुख खान",
+    "emoji": "⭐",
+    "imageUrl": "https://img.punjabkesari.in/multimedia/914/0/0X0/0/static.punjabkesari.in/2024_12image_17_54_232787637shahrukh-ll.jpg"
+  },
+  {
+    "name": "सलमान खान",
+    "emoji": "🎬",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Salman_Khan_in_2023_%281%29_%28cropped%29.jpg/500px-Salman_Khan_in_2023_%281%29_%28cropped%29.jpg"
+  },
+  {
+    "name": "आमिर खान",
+    "emoji": "🎭",
+    "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_FMjpg_UX1000_.jpg"
+  },
+  {
+    "name": "दीपिका पादुकोण",
+    "emoji": "👸",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmEXXW_2IgRhb3bJtRmynok_rANjbvWBBDtG3zCSkKj2j4c61zpw3dBXiN6dMQ4dSEJ0FFEoMPlsXIfZf-Lc5J4g8SrM9zUcFQLk6GaVE&s=10"
+  },
+  {
+    "name": "प्रियंका चोपडा",
+    "emoji": "🌟",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZlBG6M9CVIWqte3MFeT0I869Ic_cpA7Npi6qR6cZTGMu32pqXmkESDrO81PZcY8q-JC_lIIG8t989gBy_6QJcY85E2OrXbfmc5_Jkig&s=10"
+  },
+  {
+    "name": "आलिया भट",
+    "emoji": "💫",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alia_Bhatt_2016.jpg/250px-Alia_Bhatt_2016.jpg"
+  },
+  {
+    "name": "रणबीर कपूर",
+    "emoji": "🎪",
+    "imageUrl": "https://cdn.siasat.com/wp-content/uploads/2024/09/Ranbir-Kapoor-1.jpg"
+  },
+  {
+    "name": "कटरिना कैफ",
+    "emoji": "✨",
+    "imageUrl": "https://i.pinimg.com/736x/0c/dc/cc/0cdccc12d49541d3b92764341aacb700.jpg"
+  },
+  {
+    "name": "अक्षय कुमार",
+    "emoji": "🦸",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsG_FRCBTUv_9IDfT3YmXOWdjrW93lPklakg&s"
+  },
+  {
+    "name": "अजय देवगन",
+    "emoji": "🎥",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJgxMfF1ofDc0M_h_QCOI3m7jOnCZtWsCAhw&s"
+  },
+  {
+    "name": "ऋतिक रोशन",
+    "emoji": "💃",
+    "imageUrl": "https://m.media-amazon.com/images/S/pv-target-images/602f7cdf88443a6e1e2cc3e8a01b697b83e54279c8dc97a90366f2dc77d8eb01._SX300_.jpg"
+  },
+  {
+    "name": "टम क्रुज",
+    "emoji": "🚁",
+    "imageUrl": "https://cdn.britannica.com/11/185311-050-31E5BD65/Tom-Cruise-Top-Gun-Tony-Scott.jpg"
+  },
+  {
+    "name": "लियोनार्डो डिक्याप्रियो",
+    "emoji": "🌊",
+    "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_FMjpg_UX1000_.jpg"
+  },
+  {
+    "name": "ड्वेन जोन्सन",
+    "emoji": "💪",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3wfXs7PHOuU21K9tlBzvutD0Gh0DE8_bV_g&s"
+  },
+  {
+    "name": "स्कारलेट जोहानसन",
+    "emoji": "👩",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLKoj0Csu_gN-4Lem1Y2zjaxxQvEopXKN-A&s"
+  },
+  {
+    "name": "रबर्ट डाउनी जुनियर",
+    "emoji": "🦾",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-xnZVm4o9JOojh-8ed3jJvGx321MUiNbjw&s"
+  },
+  {
+    "name": "टम ह्यांक्स",
+    "emoji": "🎖️",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg/250px-Kevin_Kline_%26_Tom_Hanks_%28252967475%29_%28cropped%29.jpg"
+  },
+  {
+    "name": "विल स्मिथ",
+    "emoji": "👊",
+    "imageUrl": "https://ca-times.brightspotcdn.com/dims4/default/777882a/2147483647/strip/true/crop/5220x3700+0+0/resize/1200x851!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F9a%2F5d%2F9fa87c8743ffbdf346ce3a8830f2%2F936361-la-et-show-94th-academy-awards-2196.jpg"
+  },
+  {
+    "name": "एन्जेलिना जोली",
+    "emoji": "👼",
+    "imageUrls": [
+      "https://m.media-amazon.com/images/M/MV5BNjcxYzIyZWItZWRiOS00ODliLWI3ZTEtZTA4NTg4OGQwZDY1XkEyXkFqcGc@._V1_.jpg",
+      "https://i.dailymail.co.uk/1s/2025/12/30/19/105113309-15422951-Angelina_Jolie_is_preparing_for_what_sources_describe_as_a_long_-a-36_1767124120778.jpg"
+    ]
+  }
 ]

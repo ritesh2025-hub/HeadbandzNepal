@@ -1,13 +1,78 @@
 [
-  { "name": "फ्रिज", "emoji": "🧊", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT03-PrIExY5oLQ4rkVTyoGpMAQE2B8ZflYvQ&s" },
-  { "name": "टिभी", "emoji": "📺", "imageUrl": "https://target.scene7.com/is/image/Target/GUEST_4a02279f-c93a-4c1d-865d-bc640caa66b1" },
-  { "name": "वासिङ मसिन", "emoji": "🧺", "imageUrl": "https://techpana.prixacdn.net/media/albums/samsung-washing-machine_T8KpJOsrci.jpg" },
-  { "name": "माइक्रोवेभ", "emoji": "📻", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9KkIMRF4zrsQ6gcERnDAX6SDCnC0uWMnwIg&s" },
-  { "name": "एयर कन्डिसनर", "emoji": "❄️", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOi0dyEMcDy_NDvvLdkvKA5iRLPf1miPsSqw&s" },
-  { "name": "भ्याकुम क्लिनर", "emoji": "🧹", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmUkG3ARVeTroMywy5I9SY7lpVn_-wl9Tdgw&s" },
-  { "name": "प्रेसर कुकर", "emoji": "🍲", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/58/Pressure_cooker.jpg" },
-  { "name": "इन्डक्सन", "emoji": "🔥", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnr2ksjng4TXUh5Ch6KCUh28vXX5Yp_Zzb0g&s" },
-  { "name": "मिक्सर ग्राइन्डर", "emoji": "🥤", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2HgBA5vR-PetbeNXGJF9li-0ns1gHo8gQ1g&s" },
-  { "name": "आयरन", "emoji": "👔", "imageUrl": "https://m.media-amazon.com/images/I/41i0TJOvYWL._UF894,1000_QL80_.jpg" },
-  { "name": "हेयर ड्रायर", "emoji": "💨", "imageUrl": "https://static01.nyt.com/images/2013/07/21/magazine/21wmt/mag-21WMT-t_CA0-articleLarge.jpg?quality=75&auto=webp&disable=upscale" }
+  {
+    "name": "फ्रिज",
+    "emoji": "🧊",
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT03-PrIExY5oLQ4rkVTyoGpMAQE2B8ZflYvQ&s",
+      "https://media.gettyimages.com/id/98846175/photo/man-sleeping-inside-refrigerator.jpg?s=612x612&w=gi&k=20&c=pAr1lAaWynqSat8dYGuQBBBUJPKpcnJcJLTgbN58K6Y="
+    ]
+  },
+  {
+    "name": "टिभी",
+    "emoji": "📺",
+    "imageUrls": [
+      "https://target.scene7.com/is/image/Target/GUEST_4a02279f-c93a-4c1d-865d-bc640caa66b1",
+      "https://preview.redd.it/excited-locals-pose-with-a-newly-purchased-tv-kathmandu-v0-9za3a4r8lrnd1.jpeg?width=640&crop=smart&auto=webp&s=00fd4ac14c7a4756eacbfc24675bb50642eded9b"
+    ]
+  },
+  {
+    "name": "वासिङ मसिन",
+    "emoji": "🧺",
+    "imageUrl": "https://techpana.prixacdn.net/media/albums/samsung-washing-machine_T8KpJOsrci.jpg"
+  },
+  {
+    "name": "माइक्रोवेभ",
+    "emoji": "📻",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9KkIMRF4zrsQ6gcERnDAX6SDCnC0uWMnwIg&s"
+  },
+  {
+    "name": "एयर कन्डिसनर",
+    "emoji": "❄️",
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOi0dyEMcDy_NDvvLdkvKA5iRLPf1miPsSqw&s",
+      "https://newspaperads.ads2publish.com/wp-content/uploads/2018/04/o-general-air-conditioner-the-extreme-machine-extreme-air-flow-ad-times-of-india-mumbai-07-04-2018.png"
+    ]
+  },
+  {
+    "name": "भ्याकुम क्लिनर",
+    "emoji": "🧹",
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmUkG3ARVeTroMywy5I9SY7lpVn_-wl9Tdgw&s",
+      "https://etimg.etb2bimg.com/photo/121411616.cms"
+    ]
+  },
+  {
+    "name": "प्रेसर कुकर",
+    "emoji": "🍲",
+    "imageUrls": [
+      "https://upload.wikimedia.org/wikipedia/commons/5/58/Pressure_cooker.jpg",
+      "https://www.pnbkitchenmate.com/cdn/shop/files/2_262b3f56-661b-4b10-bb4e-f975f2767c2e.jpg?v=1755848597&width=1946"
+    ]
+  },
+  {
+    "name": "इन्डक्सन",
+    "emoji": "🔥",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnr2ksjng4TXUh5Ch6KCUh28vXX5Yp_Zzb0g&s"
+  },
+  {
+    "name": "मिक्सर ग्राइन्डर",
+    "emoji": "🥤",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2HgBA5vR-PetbeNXGJF9li-0ns1gHo8gQ1g&s"
+  },
+  {
+    "name": "आइरन",
+    "emoji": "👔",
+    "imageUrls": [
+      "https://m.media-amazon.com/images/I/41i0TJOvYWL._UF894,1000_QL80_.jpg",
+      "https://i.etsystatic.com/19523848/r/il/647aa9/4951053214/il_570xN.4951053214_qti4.jpg"
+    ]
+  },
+  {
+    "name": "हेयर ड्रायर",
+    "emoji": "💨",
+    "imageUrls": [
+      "https://static01.nyt.com/images/2013/07/21/magazine/21wmt/mag-21WMT-t_CA0-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
+      "https://dyson-h.assetsadobe2.com/is/image/content/dam/dyson/india/2024/dp-look-book/DP-605C-Homepage-Overview-Module-Hero-ROW.jpg?$responsive$&cropPathE=desktop&fit=stretch,1&wid=1920"
+    ]
+  }
 ]
