@@ -1,27 +1,37 @@
 [
-  { "name": "मेरी बास्सै", "emoji": "📺", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA0_cT8hSqjnL3fVqP6n5wEVFkH5m2FyXLHA&s" },
-  { "name": "टिटो सत्य", "emoji": "📺", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZGzl1pKCGJ5yXBQqH3jYH5FHMj5d0Qg8Qpw&s" },
-  { "name": "भद्रगोल", "emoji": "📺", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8CkX5LhWj5lQxJ3Fj5YH5FHMj5d0Qg8Qpw&s" },
-  { "name": "मुन्द्रे", "emoji": "📺", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5LhWj5lQxJ3Fj5YH5FHMj5d0Qg8Qpw8CkX&s" },
-  { "name": "हामी तीन भाई", "emoji": "📺", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5LhWj5lQxJ3Fj5YH5FHMj5d0Qg8Qpw8CkX&s" },
-  { "name": "महाभारत", "emoji": "📺", "imageUrl": "https://upload.wikimedia.org/wikipedia/en/2/2f/Mahabharat_2013_Serial_Poster.jpg" },
-  { "name": "रामायण", "emoji": "📺", "imageUrl": "https://upload.wikimedia.org/wikipedia/en/1/10/Ramanand_Sagar%27s_Ramayana.jpg" },
-  { "name": "शक्तिमान", "emoji": "💪", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ2v8h8X5LhWj5lQxJ3Fj5YH5FHMj5d0Qpw&s" },
-  { "name": "सी आई डी", "emoji": "🔍", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_8h8X5LhWj5lQxJ3Fj5YH5FHMj5d0Qg8Qpw&s" },
-  { "name": "तारक मेहता का उल्टा चश्मा", "emoji": "😂", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl8X5LhWj5lQxJ3Fj5YH5FHMj5d0Qg8Qpw&s" },
-  { "name": "शिनचान", "emoji": "👶", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScyfcg7kMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw&s" },
-  { "name": "दोरेमोन", "emoji": "🤖", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH5kMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kM&s" },
-  { "name": "छोटा भीम", "emoji": "💪", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm7M&s" },
-  { "name": "जिरे खुर्सानी", "emoji": "🌶️", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8kMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kM&s" },
-  { "name": "अप्सरा", "emoji": "👸", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm&s" },
-  { "name": "म यस्तो गीत गाउँछु", "emoji": "🎤", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kM7&s" },
-  { "name": "नेपाल आइडल", "emoji": "🎵", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm&s" },
-  { "name": "सेटी गार्न", "emoji": "💍", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm7&s" },
-  { "name": "फुप्पु", "emoji": "👵", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm7&s" },
-  { "name": "झोले", "emoji": "🎒", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm7M&s" },
-  { "name": "सानो सपना", "emoji": "💭", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm7M&s" },
-  { "name": "अन्तर्मुखी", "emoji": "🤐", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kM7M&s" },
-  { "name": "पल", "emoji": "⏱️", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm7M&s" },
-  { "name": "कुराकानी", "emoji": "💬", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kM7Mm&s" },
-  { "name": "ए मेरो हजुर", "emoji": "💕", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMm7Mf6KzQ8m2G1vfp5L2H8Qg8Qpw7kMm7k&s" }
+  {
+    "name": "मेरी बास्सै",
+    "emoji": "📺",
+    "imageUrl": "https://i.ytimg.com/vi/KGavO5PuqdM/maxresdefault.jpg"
+  },
+  {
+    "name": "टिटो सत्य",
+    "emoji": "📺",
+    "imageUrl": "https://nettv4u.com/imagine/13-02-2023/tito-satya.png"
+  },
+  {
+    "name": "महाभारत",
+    "emoji": "📺",
+    "imageUrl": "https://i.ytimg.com/vi/Zq5X55MBNk8/maxresdefault.jpg"
+  },
+  {
+    "name": "रामायण",
+    "emoji": "📺",
+    "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjllNjBmODItNDlhZC00OWYwLWFiYjYtZDJhOWRjMzFiM2FmXkEyXkFqcGc@._V1_.jpg"
+  },
+  {
+    "name": "शक्तिमान",
+    "emoji": "💪",
+    "imageUrl": "https://i.ytimg.com/vi/UOsuGGEeW4Y/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCNDSE2fNAiEP3UXDS1OUpjLenwQg"
+  },
+  {
+    "name": "सी आई डी",
+    "emoji": "🔍",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b5/CID_%28Indian_TV_series%29.png"
+  },
+  {
+    "name": "जिरे खुर्सानी",
+    "emoji": "🌶️",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b5/Jire_Khursani_Intertitle.jpg"
+  }
 ]
