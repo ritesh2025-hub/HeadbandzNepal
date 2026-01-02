@@ -1446,6 +1446,14 @@
                 <!-- Add New Item Form -->
                 <div id="addItemForm" style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 15px; padding: 20px; margin-bottom: 20px; display: none;">
                     <h3 style="color: #166534; margin-bottom: 15px;">➕ Add New Item</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #2d3748;">English Name (will auto-translate):</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="newItemEnglishName" placeholder="e.g., Tiger (press Enter to translate)" style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;" onkeypress="if(event.key==='Enter'){event.preventDefault();translateToNepali();}">
+                            <button onclick="translateToNepali()" style="background: #3b82f6; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; white-space: nowrap;">🌐 Translate</button>
+                        </div>
+                        <div id="translationStatus" style="margin-top: 5px; font-size: 0.85em;"></div>
+                    </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                         <div>
                             <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #2d3748;">Guess Word (Nepali):</label>
@@ -2914,13 +2922,44 @@
             document.getElementById('dataTable').innerHTML = tableHTML;
         }
 
+        async function translateToNepali() {
+            const englishText = document.getElementById('newItemEnglishName').value.trim();
+            const statusDiv = document.getElementById('translationStatus');
+
+            if (!englishText) {
+                statusDiv.innerHTML = '<span style="color: #ef4444;">⚠️ Please enter English text first</span>';
+                return;
+            }
+
+            statusDiv.innerHTML = '<span style="color: #3b82f6;">⏳ Translating...</span>';
+
+            try {
+                // Using MyMemory Translation API (free, no API key needed)
+                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(englishText)}&langpair=en|ne`);
+                const data = await response.json();
+
+                if (data.responseStatus === 200 && data.responseData.translatedText) {
+                    const nepaliText = data.responseData.translatedText;
+                    document.getElementById('newItemName').value = nepaliText;
+                    statusDiv.innerHTML = `<span style="color: #48bb78;">✅ Translated: ${englishText} → ${nepaliText}</span>`;
+                } else {
+                    throw new Error('Translation failed');
+                }
+            } catch (error) {
+                console.error('Translation error:', error);
+                statusDiv.innerHTML = '<span style="color: #ef4444;">❌ Translation failed. Please enter Nepali text manually.</span>';
+            }
+        }
+
         function showAddItemForm() {
             document.getElementById('addItemForm').style.display = 'block';
+            document.getElementById('newItemEnglishName').value = '';
             document.getElementById('newItemName').value = '';
             document.getElementById('newItemEmoji').value = '';
             document.getElementById('newItemImageUrls').value = '';
             document.getElementById('newItemPreviews').innerHTML = '';
-            document.getElementById('newItemName').focus();
+            document.getElementById('translationStatus').innerHTML = '';
+            document.getElementById('newItemEnglishName').focus();
         }
 
         function cancelAddItem() {
