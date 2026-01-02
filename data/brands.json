@@ -1,0 +1,30 @@
+[
+  { "name": "वाई वाई", "emoji": "🍜", "imageUrls": [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy8VVQKZhxWzJQJ0gQxHJqVHMz8kF0jLqQZg&s",
+    "https://www.waiwai.com.np/images/logo.png"
+  ] },
+  { "name": "एनसेल", "emoji": "📱", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Ncell_logo.svg/2560px-Ncell_logo.svg.png" },
+  { "name": "नेपाल टेलिकम", "emoji": "☎️", "imageUrl": "https://yt3.googleusercontent.com/ytc/AIdro_kGm_4A5kWmqZdX3YQe2YZVPw0YC8CHI3TlR5bL=s900-c-k-c0x00ffffff-no-rj" },
+  { "name": "चौधरी ग्रुप", "emoji": "🏢", "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/Chaudhary_Group_logo.svg/1200px-Chaudhary_Group_logo.svg.png" },
+  { "name": "गोल्डस्टार", "emoji": "⭐", "imageUrl": "https://goldenstarshoes.com/images/logo.png" },
+  { "name": "डाबर", "emoji": "🪥", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Dabur_logo.svg/2560px-Dabur_logo.svg.png" },
+  { "name": "राम्रो", "emoji": "🍞", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHkQZyYGXWGjqm8a5oJ-8OmJE0yRqYrGqUQw&s" },
+  { "name": "प्रभु बैंक", "emoji": "🏦", "imageUrl": "https://www.prabhubank.com/img/logo/logo.png" },
+  { "name": "निबिल बैंक", "emoji": "🏦", "imageUrl": "https://www.nabilbank.com/image/logo.png" },
+  { "name": "सिद्धार्थ बैंक", "emoji": "🏦", "imageUrl": "https://www.siddharthabank.com/assets/images/logo.png" },
+  { "name": "रारा", "emoji": "🍜", "imageUrl": "https://raranoodles.com/wp-content/uploads/2022/07/rara-logo.png" },
+  { "name": "रुस्लान", "emoji": "🏍️", "imageUrl": "https://rushlanlube.com/wp-content/uploads/2020/09/Rushlan-Logo.png" },
+  { "name": "साधना", "emoji": "🛢️", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXLJ8Zv_0qU5gSFYvBDzGPOjlVNdITKN8Cmg&s" },
+  { "name": "बालाजु", "emoji": "💧", "imageUrl": "https://balajuwater.com/images/logo.png" },
+  { "name": "पशुपति धुप", "emoji": "🔥", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqFzJlN7VU5F1xQGE_8Pt9gYvh8eQc5jZCiQ&s" },
+  { "name": "सूर्य नेपाल", "emoji": "🚬", "imageUrl": "https://www.suryanepal.com.np/assets/images/logo.png" },
+  { "name": "एभरेष्ट बैंक", "emoji": "🏦", "imageUrl": "https://www.everestbankltd.com/images/logo.png" },
+  { "name": "आई एम इ पे", "emoji": "💳", "imageUrl": "https://imepay.com.np/images/logo.png" },
+  { "name": "ईसेवा", "emoji": "📱", "imageUrl": "https://esewa.com.np/common/images/esewa_logo.png" },
+  { "name": "खल्ती", "emoji": "💰", "imageUrl": "https://web.khalti.com/static/img/logo1.png" },
+  { "name": "हिमालयन बैंक", "emoji": "🏦", "imageUrl": "https://www.himalayanbank.com/assets/images/logo.png" },
+  { "name": "सिमेन्ट", "emoji": "🏗️", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0BXBKqJ8QGvW3eY0fCWrqVLPzGhSp6wXFQ&s" },
+  { "name": "बट्टा बट्टामा", "emoji": "🛍️", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwv7kNyQQqGzj7UvM0ZR3VQQJzS0-x2vqZyw&s" },
+  { "name": "सेल्स बेरी", "emoji": "🛒", "imageUrl": "https://salesberry.com.np/public/frontend/images/logo/logo.png" },
+  { "name": "दराज", "emoji": "🛍️", "imageUrl": "https://static-01.daraz.com.np/p/3e6e5e5a95d8f8f8b7c2f3d1d3c3c3c3.png" }
+]

@@ -1680,6 +1680,12 @@
                             🔌 उपकरणहरू
                         </label>
                     </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="brands" checked>
+                            🏷️ नेपाली ब्रान्डहरू
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -1818,7 +1824,7 @@
                 'animals', 'birds', 'food', 'objects', 'festivals', 'personalities',
                 'places', 'flags', 'world_places', 'movie_stars', 'athletes',
                 'professions', 'vehicles', 'fruits', 'vegetables', 'sports',
-                'flowers', 'sea_creatures', 'appliances', 'others'
+                'flowers', 'sea_creatures', 'appliances', 'brands', 'others'
             ];
 
             const loadPromises = categories.map(async (category) => {
@@ -1880,9 +1886,9 @@
             vegetables: 'तरकारीहरू',
             sports: 'खेलकुदहरू',
             flowers: 'फूलहरू',
-            birds: 'चराहरू',
             sea_creatures: 'समुद्री जीवहरू',
-            appliances: 'उपकरणहरू'
+            appliances: 'उपकरणहरू',
+            brands: 'नेपाली ब्रान्डहरू'
         };
 
         const motivationalPhrases = [
@@ -2828,7 +2834,7 @@
                 'animals', 'birds', 'food', 'objects', 'festivals', 'personalities',
                 'places', 'flags', 'world_places', 'movie_stars', 'athletes',
                 'professions', 'vehicles', 'fruits', 'vegetables', 'sports',
-                'flowers', 'sea_creatures', 'appliances', 'others'
+                'flowers', 'sea_creatures', 'appliances', 'brands', 'others'
             ];
 
             document.getElementById('loadingStatus').textContent = 'Loading...';
