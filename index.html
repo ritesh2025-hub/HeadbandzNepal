@@ -1686,6 +1686,12 @@
                             🏷️ नेपाली ब्रान्डहरू
                         </label>
                     </div>
+                    <div class="category-card">
+                        <label>
+                            <input type="checkbox" value="tv_shows" checked>
+                            📺 टिभी कार्यक्रम
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -1824,7 +1830,7 @@
                 'animals', 'birds', 'food', 'objects', 'festivals', 'personalities',
                 'places', 'flags', 'world_places', 'movie_stars', 'athletes',
                 'professions', 'vehicles', 'fruits', 'vegetables', 'sports',
-                'flowers', 'sea_creatures', 'appliances', 'brands', 'others'
+                'flowers', 'sea_creatures', 'appliances', 'brands', 'tv_shows', 'others'
             ];
 
             const loadPromises = categories.map(async (category) => {
@@ -1888,7 +1894,8 @@
             flowers: 'फूलहरू',
             sea_creatures: 'समुद्री जीवहरू',
             appliances: 'उपकरणहरू',
-            brands: 'नेपाली ब्रान्डहरू'
+            brands: 'नेपाली ब्रान्डहरू',
+            tv_shows: 'टिभी कार्यक्रम'
         };
 
         const motivationalPhrases = [
@@ -2834,7 +2841,7 @@
                 'animals', 'birds', 'food', 'objects', 'festivals', 'personalities',
                 'places', 'flags', 'world_places', 'movie_stars', 'athletes',
                 'professions', 'vehicles', 'fruits', 'vegetables', 'sports',
-                'flowers', 'sea_creatures', 'appliances', 'brands', 'others'
+                'flowers', 'sea_creatures', 'appliances', 'brands', 'tv_shows', 'others'
             ];
 
             document.getElementById('loadingStatus').textContent = 'Loading...';
