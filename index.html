@@ -1409,7 +1409,84 @@
         </div>
     </div>
 
-    <div class="container">
+    <!-- Admin Panel -->
+    <div id="adminPanel" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f7fafc; z-index: 5000; overflow-y: auto;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 20px;">
+            <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h1 style="color: #DC143C; margin: 0;">🔧 Admin Panel - Game Data Manager</h1>
+                    <button onclick="closeAdmin()" style="background: #f56565; color: white; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">Close Admin</button>
+                </div>
+                <p style="color: #718096; margin-bottom: 20px;">Manage all game data, add new items, test images, and download updated JSON files.</p>
+
+                <!-- Stats -->
+                <div id="adminStats" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <div style="background: #e6fffa; padding: 15px 20px; border-radius: 10px; flex: 1; min-width: 150px;">
+                        <div style="color: #047857; font-size: 0.9em;">Total Categories</div>
+                        <div id="totalCategories" style="color: #047857; font-size: 2em; font-weight: bold;">0</div>
+                    </div>
+                    <div style="background: #fef3c7; padding: 15px 20px; border-radius: 10px; flex: 1; min-width: 150px;">
+                        <div style="color: #92400e; font-size: 0.9em;">Total Items</div>
+                        <div id="totalItems" style="color: #92400e; font-size: 2em; font-weight: bold;">0</div>
+                    </div>
+                    <div style="background: #dbeafe; padding: 15px 20px; border-radius: 10px; flex: 1; min-width: 150px;">
+                        <div style="color: #1e40af; font-size: 0.9em;">Loading Status</div>
+                        <div id="loadingStatus" style="color: #1e40af; font-size: 1.2em; font-weight: bold;">Loading...</div>
+                    </div>
+                </div>
+
+                <!-- Category Selector -->
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: bold; color: #2d3748;">Select Category:</label>
+                    <select id="categorySelector" onchange="loadCategoryData()" style="width: 100%; padding: 12px; font-size: 16px; border: 2px solid #ddd; border-radius: 10px;">
+                        <option value="">-- Select a category --</option>
+                    </select>
+                </div>
+
+                <!-- Add New Item Form -->
+                <div id="addItemForm" style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 15px; padding: 20px; margin-bottom: 20px; display: none;">
+                    <h3 style="color: #166534; margin-bottom: 15px;">➕ Add New Item</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #2d3748;">Guess Word (Nepali):</label>
+                            <input type="text" id="newItemName" placeholder="e.g., बाघ" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #2d3748;">Emoji Fallback:</label>
+                            <input type="text" id="newItemEmoji" placeholder="e.g., 🐯" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #2d3748;">Image URL:</label>
+                        <input type="text" id="newItemImageUrl" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;" onblur="testImageUrl('newItemImageUrl', 'newItemPreview')">
+                        <div id="newItemPreview" style="margin-top: 10px; min-height: 50px;"></div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="addNewItem()" style="background: #48bb78; color: white; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; flex: 1;">Add Item</button>
+                        <button onclick="cancelAddItem()" style="background: #cbd5e0; color: #2d3748; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3 id="categoryTitle" style="color: #2d3748; margin: 0;">Category Data</h3>
+                        <button id="showAddItemBtn" onclick="showAddItemForm()" style="background: #48bb78; color: white; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; display: none;">➕ Add New Item</button>
+                    </div>
+                    <div id="dataTable" style="overflow-x: auto;"></div>
+                </div>
+
+                <!-- Download Section -->
+                <div style="background: #fef3c7; border: 2px solid #fbbf24; border-radius: 15px; padding: 20px;">
+                    <h3 style="color: #92400e; margin-bottom: 10px;">💾 Download Modified Data</h3>
+                    <p style="color: #78350f; margin-bottom: 15px; font-size: 0.95em;">After making changes, download the updated JSON file and replace it in the /data/ folder.</p>
+                    <button id="downloadBtn" onclick="downloadCategoryData()" disabled style="background: #fbbf24; color: #78350f; padding: 12px 24px; border: none; border-radius: 10px; cursor: not-allowed; font-weight: bold; opacity: 0.5;">Download JSON</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="mainContainer">
         <h1>
             <img src="images/logo.jpg" alt="नेपाली हेडब्यान्ड्ज खेल" class="header-logo">
         </h1>
@@ -1815,7 +1892,7 @@
         let maxRounds = 3; // Default 3 rounds per player
         let totalRoundsPlayed = 0;
         let skipCount = 0;
-        let preloadedImage = null;
+        let preloadedImages = []; // Array to store 2 preloaded images
         let playerRoundDetails = {}; // Track detailed stats per round
         let currentRoundCorrect = 0; // Track correct answers in current round
         let currentRoundSkipped = 0; // Track skips in current round
@@ -1986,16 +2063,22 @@
         }
 
         function preloadNextImage() {
-            // Preload the next card's image in background
-            const nextIndex = (currentCardIndex + 1) % cards.length;
-            const nextCard = cards[nextIndex];
+            // Preload the next 2 cards' images in background for smooth transitions
+            preloadedImages = []; // Clear previous preloads
 
-            if (nextCard.imageUrl) {
-                preloadedImage = new Image();
-                preloadedImage.src = nextCard.imageUrl;
-            } else if (nextCard.imageFile) {
-                preloadedImage = new Image();
-                preloadedImage.src = `images/${nextCard.imageFile}`;
+            for (let i = 1; i <= 2; i++) {
+                const nextIndex = (currentCardIndex + i) % cards.length;
+                const nextCard = cards[nextIndex];
+
+                if (nextCard.imageUrl) {
+                    const img = new Image();
+                    img.src = nextCard.imageUrl;
+                    preloadedImages.push(img);
+                } else if (nextCard.imageFile) {
+                    const img = new Image();
+                    img.src = `images/${nextCard.imageFile}`;
+                    preloadedImages.push(img);
+                }
             }
         }
 
@@ -2471,6 +2554,7 @@
             roundTime = 90;
             countdownDuration = 3;
             skipCount = 0;
+            preloadedImages = [];
             currentRoundCorrect = 0;
             currentRoundSkipped = 0;
 
@@ -2639,6 +2723,316 @@
 
         // Prevent scrolling on load
         document.body.classList.add('splash-active');
+
+        // ===== ADMIN PANEL CODE =====
+        let adminGameData = {}; // Separate copy for admin
+        let currentAdminCategory = '';
+        let adminDataLoaded = false;
+
+        // Check if ?admin parameter is present
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('admin')) {
+                showAdminPanel();
+            }
+        });
+
+        async function showAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('splashScreen').style.display = 'none';
+            document.getElementById('welcomeScreen').style.display = 'none';
+
+            // Load all data for admin
+            await loadAdminData();
+        }
+
+        function closeAdmin() {
+            // Remove ?admin from URL and reload
+            const url = new URL(window.location);
+            url.searchParams.delete('admin');
+            window.location.href = url.toString();
+        }
+
+        async function loadAdminData() {
+            const categories = [
+                'animals', 'birds', 'food', 'objects', 'festivals', 'personalities',
+                'places', 'flags', 'world_places', 'movie_stars', 'athletes',
+                'professions', 'vehicles', 'fruits', 'vegetables', 'sports',
+                'flowers', 'sea_creatures', 'appliances', 'others'
+            ];
+
+            document.getElementById('loadingStatus').textContent = 'Loading...';
+
+            const loadPromises = categories.map(async (category) => {
+                try {
+                    const response = await fetch(`data/${category}.json`);
+                    if (!response.ok) {
+                        console.error(`Failed to load ${category}.json`);
+                        return { category, data: [] };
+                    }
+                    const data = await response.json();
+                    return { category, data };
+                } catch (error) {
+                    console.error(`Error loading ${category}.json:`, error);
+                    return { category, data: [] };
+                }
+            });
+
+            const results = await Promise.all(loadPromises);
+
+            results.forEach(({ category, data }) => {
+                adminGameData[category] = data;
+            });
+
+            adminDataLoaded = true;
+
+            // Update stats
+            document.getElementById('totalCategories').textContent = Object.keys(adminGameData).length;
+            let totalItems = 0;
+            Object.values(adminGameData).forEach(items => totalItems += items.length);
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('loadingStatus').textContent = '✓ Loaded';
+            document.getElementById('loadingStatus').style.color = '#047857';
+
+            // Populate category selector
+            const selector = document.getElementById('categorySelector');
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = `${categoryNames[cat]} (${cat}) - ${adminGameData[cat].length} items`;
+                selector.appendChild(option);
+            });
+        }
+
+        function loadCategoryData() {
+            const category = document.getElementById('categorySelector').value;
+            if (!category) {
+                document.getElementById('dataTable').innerHTML = '';
+                document.getElementById('categoryTitle').textContent = 'Category Data';
+                document.getElementById('showAddItemBtn').style.display = 'none';
+                document.getElementById('downloadBtn').disabled = true;
+                document.getElementById('downloadBtn').style.cursor = 'not-allowed';
+                document.getElementById('downloadBtn').style.opacity = '0.5';
+                return;
+            }
+
+            currentAdminCategory = category;
+            document.getElementById('categoryTitle').textContent = `${categoryNames[category]} (${category})`;
+            document.getElementById('showAddItemBtn').style.display = 'block';
+            document.getElementById('downloadBtn').disabled = false;
+            document.getElementById('downloadBtn').style.cursor = 'pointer';
+            document.getElementById('downloadBtn').style.opacity = '1';
+
+            const data = adminGameData[category];
+
+            let tableHTML = `
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <thead>
+                        <tr style="background: #DC143C; color: white;">
+                            <th style="padding: 12px; text-align: left; width: 60px;">#</th>
+                            <th style="padding: 12px; text-align: left;">Guess Word</th>
+                            <th style="padding: 12px; text-align: left; width: 80px;">Emoji</th>
+                            <th style="padding: 12px; text-align: left;">Image</th>
+                            <th style="padding: 12px; text-align: left; width: 200px;">Preview</th>
+                            <th style="padding: 12px; text-align: center; width: 150px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.forEach((item, index) => {
+                const imageSource = item.imageUrl || (item.imageFile ? `images/${item.imageFile}` : '');
+                const imageDisplay = item.imageUrl ? 'URL' : (item.imageFile ? 'File' : 'None');
+
+                tableHTML += `
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 12px;">${index + 1}</td>
+                        <td style="padding: 12px; font-weight: bold;">${item.name}</td>
+                        <td style="padding: 12px; font-size: 2em;">${item.emoji}</td>
+                        <td style="padding: 12px; font-size: 0.85em; color: #718096;">
+                            ${imageDisplay}<br>
+                            ${imageSource ? `<a href="${imageSource}" target="_blank" style="color: #3b82f6; text-decoration: none; word-break: break-all; display: inline-block; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${imageSource}">🔗 View</a>` : ''}
+                        </td>
+                        <td style="padding: 12px;">
+                            ${imageSource ? `<img src="${imageSource}" style="max-width: 150px; max-height: 100px; border-radius: 8px; object-fit: contain;" onerror="this.parentElement.innerHTML='<span style=color:red>❌ Failed to load</span>'" onload="this.parentElement.innerHTML=this.parentElement.innerHTML.replace('⏳ Loading...', '✓ Loaded')" alt="${item.name}">` : '<span style="color: #cbd5e0;">No image</span>'}
+                        </td>
+                        <td style="padding: 12px; text-align: center;">
+                            <button onclick="editItem(${index})" style="background: #3b82f6; color: white; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; margin-right: 5px; font-size: 0.9em;">✏️ Edit</button>
+                            <button onclick="deleteItem(${index})" style="background: #ef4444; color: white; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9em;">🗑️ Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('dataTable').innerHTML = tableHTML;
+        }
+
+        function showAddItemForm() {
+            document.getElementById('addItemForm').style.display = 'block';
+            document.getElementById('newItemName').value = '';
+            document.getElementById('newItemEmoji').value = '';
+            document.getElementById('newItemImageUrl').value = '';
+            document.getElementById('newItemPreview').innerHTML = '';
+            document.getElementById('newItemName').focus();
+        }
+
+        function cancelAddItem() {
+            document.getElementById('addItemForm').style.display = 'none';
+        }
+
+        function testImageUrl(inputId, previewId) {
+            const url = document.getElementById(inputId).value.trim();
+            const preview = document.getElementById(previewId);
+
+            if (!url) {
+                preview.innerHTML = '';
+                return;
+            }
+
+            preview.innerHTML = '<span style="color: #3b82f6;">⏳ Testing image...</span>';
+
+            const img = new Image();
+            img.onload = function() {
+                preview.innerHTML = `
+                    <div style="padding: 10px; background: #f0fdf4; border: 2px solid #86efac; border-radius: 8px;">
+                        <div style="color: #166534; font-weight: bold; margin-bottom: 8px;">✅ Image loaded successfully!</div>
+                        <img src="${url}" style="max-width: 200px; max-height: 150px; border-radius: 8px; object-fit: contain;">
+                    </div>
+                `;
+            };
+            img.onerror = function() {
+                preview.innerHTML = `
+                    <div style="padding: 10px; background: #fef2f2; border: 2px solid #fca5a5; border-radius: 8px;">
+                        <div style="color: #991b1b; font-weight: bold;">❌ Failed to load image!</div>
+                        <div style="color: #7f1d1d; font-size: 0.9em; margin-top: 5px;">Check if the URL is correct and accessible.</div>
+                    </div>
+                `;
+            };
+            img.src = url;
+        }
+
+        function addNewItem() {
+            const name = document.getElementById('newItemName').value.trim();
+            const emoji = document.getElementById('newItemEmoji').value.trim();
+            const imageUrl = document.getElementById('newItemImageUrl').value.trim();
+
+            if (!name) {
+                alert('Please enter a guess word!');
+                return;
+            }
+
+            if (!emoji) {
+                alert('Please enter an emoji fallback!');
+                return;
+            }
+
+            const newItem = {
+                name: name,
+                emoji: emoji
+            };
+
+            if (imageUrl) {
+                newItem.imageUrl = imageUrl;
+            }
+
+            // Add to current category
+            adminGameData[currentAdminCategory].push(newItem);
+
+            // Reload the table
+            loadCategoryData();
+
+            // Hide form
+            cancelAddItem();
+
+            // Update total items count
+            let totalItems = 0;
+            Object.values(adminGameData).forEach(items => totalItems += items.length);
+            document.getElementById('totalItems').textContent = totalItems;
+
+            alert('Item added successfully! Don\'t forget to download the updated JSON file.');
+        }
+
+        function editItem(index) {
+            const category = currentAdminCategory;
+            const item = adminGameData[category][index];
+
+            const newName = prompt('Edit Guess Word:', item.name);
+            if (newName === null) return; // Cancelled
+
+            const newEmoji = prompt('Edit Emoji:', item.emoji);
+            if (newEmoji === null) return;
+
+            const imageSource = item.imageUrl || (item.imageFile ? `images/${item.imageFile}` : '');
+            const newImageUrl = prompt('Edit Image URL (leave empty for no image):', imageSource);
+            if (newImageUrl === null) return;
+
+            // Update item
+            adminGameData[category][index].name = newName.trim() || item.name;
+            adminGameData[category][index].emoji = newEmoji.trim() || item.emoji;
+
+            // Remove old image properties
+            delete adminGameData[category][index].imageUrl;
+            delete adminGameData[category][index].imageFile;
+
+            // Add new image URL if provided
+            if (newImageUrl.trim()) {
+                adminGameData[category][index].imageUrl = newImageUrl.trim();
+            }
+
+            // Reload table
+            loadCategoryData();
+
+            alert('Item updated successfully! Don\'t forget to download the updated JSON file.');
+        }
+
+        function deleteItem(index) {
+            const category = currentAdminCategory;
+            const item = adminGameData[category][index];
+
+            if (!confirm(`Are you sure you want to delete "${item.name}"?`)) {
+                return;
+            }
+
+            adminGameData[category].splice(index, 1);
+
+            // Reload table
+            loadCategoryData();
+
+            // Update total items count
+            let totalItems = 0;
+            Object.values(adminGameData).forEach(items => totalItems += items.length);
+            document.getElementById('totalItems').textContent = totalItems;
+
+            alert('Item deleted successfully! Don\'t forget to download the updated JSON file.');
+        }
+
+        function downloadCategoryData() {
+            if (!currentAdminCategory) {
+                alert('Please select a category first!');
+                return;
+            }
+
+            const data = adminGameData[currentAdminCategory];
+            const jsonString = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentAdminCategory}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert(`Downloaded ${currentAdminCategory}.json!\n\nReplace the file in your /data/ folder to apply changes.`);
+        }
     </script>
 </body>
 </html>
