@@ -5,7 +5,10 @@
   { "name": "मछिन्द्रनाथ", "emoji": "🙏", "imageFile": "machindranath.jpg" },
   { "name": "काले दाइ", "emoji": "😎", "imageFile": "kale-dai.jpg" },
   { "name": "दर्पण छाया", "emoji": "📺", "imageFile": "darpan-chaya.jpg" },
-  { "name": "लौरे", "emoji": "🎤", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThaNz0U7o4KdWfmLlNa9Fk7dzJurBD90svXw&s" },
+  { "name": "लौरे", "emoji": "🎤", "imageUrls": [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThaNz0U7o4KdWfmLlNa9Fk7dzJurBD90svXw&s",
+    "https://m.media-amazon.com/images/M/MV5BMTExNTA2NTg0NzJeQTJeQWpwZ15BbWU4MDA0NTI3OTIy._V1_.jpg"
+  ] },
   { "name": "याम बुद्ध", "emoji": "🎤", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Rapperyammabuddha.png" },
   { "name": "गिरिष खतिवडा", "emoji": "😂", "imageUrl": "https://i.ytimg.com/vi/Hlp7eAnlEaM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnIGjasT6tS8m77hpi6wm01an9Ag" },
   { "name": "जीतु नेपाल", "emoji": "😂", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxEFW-6BtczXi2jg66TdPLZaDl6vvTxMXaMw&s" },

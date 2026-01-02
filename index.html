@@ -1457,9 +1457,10 @@
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #2d3748;">Image URL:</label>
-                        <input type="text" id="newItemImageUrl" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;" onblur="testImageUrl('newItemImageUrl', 'newItemPreview')">
-                        <div id="newItemPreview" style="margin-top: 10px; min-height: 50px;"></div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #2d3748;">Image URLs (one per line):</label>
+                        <textarea id="newItemImageUrls" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg&#10;https://example.com/image3.jpg" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 100px; font-family: monospace;" onblur="testMultipleImageUrls()"></textarea>
+                        <div style="color: #718096; font-size: 0.85em; margin-top: 5px;">💡 Add multiple URLs (one per line) - game will randomly pick one each time</div>
+                        <div id="newItemPreviews" style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;"></div>
                     </div>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="addNewItem()" style="background: #48bb78; color: white; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; flex: 1;">Add Item</button>
@@ -2070,13 +2071,20 @@
                 const nextIndex = (currentCardIndex + i) % cards.length;
                 const nextCard = cards[nextIndex];
 
-                if (nextCard.imageUrl) {
-                    const img = new Image();
-                    img.src = nextCard.imageUrl;
-                    preloadedImages.push(img);
+                // Helper to get a random URL if multiple are available
+                let imageUrl = null;
+                if (nextCard.imageUrls && Array.isArray(nextCard.imageUrls) && nextCard.imageUrls.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * nextCard.imageUrls.length);
+                    imageUrl = nextCard.imageUrls[randomIndex];
+                } else if (nextCard.imageUrl) {
+                    imageUrl = nextCard.imageUrl;
                 } else if (nextCard.imageFile) {
+                    imageUrl = `images/${nextCard.imageFile}`;
+                }
+
+                if (imageUrl) {
                     const img = new Image();
-                    img.src = `images/${nextCard.imageFile}`;
+                    img.src = imageUrl;
                     preloadedImages.push(img);
                 }
             }
@@ -2087,11 +2095,24 @@
             cardImageElement.innerHTML = '';
             cardImageElement.className = 'card-image';
 
+            // Helper function to get a random image URL from array or single URL
+            function getRandomImageUrl(card) {
+                // Support for multiple image URLs (imageUrls array)
+                if (card.imageUrls && Array.isArray(card.imageUrls) && card.imageUrls.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * card.imageUrls.length);
+                    return card.imageUrls[randomIndex];
+                }
+                // Fallback to single imageUrl
+                return card.imageUrl || null;
+            }
+
+            const selectedImageUrl = getRandomImageUrl(card);
+
             // Check for external URL first, then local file, then emoji fallback
-            if (card.imageUrl) {
-                // External URL support
+            if (selectedImageUrl) {
+                // External URL support (randomly selected if multiple)
                 const img = document.createElement('img');
-                img.src = card.imageUrl;
+                img.src = selectedImageUrl;
                 img.alt = card.name;
                 img.onerror = function() {
                     cardImageElement.textContent = card.emoji;
@@ -2842,8 +2863,28 @@
             `;
 
             data.forEach((item, index) => {
-                const imageSource = item.imageUrl || (item.imageFile ? `images/${item.imageFile}` : '');
-                const imageDisplay = item.imageUrl ? 'URL' : (item.imageFile ? 'File' : 'None');
+                // Support both single URL and multiple URLs
+                let imageSources = [];
+                let imageDisplay = 'None';
+
+                if (item.imageUrls && Array.isArray(item.imageUrls) && item.imageUrls.length > 0) {
+                    imageSources = item.imageUrls;
+                    imageDisplay = `${item.imageUrls.length} URLs`;
+                } else if (item.imageUrl) {
+                    imageSources = [item.imageUrl];
+                    imageDisplay = 'URL';
+                } else if (item.imageFile) {
+                    imageSources = [`images/${item.imageFile}`];
+                    imageDisplay = 'File';
+                }
+
+                const imageLinksHTML = imageSources.map((src, i) =>
+                    `<a href="${src}" target="_blank" style="color: #3b82f6; text-decoration: none; display: block; margin-bottom: 3px;" title="${src}">🔗 URL ${i + 1}</a>`
+                ).join('');
+
+                const imagePreviewsHTML = imageSources.map((src, i) =>
+                    `<img src="${src}" style="max-width: 80px; max-height: 60px; border-radius: 6px; object-fit: contain; margin-right: 5px; margin-bottom: 5px; border: 2px solid #e2e8f0;" onerror="this.style.border='2px solid #ef4444'; this.title='Failed to load'" alt="${item.name} ${i + 1}">`
+                ).join('');
 
                 tableHTML += `
                     <tr style="border-bottom: 1px solid #e2e8f0;">
@@ -2852,10 +2893,10 @@
                         <td style="padding: 12px; font-size: 2em;">${item.emoji}</td>
                         <td style="padding: 12px; font-size: 0.85em; color: #718096;">
                             ${imageDisplay}<br>
-                            ${imageSource ? `<a href="${imageSource}" target="_blank" style="color: #3b82f6; text-decoration: none; word-break: break-all; display: inline-block; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${imageSource}">🔗 View</a>` : ''}
+                            ${imageLinksHTML || '<span style="color: #cbd5e0;">No image</span>'}
                         </td>
                         <td style="padding: 12px;">
-                            ${imageSource ? `<img src="${imageSource}" style="max-width: 150px; max-height: 100px; border-radius: 8px; object-fit: contain;" onerror="this.parentElement.innerHTML='<span style=color:red>❌ Failed to load</span>'" onload="this.parentElement.innerHTML=this.parentElement.innerHTML.replace('⏳ Loading...', '✓ Loaded')" alt="${item.name}">` : '<span style="color: #cbd5e0;">No image</span>'}
+                            ${imagePreviewsHTML || '<span style="color: #cbd5e0;">No image</span>'}
                         </td>
                         <td style="padding: 12px; text-align: center;">
                             <button onclick="editItem(${index})" style="background: #3b82f6; color: white; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; margin-right: 5px; font-size: 0.9em;">✏️ Edit</button>
@@ -2877,8 +2918,8 @@
             document.getElementById('addItemForm').style.display = 'block';
             document.getElementById('newItemName').value = '';
             document.getElementById('newItemEmoji').value = '';
-            document.getElementById('newItemImageUrl').value = '';
-            document.getElementById('newItemPreview').innerHTML = '';
+            document.getElementById('newItemImageUrls').value = '';
+            document.getElementById('newItemPreviews').innerHTML = '';
             document.getElementById('newItemName').focus();
         }
 
@@ -2917,10 +2958,61 @@
             img.src = url;
         }
 
+        function testMultipleImageUrls() {
+            const textarea = document.getElementById('newItemImageUrls');
+            const preview = document.getElementById('newItemPreviews');
+            const urls = textarea.value.split('\n').map(u => u.trim()).filter(u => u.length > 0);
+
+            if (urls.length === 0) {
+                preview.innerHTML = '';
+                return;
+            }
+
+            preview.innerHTML = '<div style="color: #3b82f6; margin-bottom: 10px;">⏳ Testing ' + urls.length + ' image(s)...</div>';
+
+            let previews = '<div style="width: 100%; display: flex; gap: 10px; flex-wrap: wrap;">';
+            let loadedCount = 0;
+            let failedCount = 0;
+
+            urls.forEach((url, i) => {
+                const img = new Image();
+                img.onload = function() {
+                    loadedCount++;
+                    const elem = document.getElementById('preview-' + i);
+                    if (elem) {
+                        elem.innerHTML = `
+                            <div style="padding: 8px; background: #f0fdf4; border: 2px solid #86efac; border-radius: 8px; text-align: center;">
+                                <div style="color: #166534; font-size: 0.8em; margin-bottom: 5px;">✅ URL ${i + 1}</div>
+                                <img src="${url}" style="width: 100px; height: 80px; border-radius: 6px; object-fit: contain;">
+                            </div>
+                        `;
+                    }
+                };
+                img.onerror = function() {
+                    failedCount++;
+                    const elem = document.getElementById('preview-' + i);
+                    if (elem) {
+                        elem.innerHTML = `
+                            <div style="padding: 8px; background: #fef2f2; border: 2px solid #fca5a5; border-radius: 8px; text-align: center; width: 100px;">
+                                <div style="color: #991b1b; font-size: 0.8em; margin-bottom: 5px;">❌ URL ${i + 1}</div>
+                                <div style="color: #7f1d1d; font-size: 0.75em;">Failed</div>
+                            </div>
+                        `;
+                    }
+                };
+                img.src = url;
+
+                previews += `<div id="preview-${i}" style="flex: 0 0 auto;"><div style="color: #3b82f6; font-size: 0.85em;">⏳ Loading URL ${i + 1}...</div></div>`;
+            });
+
+            previews += '</div>';
+            preview.innerHTML = previews;
+        }
+
         function addNewItem() {
             const name = document.getElementById('newItemName').value.trim();
             const emoji = document.getElementById('newItemEmoji').value.trim();
-            const imageUrl = document.getElementById('newItemImageUrl').value.trim();
+            const imageUrlsText = document.getElementById('newItemImageUrls').value.trim();
 
             if (!name) {
                 alert('Please enter a guess word!');
@@ -2937,8 +3029,15 @@
                 emoji: emoji
             };
 
-            if (imageUrl) {
-                newItem.imageUrl = imageUrl;
+            if (imageUrlsText) {
+                const urls = imageUrlsText.split('\n').map(u => u.trim()).filter(u => u.length > 0);
+                if (urls.length === 1) {
+                    // Single URL - store as imageUrl for backward compatibility
+                    newItem.imageUrl = urls[0];
+                } else if (urls.length > 1) {
+                    // Multiple URLs - store as imageUrls array
+                    newItem.imageUrls = urls;
+                }
             }
 
             // Add to current category
@@ -2968,9 +3067,18 @@
             const newEmoji = prompt('Edit Emoji:', item.emoji);
             if (newEmoji === null) return;
 
-            const imageSource = item.imageUrl || (item.imageFile ? `images/${item.imageFile}` : '');
-            const newImageUrl = prompt('Edit Image URL (leave empty for no image):', imageSource);
-            if (newImageUrl === null) return;
+            // Get current image URLs as a newline-separated string
+            let currentUrls = '';
+            if (item.imageUrls && Array.isArray(item.imageUrls)) {
+                currentUrls = item.imageUrls.join('\n');
+            } else if (item.imageUrl) {
+                currentUrls = item.imageUrl;
+            } else if (item.imageFile) {
+                currentUrls = `images/${item.imageFile}`;
+            }
+
+            const newImageUrls = prompt('Edit Image URLs (one per line, leave empty for no image):\n\nTip: Add multiple URLs for random selection', currentUrls);
+            if (newImageUrls === null) return;
 
             // Update item
             adminGameData[category][index].name = newName.trim() || item.name;
@@ -2978,11 +3086,19 @@
 
             // Remove old image properties
             delete adminGameData[category][index].imageUrl;
+            delete adminGameData[category][index].imageUrls;
             delete adminGameData[category][index].imageFile;
 
-            // Add new image URL if provided
-            if (newImageUrl.trim()) {
-                adminGameData[category][index].imageUrl = newImageUrl.trim();
+            // Add new image URLs if provided
+            if (newImageUrls.trim()) {
+                const urls = newImageUrls.split('\n').map(u => u.trim()).filter(u => u.length > 0);
+                if (urls.length === 1) {
+                    // Single URL - store as imageUrl for backward compatibility
+                    adminGameData[category][index].imageUrl = urls[0];
+                } else if (urls.length > 1) {
+                    // Multiple URLs - store as imageUrls array
+                    adminGameData[category][index].imageUrls = urls;
+                }
             }
 
             // Reload table
