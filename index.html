@@ -2909,15 +2909,19 @@
             const data = adminGameData[category];
 
             let tableHTML = `
+                <div style="background: #e6f7ff; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #3b82f6;">
+                    <div style="color: #1e40af; font-weight: bold; margin-bottom: 5px;">💡 Inline Editing Enabled</div>
+                    <div style="color: #3b82f6; font-size: 0.9em;">Click on any field to edit directly. Changes are saved automatically. Click "Download JSON" when done.</div>
+                </div>
                 <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <thead>
                         <tr style="background: #DC143C; color: white;">
                             <th style="padding: 12px; text-align: left; width: 60px;">#</th>
-                            <th style="padding: 12px; text-align: left;">Guess Word</th>
-                            <th style="padding: 12px; text-align: left; width: 80px;">Emoji</th>
-                            <th style="padding: 12px; text-align: left;">Image</th>
+                            <th style="padding: 12px; text-align: left;">Guess Word (Click to Edit)</th>
+                            <th style="padding: 12px; text-align: left; width: 100px;">Emoji (Click to Edit)</th>
+                            <th style="padding: 12px; text-align: left;">Image URLs (Click to Edit)</th>
                             <th style="padding: 12px; text-align: left; width: 200px;">Preview</th>
-                            <th style="padding: 12px; text-align: center; width: 150px;">Actions</th>
+                            <th style="padding: 12px; text-align: center; width: 100px;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -2926,42 +2930,61 @@
             data.forEach((item, index) => {
                 // Support both single URL and multiple URLs
                 let imageSources = [];
-                let imageDisplay = 'None';
+                let imageUrlsText = '';
 
                 if (item.imageUrls && Array.isArray(item.imageUrls) && item.imageUrls.length > 0) {
                     imageSources = item.imageUrls;
-                    imageDisplay = `${item.imageUrls.length} URLs`;
+                    imageUrlsText = item.imageUrls.join('\n');
                 } else if (item.imageUrl) {
                     imageSources = [item.imageUrl];
-                    imageDisplay = 'URL';
+                    imageUrlsText = item.imageUrl;
                 } else if (item.imageFile) {
                     imageSources = [`images/${item.imageFile}`];
-                    imageDisplay = 'File';
+                    imageUrlsText = `images/${item.imageFile}`;
                 }
-
-                const imageLinksHTML = imageSources.map((src, i) =>
-                    `<a href="${src}" target="_blank" style="color: #3b82f6; text-decoration: none; display: block; margin-bottom: 3px;" title="${src}">🔗 URL ${i + 1}</a>`
-                ).join('');
 
                 const imagePreviewsHTML = imageSources.map((src, i) =>
                     `<img src="${src}" style="max-width: 80px; max-height: 60px; border-radius: 6px; object-fit: contain; margin-right: 5px; margin-bottom: 5px; border: 2px solid #e2e8f0;" onerror="this.style.border='2px solid #ef4444'; this.title='Failed to load'" alt="${item.name} ${i + 1}">`
                 ).join('');
 
                 tableHTML += `
-                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <tr style="border-bottom: 1px solid #e2e8f0;" id="row-${index}">
                         <td style="padding: 12px;">${index + 1}</td>
-                        <td style="padding: 12px; font-weight: bold;">${item.name}</td>
-                        <td style="padding: 12px; font-size: 2em;">${item.emoji}</td>
-                        <td style="padding: 12px; font-size: 0.85em; color: #718096;">
-                            ${imageDisplay}<br>
-                            ${imageLinksHTML || '<span style="color: #cbd5e0;">No image</span>'}
-                        </td>
+                        <td style="padding: 12px; cursor: text;"
+                            contenteditable="true"
+                            data-field="name"
+                            data-index="${index}"
+                            onblur="saveInlineEdit(${index}, 'name', this)"
+                            onfocus="this.style.background='#fff9db'"
+                            style="background: white; font-weight: bold; border: 2px solid transparent; padding: 8px; border-radius: 4px;"
+                            onmouseover="this.style.borderColor='#3b82f6'"
+                            onmouseout="if(document.activeElement !== this) this.style.borderColor='transparent'">${item.name}</td>
+                        <td style="padding: 12px; font-size: 2em; cursor: text;"
+                            contenteditable="true"
+                            data-field="emoji"
+                            data-index="${index}"
+                            onblur="saveInlineEdit(${index}, 'emoji', this)"
+                            onfocus="this.style.background='#fff9db'"
+                            style="background: white; border: 2px solid transparent; padding: 8px; border-radius: 4px;"
+                            onmouseover="this.style.borderColor='#3b82f6'"
+                            onmouseout="if(document.activeElement !== this) this.style.borderColor='transparent'">${item.emoji}</td>
                         <td style="padding: 12px;">
+                            <textarea
+                                data-field="urls"
+                                data-index="${index}"
+                                onblur="saveInlineEdit(${index}, 'urls', this)"
+                                onfocus="this.style.background='#fff9db'"
+                                onmouseout="if(document.activeElement !== this) this.style.borderColor='transparent'"
+                                onmouseover="this.style.borderColor='#3b82f6'"
+                                style="width: 100%; min-height: 60px; padding: 8px; border: 2px solid transparent; border-radius: 4px; font-size: 0.85em; font-family: monospace; resize: vertical; background: white;"
+                            >${imageUrlsText}</textarea>
+                            <div style="color: #718096; font-size: 0.75em; margin-top: 3px;">One URL per line</div>
+                        </td>
+                        <td style="padding: 12px;" id="preview-${index}">
                             ${imagePreviewsHTML || '<span style="color: #cbd5e0;">No image</span>'}
                         </td>
                         <td style="padding: 12px; text-align: center;">
-                            <button onclick="editItem(${index})" style="background: #3b82f6; color: white; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; margin-right: 5px; font-size: 0.9em;">✏️ Edit</button>
-                            <button onclick="deleteItem(${index})" style="background: #ef4444; color: white; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9em;">🗑️ Delete</button>
+                            <button onclick="deleteItem(${index})" style="background: #ef4444; color: white; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9em;">🗑️</button>
                         </td>
                     </tr>
                 `;
@@ -2973,6 +2996,71 @@
             `;
 
             document.getElementById('dataTable').innerHTML = tableHTML;
+        }
+
+        function saveInlineEdit(index, field, element) {
+            const category = currentAdminCategory;
+            const value = element.tagName === 'TEXTAREA' ? element.value.trim() : element.textContent.trim();
+
+            // Reset background
+            element.style.background = 'white';
+            element.style.borderColor = 'transparent';
+
+            if (!value && field !== 'urls') {
+                alert(`${field === 'name' ? 'Guess Word' : 'Emoji'} cannot be empty!`);
+                loadCategoryData();
+                return;
+            }
+
+            // Update the data
+            if (field === 'name') {
+                adminGameData[category][index].name = value;
+                // Flash green to indicate save
+                element.style.background = '#d1fae5';
+                setTimeout(() => { element.style.background = 'white'; }, 500);
+            } else if (field === 'emoji') {
+                adminGameData[category][index].emoji = value;
+                // Flash green to indicate save
+                element.style.background = '#d1fae5';
+                setTimeout(() => { element.style.background = 'white'; }, 500);
+            } else if (field === 'urls') {
+                const urls = value.split('\n').map(u => u.trim()).filter(u => u.length > 0);
+
+                // Remove old image properties
+                delete adminGameData[category][index].imageUrl;
+                delete adminGameData[category][index].imageUrls;
+                delete adminGameData[category][index].imageFile;
+
+                // Add new URLs
+                if (urls.length === 1) {
+                    adminGameData[category][index].imageUrl = urls[0];
+                } else if (urls.length > 1) {
+                    adminGameData[category][index].imageUrls = urls;
+                }
+
+                // Flash green to indicate save
+                element.style.background = '#d1fae5';
+                setTimeout(() => { element.style.background = 'white'; }, 500);
+
+                // Update preview
+                updatePreview(index, urls);
+            }
+        }
+
+        function updatePreview(index, urls) {
+            const previewCell = document.getElementById(`preview-${index}`);
+            if (!previewCell) return;
+
+            if (urls.length === 0) {
+                previewCell.innerHTML = '<span style="color: #cbd5e0;">No image</span>';
+                return;
+            }
+
+            const imagePreviewsHTML = urls.map((src, i) =>
+                `<img src="${src}" style="max-width: 80px; max-height: 60px; border-radius: 6px; object-fit: contain; margin-right: 5px; margin-bottom: 5px; border: 2px solid #e2e8f0;" onerror="this.style.border='2px solid #ef4444'; this.title='Failed to load'" alt="Image ${i + 1}">`
+            ).join('');
+
+            previewCell.innerHTML = imagePreviewsHTML;
         }
 
         async function translateToNepali() {
