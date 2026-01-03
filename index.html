@@ -86,11 +86,15 @@
 
         .ready-content {
             background: linear-gradient(135deg, rgba(220, 20, 60, 0.95) 0%, rgba(0, 56, 147, 0.95) 100%);
-            padding: 60px 40px;
+            padding: 80px 60px;
             border-radius: 30px;
             text-align: center;
-            width: 80%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 900px;
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             animation: popIn 0.5s ease;
         }
@@ -899,6 +903,7 @@
         .action-buttons {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 30px;
             margin-top: 0;
         }
@@ -934,6 +939,7 @@
             background: #48bb78;
             color: white;
             width: 450px; /* Larger than skip button */
+            height: 84px; /* 20% bigger than default 70px */
             font-size: 1.8em; /* 20% bigger than default 1.5em */
         }
 
@@ -1007,6 +1013,7 @@
 
             .btn-correct {
                 width: 490px; /* Larger size for tablets */
+                height: 96px; /* 20% bigger than 80px */
                 font-size: 1.92em; /* 20% bigger than 1.6em */
             }
 
@@ -1144,6 +1151,7 @@
             .action-buttons {
                 gap: 10px;
                 flex-direction: row;
+                align-items: center;
                 margin-top: 0;
             }
 
@@ -1156,6 +1164,7 @@
 
             .btn-correct {
                 flex: 3.5; /* Correct button takes more space (450/130 ratio) */
+                height: 66px; /* 20% bigger than 55px */
                 font-size: 1.44em; /* 20% bigger than 1.2em */
             }
 
@@ -1195,8 +1204,10 @@
             }
 
             .ready-content {
-                padding: 40px 25px;
-                margin: 20px;
+                padding: 50px 30px;
+                margin: 10px;
+                width: 95%;
+                min-height: 60vh;
             }
 
             .ready-content h2 {
@@ -2302,15 +2313,15 @@
             timeRemaining = roundTime;
             updateTimerDisplay();
 
-            // Show initial countdown before revealing first card
-            showCountdown(() => {
+            // Show game starting countdown with voice
+            showGameStartCountdown(() => {
                 // After countdown, show the card and start timer
                 displayCard(card);
                 document.getElementById('cardName').textContent = card.name;
                 document.getElementById('cardCategory').textContent = card.category;
                 enableButtons(); // Re-enable buttons after countdown
                 startTimer();
-            }, 'तयार हुनुहोस्... 🎯');
+            });
         }
 
         function startTimer() {
@@ -2745,20 +2756,28 @@
 
         function playTimeUpSound() {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            // Create bell sound with multiple harmonics
+            const frequencies = [800, 1200, 1800, 2400]; // Bell harmonics
+            const gains = [0.4, 0.3, 0.2, 0.1]; // Decreasing volume for each harmonic
 
-            oscillator.frequency.value = 300;
-            oscillator.type = 'sawtooth';
+            frequencies.forEach((freq, index) => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
 
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
 
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.5);
+                oscillator.frequency.value = freq;
+                oscillator.type = 'sine';
+
+                // Bell envelope: quick attack, long decay
+                gainNode.gain.setValueAtTime(gains[index], audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.5);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 1.5);
+            });
         }
 
         function playCountdownBeep() {
@@ -2777,6 +2796,84 @@
 
             oscillator.start(audioContext.currentTime);
             oscillator.stop(audioContext.currentTime + 0.15);
+        }
+
+        function showGameStartCountdown(callback) {
+            const overlay = document.getElementById('countdownOverlay');
+            const numberDisplay = document.getElementById('countdownNumber');
+            const messageDisplay = document.getElementById('countdownMessage');
+
+            overlay.style.display = 'flex';
+
+            // Show message
+            messageDisplay.textContent = 'खेल सुरु हुँदैछ...';
+            numberDisplay.textContent = '';
+
+            setTimeout(() => {
+                // Countdown 3
+                numberDisplay.textContent = '३';
+                playCountdownTick();
+
+                setTimeout(() => {
+                    // Countdown 2
+                    numberDisplay.textContent = '२';
+                    playCountdownTick();
+
+                    setTimeout(() => {
+                        // Countdown 1
+                        numberDisplay.textContent = '१';
+                        playCountdownTick();
+
+                        setTimeout(() => {
+                            // GO!
+                            numberDisplay.textContent = '🎮';
+                            messageDisplay.textContent = 'खेलौं!';
+                            playStartBeep();
+
+                            setTimeout(() => {
+                                overlay.style.display = 'none';
+                                if (callback) callback();
+                            }, 500);
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
+
+        function playCountdownTick() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 880; // Higher pitch for countdown
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+
+        function playStartBeep() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
         }
 
         function startFromSplash() {
