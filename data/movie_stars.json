@@ -2,12 +2,18 @@
   {
     "name": "राजेश हमाल",
     "emoji": "🇳🇵",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsKDlEpXq-kpNWwsMZ-Tml6AHRb59WpKK17Q&s"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsKDlEpXq-kpNWwsMZ-Tml6AHRb59WpKK17Q&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz5FWvoVgpLqi-a8Ija9SaGxuAqlymzFQNNQ&s"
+    ]
   },
   {
     "name": "भुवन केसी",
     "emoji": "🎬",
-    "imageFile": "bhuwan-kc.jpg"
+    "imageUrls": [
+      "images/bhuwan-kc.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_DrhlCGlGKSXWNsUdc2VEOpzPRDE-Fb3FA&s"
+    ]
   },
   {
     "name": "अनमोल केसी",
@@ -28,22 +34,34 @@
   {
     "name": "स्वस्तिमा खड्का",
     "emoji": "🎬",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJoQaeTNKfh0ibOv9Q8uWoe2fvgJSjSfi9w&s"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJoQaeTNKfh0ibOv9Q8uWoe2fvgJSjSfi9w&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-KfLxsbecLK6ZLT5qNNWBnV4GhLDW6fO4vQ&s"
+    ]
   },
   {
-    "name": "पल शाह",
+    "name": "पॉल शाह",
     "emoji": "🎬",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsNhpSGyhttTiGjMv2zMcqtCzeuUsiN9YEg&s"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsNhpSGyhttTiGjMv2zMcqtCzeuUsiN9YEg&s",
+      "https://www.himalayatv.com/wp-content/uploads/2022/03/pal-shaha-5.jpg"
+    ]
   },
   {
     "name": "नम्रता श्रेष्ठ",
     "emoji": "🎬",
-    "imageUrl": "https://pbs.twimg.com/profile_images/3602745636/cb9ff3a7e911bd2d2cbf4c4e42644f4a.jpeg"
+    "imageUrls": [
+      "https://pbs.twimg.com/profile_images/3602745636/cb9ff3a7e911bd2d2cbf4c4e42644f4a.jpeg",
+      "https://nepal.fm/wp-content/uploads/Namrata-Shrestha-Birthday-Maun-Movie-1.jpg"
+    ]
   },
   {
     "name": "रेखा थापा",
     "emoji": "🎬",
-    "imageUrl": "https://www.lensnepal.com/files/profiles/rekha-thapa.jpg"
+    "imageUrls": [
+      "https://www.lensnepal.com/files/profiles/rekha-thapa.jpg",
+      "https://republicaimg.nagariknewscdn.com/shared/web/uploads/media/rekha-thapa-.jpg"
+    ]
   },
   {
     "name": "शाहरुख खान",
@@ -58,22 +76,34 @@
   {
     "name": "आमिर खान",
     "emoji": "🎭",
-    "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_FMjpg_UX1000_.jpg"
+    "imageUrls": [
+      "https://m.media-amazon.com/images/M/MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_FMjpg_UX1000_.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHJ8kh96fM7TpCjVXLW-zinAxamgUH9jzt2g&s"
+    ]
   },
   {
     "name": "दीपिका पादुकोण",
     "emoji": "👸",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmEXXW_2IgRhb3bJtRmynok_rANjbvWBBDtG3zCSkKj2j4c61zpw3dBXiN6dMQ4dSEJ0FFEoMPlsXIfZf-Lc5J4g8SrM9zUcFQLk6GaVE&s=10"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmEXXW_2IgRhb3bJtRmynok_rANjbvWBBDtG3zCSkKj2j4c61zpw3dBXiN6dMQ4dSEJ0FFEoMPlsXIfZf-Lc5J4g8SrM9zUcFQLk6GaVE&s=10",
+      "https://www.seema.com/wp-content/uploads/2021/11/deepika-padukone1.jpg"
+    ]
   },
   {
     "name": "प्रियंका चोपडा",
     "emoji": "🌟",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZlBG6M9CVIWqte3MFeT0I869Ic_cpA7Npi6qR6cZTGMu32pqXmkESDrO81PZcY8q-JC_lIIG8t989gBy_6QJcY85E2OrXbfmc5_Jkig&s=10"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZlBG6M9CVIWqte3MFeT0I869Ic_cpA7Npi6qR6cZTGMu32pqXmkESDrO81PZcY8q-JC_lIIG8t989gBy_6QJcY85E2OrXbfmc5_Jkig&s=10",
+      "https://i.pinimg.com/736x/66/0a/3f/660a3f132e9074f6f2d333e69c75c59a.jpg"
+    ]
   },
   {
     "name": "आलिया भट",
     "emoji": "💫",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alia_Bhatt_2016.jpg/250px-Alia_Bhatt_2016.jpg"
+    "imageUrls": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alia_Bhatt_2016.jpg/250px-Alia_Bhatt_2016.jpg",
+      "https://i.pinimg.com/564x/98/63/6e/98636e6b6a7c59873dcd21538727bdc3.jpg"
+    ]
   },
   {
     "name": "रणबीर कपूर",
@@ -83,32 +113,50 @@
   {
     "name": "कटरिना कैफ",
     "emoji": "✨",
-    "imageUrl": "https://i.pinimg.com/736x/0c/dc/cc/0cdccc12d49541d3b92764341aacb700.jpg"
+    "imageUrls": [
+      "https://i.pinimg.com/736x/0c/dc/cc/0cdccc12d49541d3b92764341aacb700.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgmY-GGK4z8TkJn5d2HVNJjt-oyOCLsD8IeQ&s"
+    ]
   },
   {
     "name": "अक्षय कुमार",
     "emoji": "🦸",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsG_FRCBTUv_9IDfT3YmXOWdjrW93lPklakg&s"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsG_FRCBTUv_9IDfT3YmXOWdjrW93lPklakg&s",
+      "https://preview.redd.it/lets-appreciate-young-akshay-kumar-more-v0-1ru3ud7zdwjc1.jpg?width=720&format=pjpg&auto=webp&s=c944c6bd59ec6a17f92bcb517109d055a09ca4ae"
+    ]
   },
   {
     "name": "अजय देवगन",
     "emoji": "🎥",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJgxMfF1ofDc0M_h_QCOI3m7jOnCZtWsCAhw&s"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJgxMfF1ofDc0M_h_QCOI3m7jOnCZtWsCAhw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI2Tkh5_mrD9k-RrkEoDsZ4Xv3nMvksTaB2A&s"
+    ]
   },
   {
     "name": "ऋतिक रोशन",
     "emoji": "💃",
-    "imageUrl": "https://m.media-amazon.com/images/S/pv-target-images/602f7cdf88443a6e1e2cc3e8a01b697b83e54279c8dc97a90366f2dc77d8eb01._SX300_.jpg"
+    "imageUrls": [
+      "https://m.media-amazon.com/images/S/pv-target-images/602f7cdf88443a6e1e2cc3e8a01b697b83e54279c8dc97a90366f2dc77d8eb01._SX300_.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5KYFlMy7k-ROebh_flLa4jz67zR_m2la55Q&s"
+    ]
   },
   {
     "name": "टम क्रुज",
     "emoji": "🚁",
-    "imageUrl": "https://cdn.britannica.com/11/185311-050-31E5BD65/Tom-Cruise-Top-Gun-Tony-Scott.jpg"
+    "imageUrls": [
+      "https://cdn.britannica.com/11/185311-050-31E5BD65/Tom-Cruise-Top-Gun-Tony-Scott.jpg",
+      "https://i0.wp.com/wpmedia.wonderwall.com/2022/05/09114953/tom-cruise-young.jpeg?h=800"
+    ]
   },
   {
     "name": "लियोनार्डो डिक्याप्रियो",
     "emoji": "🌊",
-    "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_FMjpg_UX1000_.jpg"
+    "imageUrls": [
+      "https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_FMjpg_UX1000_.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP_nGLS9PO-EwzCWGTRwag9dldsYraynU6sA&s"
+    ]
   },
   {
     "name": "ड्वेन जोन्सन",
@@ -118,7 +166,10 @@
   {
     "name": "स्कारलेट जोहानसन",
     "emoji": "👩",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLKoj0Csu_gN-4Lem1Y2zjaxxQvEopXKN-A&s"
+    "imageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLKoj0Csu_gN-4Lem1Y2zjaxxQvEopXKN-A&s",
+      "https://images.bhaskarassets.com/web2images/521/2021/07/30/scarlett_1627619506.jpg"
+    ]
   },
   {
     "name": "रबर्ट डाउनी जुनियर",

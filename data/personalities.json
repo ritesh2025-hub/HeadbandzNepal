@@ -1,15 +1,123 @@
 [
-  { "name": "गौतम बुद्ध", "emoji": "☸️", "imageFile": "gautam-buddha.jpg" },
-  { "name": "पृथ्वीनारायण शाह", "emoji": "👑", "imageFile": "prithvi-narayan-shah.jpg" },
-  { "name": "लक्ष्मी प्रसाद देवकोटा", "emoji": "✍️", "imageFile": "laxmi-prasad-devkota.jpg" },
-  { "name": "नारायण गोपाल", "emoji": "🎤", "imageFile": "narayan-gopal.jpg" },
-  { "name": "कुमारी", "emoji": "👸", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Kumari.jpg.nepal.jpg" },
-  { "name": "भानुभक्त आचार्य", "emoji": "✒️", "imageFile": "bhanubhakta-acharya.jpg" },
-  { "name": "अरनिको", "emoji": "🏛️", "imageFile": "araniko.jpg" },
-  { "name": "तेन्जिङ नोर्गे", "emoji": "🏔️", "imageFile": "tenzing-norgay.jpg" },
-  { "name": "मदन कृष्ण श्रेष्ठ", "emoji": "🎭", "imageFile": "madan-krishna-shrestha.jpg" },
-  { "name": "हरि बंश आचार्य", "emoji": "🎸", "imageFile": "hari-bansha-acharya.jpg" },
-  { "name": "दुर्गेश थापा", "emoji": "👨", "imageFile": "durgesh-thapa.jpg" },
-  { "name": "केपी ओली", "emoji": "🧑‍💼", "imageFile": "kp-oli.jpg" },
-  { "name": "गिरिजा प्रसाद", "emoji": "👔", "imageFile": "girija-prasad.jpg" }
+  {
+    "name": "गौतम बुद्ध",
+    "emoji": "☸️",
+    "imageUrls": [
+      "images/gautam-buddha.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRItHPyct1O8KAH4WWq7XbfiZspV5-NCPmx-g&s"
+    ]
+  },
+  {
+    "name": "पृथ्वीनारायण शाह",
+    "emoji": "👑",
+    "imageFile": "prithvi-narayan-shah.jpg"
+  },
+  {
+    "name": "लक्ष्मी प्रसाद देवकोटा",
+    "emoji": "✍️",
+    "imageFile": "laxmi-prasad-devkota.jpg"
+  },
+  {
+    "name": "नारायण गोपाल",
+    "emoji": "🎤",
+    "imageFile": "narayan-gopal.jpg"
+  },
+  {
+    "name": "कुमारी",
+    "emoji": "👸",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Kumari.jpg.nepal.jpg"
+  },
+  {
+    "name": "भानुभक्त आचार्य",
+    "emoji": "✒️",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_36RTg6gkXbHvZ4z9gs6Er8YHVBqndvBSg&s"
+  },
+  {
+    "name": "अरनिको",
+    "emoji": "🏛️",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Statue_of_Araniko_in_Miaoying_Temple.jpg/250px-Statue_of_Araniko_in_Miaoying_Temple.jpg"
+  },
+  {
+    "name": "तेन्जिङ नोर्गे",
+    "emoji": "🏔️",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Tenzing_Norgay_%28cropped%29.jpg"
+  },
+  {
+    "name": "मदन कृष्ण श्रेष्ठ",
+    "emoji": "🎭",
+    "imageFile": "madan-krishna-shrestha.jpg"
+  },
+  {
+    "name": "हरि बंश आचार्य",
+    "emoji": "🎸",
+    "imageFile": "hari-bansha-acharya.jpg"
+  },
+  {
+    "name": "दुर्गेश थापा",
+    "emoji": "👨",
+    "imageFile": "durgesh-thapa.jpg"
+  },
+  {
+    "name": "केपी ओली",
+    "emoji": "🧑‍💼",
+    "imageFile": "kp-oli.jpg"
+  },
+  {
+    "name": "गिरिजा प्रसाद",
+    "emoji": "👔",
+    "imageUrls": [
+      "images/girija-prasad.jpg",
+      "https://english.pardafas.com/wp-content/uploads/2023/07/girija-prasad-koirala--1024x576.jpg"
+    ]
+  },
+  {
+    "name": "सुशीला कार्की",
+    "emoji": ":)",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Rt._Hon._Prime_Minister_Sushila_Karki_Official_Portrait.jpg/250px-Rt._Hon._Prime_Minister_Sushila_Karki_Official_Portrait.jpg"
+  },
+  {
+    "name": "अमृत गुरुङ",
+    "emoji": ":)",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-F1A7jpdX1IJwZFxllNSCfyzIt7D8Ycd2eg&s"
+  },
+  {
+    "name": "राजु लामा",
+    "emoji": ":)",
+    "imageUrl": "https://images.genius.com/ff8dd81e36185423cd118268a00d8d02.768x768x1.jpg"
+  },
+  {
+    "name": "1974 AD",
+    "emoji": ":)",
+    "imageUrl": "https://thehimalayantimes.com/uploads/imported_images/wp-content/uploads/2020/08/1974-AD-01.jpg"
+  },
+  {
+    "name": "निर्मल पुर्जा",
+    "emoji": ":)",
+    "imageUrl": "https://travelnepal.com/wp-content/uploads/2021/12/14_Peaks_Nothing_is_Impossible_1464-1.jpg"
+  },
+  {
+    "name": "पासाङ ल्हामु शेर्पा",
+    "emoji": ":)",
+    "imageUrl": "data:image/jpeg;base64,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"
+  },
+  {
+    "name": "जंग बहादुर राणा",
+    "emoji": ":)",
+    "imageUrl": "https://cdn2.picryl.com/photo/2021/12/08/jang-bahadur-rana-69dc14-640.jpg"
+  },
+  {
+    "name": "ज्ञानेन्द्र शाह",
+    "emoji": ":)",
+    "imageUrl": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/ap/1f32092d-627d-4fd5-8bb8-2e0c79fb7f99.jpg"
+  },
+  {
+    "name": "पारस शाह",
+    "emoji": ":)",
+    "imageUrl": "https://media.gettyimages.com/id/542640444/photo/crown-prince-paras-bir-bikram-shah-dav-at-the-royal-palace-the-himalayan-kingdom-witnessed-its.jpg?s=612x612&w=gi&k=20&c=-7gfbd53yvQ1_2vtjOw1X_q6tdhNAJ2ibZzCsi9zqMs="
+  },
+  {
+    "name": "ऋषि धमला",
+    "emoji": ":)",
+    "imageUrl": "https://media.gettyimages.com/id/57342174/photo/rishi-dhamala-president-of-reporter.jpg?s=612x612&w=gi&k=20&c=hI21nY6D75hFf28vq-zH9_l1f3keVw7kHe4OwQ-BG4g="
+  }
 ]

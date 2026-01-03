@@ -1,31 +1,167 @@
 [
-  { "name": "मोमो", "emoji": "🥟", "imageFile": "momo.jpg" },
-  { "name": "Jhol मोमो", "emoji": "🥟", "imageUrl": "https://junifoods.com/wp-content/uploads/2024/06/Spicy-Tomato-Jhol-Momo-%E0%A4%9F%E0%A4%AE%E0%A4%BE%E0%A4%9F%E0%A4%B0-%E0%A4%85%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A4%95%E0%A5%8B-%E0%A4%9D%E0%A5%8B%E0%A4%B2-%E0%A4%AE%E0%A5%8B%E0%A4%AE%E0%A5%8B-1-300x300.jpg" },
-  { "name": "Fried मोमो", "emoji": "🥟", "imageUrl": "https://i.ytimg.com/vi/dNhgr9w7Y6g/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBX66hdQIfXhL35NSZVXGC5TKo8wg" },
-  { "name": "दालभात", "emoji": "🍚", "imageFile": "dalbhat.jpg" },
-  { "name": "सेलरोटी", "emoji": "🍩", "imageFile": "sel-roti.jpg" },
-  { "name": "चोयला", "emoji": "🍖", "imageFile": "choyla.jpg" },
-  { "name": "बारा", "emoji": "🥞", "imageFile": "bara.jpg" },
-  { "name": "चाट", "emoji": "🥗", "imageFile": "chaat.jpg" },
-  { "name": "समोसा", "emoji": "🥙", "imageFile": "samosa.jpg" },
-  { "name": "जलेबी", "emoji": "🧡", "imageFile": "jalebi.jpg" },
-  { "name": "लस्सी", "emoji": "🥛", "imageFile": "lassi.jpg" },
-  { "name": "चाउमिन", "emoji": "🍜", "imageFile": "chowmein.jpg" },
-  { "name": "पानीपुरी", "emoji": "🫓", "imageFile": "panipuri.jpg" },
-  { "name": "छोयला", "emoji": "🍗", "imageFile": "chhoyela.jpg" },
-  { "name": "भटमास", "emoji": "🥜", "imageFile": "bhatmas.jpg" },
-  { "name": "गुन्द्रुक", "emoji": "🥬", "imageFile": "gundruk.jpg" },
-  { "name": "ढिडो", "emoji": "🥣", "imageFile": "dhido.jpg" },
-  { "name": "यमरी", "emoji": "🥟", "imageFile": "yomari.jpg" },
-  { "name": "वडा", "emoji": "🍘", "imageUrl": "https://www.cookshideout.com/wp-content/uploads/2014/03/Instant-Vada_New_FI.jpg" },
-  { "name": "आलुदम", "emoji": "🥔", "imageFile": "aludam.jpg" },
-  { "name": "खीर", "emoji": "🍮", "imageFile": "kheer.jpg" },
-  { "name": "पकौडा", "emoji": "🥙", "imageFile": "pakoda.jpg" },
-  { "name": "चटामरी", "emoji": "🥞", "imageUrl": "https://i.ytimg.com/vi/h0rXQI7xS5A/maxresdefault.jpg" },
-  { "name": "लखामरी", "emoji": "🍪", "imageFile": "lakhamari.jpg" },
-  { "name": "चुरपी", "emoji": "🧀", "imageFile": "chhurpi.jpg" },
-  { "name": "थुक्पा", "emoji": "🍲", "imageFile": "thukpa.jpg" },
-  { "name": "पुरी तरकारी", "emoji": "🥘", "imageFile": "puri-tarkari.jpg" },
-  { "name": "राजमा", "emoji": "🫘", "imageFile": "rajma.jpg" },
-  { "name": "तोङ्बा", "emoji": "🍺", "imageFile": "tongba.jpg" }
+  {
+    "name": "मोमो",
+    "emoji": "🥟",
+    "imageFile": "momo.jpg"
+  },
+  {
+    "name": "Jhol मोमो",
+    "emoji": "🥟",
+    "imageUrl": "https://junifoods.com/wp-content/uploads/2024/06/Spicy-Tomato-Jhol-Momo-%E0%A4%9F%E0%A4%AE%E0%A4%BE%E0%A4%9F%E0%A4%B0-%E0%A4%85%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A4%95%E0%A5%8B-%E0%A4%9D%E0%A5%8B%E0%A4%B2-%E0%A4%AE%E0%A5%8B%E0%A4%AE%E0%A5%8B-1-300x300.jpg"
+  },
+  {
+    "name": "Fried मोमो",
+    "emoji": "🥟",
+    "imageUrl": "https://i.ytimg.com/vi/dNhgr9w7Y6g/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBX66hdQIfXhL35NSZVXGC5TKo8wg"
+  },
+  {
+    "name": "दालभात",
+    "emoji": "🍚",
+    "imageFile": "dalbhat.jpg"
+  },
+  {
+    "name": "सेलरोटी",
+    "emoji": "🍩",
+    "imageFile": "sel-roti.jpg"
+  },
+  {
+    "name": "चोयला",
+    "emoji": "🍖",
+    "imageFile": "choyla.jpg"
+  },
+  {
+    "name": "बारा",
+    "emoji": "🥞",
+    "imageFile": "bara.jpg"
+  },
+  {
+    "name": "चाट",
+    "emoji": "🥗",
+    "imageFile": "chaat.jpg"
+  },
+  {
+    "name": "समोसा",
+    "emoji": "🥙",
+    "imageFile": "samosa.jpg"
+  },
+  {
+    "name": "जेरी",
+    "emoji": "🧡",
+    "imageFile": "jalebi.jpg"
+  },
+  {
+    "name": "लस्सी",
+    "emoji": "🥛",
+    "imageFile": "lassi.jpg"
+  },
+  {
+    "name": "चाउमिन",
+    "emoji": "🍜",
+    "imageFile": "chowmein.jpg"
+  },
+  {
+    "name": "पानीपुरी",
+    "emoji": "🫓",
+    "imageFile": "panipuri.jpg"
+  },
+  {
+    "name": "छोयला",
+    "emoji": "🍗",
+    "imageFile": "chhoyela.jpg"
+  },
+  {
+    "name": "भटमास",
+    "emoji": "🥜",
+    "imageFile": "bhatmas.jpg"
+  },
+  {
+    "name": "गुन्द्रुक",
+    "emoji": "🥬",
+    "imageFile": "gundruk.jpg"
+  },
+  {
+    "name": "ढिडो",
+    "emoji": "🥣",
+    "imageFile": "dhido.jpg"
+  },
+  {
+    "name": "योमरी",
+    "emoji": "🥟",
+    "imageFile": "yomari.jpg"
+  },
+  {
+    "name": "वडा",
+    "emoji": "🍘",
+    "imageUrl": "https://www.cookshideout.com/wp-content/uploads/2014/03/Instant-Vada_New_FI.jpg"
+  },
+  {
+    "name": "आलुदम",
+    "emoji": "🥔",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHnxmf8-AyenMI2WvvwGmyjBzXgjH14YmRlQ&s"
+  },
+  {
+    "name": "खीर",
+    "emoji": "🍮",
+    "imageFile": "kheer.jpg"
+  },
+  {
+    "name": "पकौडा",
+    "emoji": "🥙",
+    "imageFile": "pakoda.jpg"
+  },
+  {
+    "name": "चटामरी",
+    "emoji": "🥞",
+    "imageUrl": "https://i.ytimg.com/vi/h0rXQI7xS5A/maxresdefault.jpg"
+  },
+  {
+    "name": "लखामरी",
+    "emoji": "🍪",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TNi0lB5zmxzuUZlswVJSIHFPYyJ4ekQcfQ&s"
+  },
+  {
+    "name": "चुरपी",
+    "emoji": "🧀",
+    "imageFile": "chhurpi.jpg"
+  },
+  {
+    "name": "थुक्पा",
+    "emoji": "🍲",
+    "imageFile": "thukpa.jpg"
+  },
+  {
+    "name": "पुरी तरकारी",
+    "emoji": "🥘",
+    "imageFile": "puri-tarkari.jpg"
+  },
+  {
+    "name": "राजमा",
+    "emoji": "🫘",
+    "imageUrl": "https://nepalifoodandreceipe.wordpress.com/wp-content/uploads/2016/03/2ef83-img_5419.jpg"
+  },
+  {
+    "name": "तोङ्बा",
+    "emoji": "🍺",
+    "imageFile": "tongba.jpg"
+  },
+  {
+    "name": "सेल",
+    "emoji": ":)",
+    "imageUrl": "https://mountainroutes.com/wp-content/uploads/2025/01/sel-nepali-food-1024x536.jpg"
+  },
+  {
+    "name": "भुट्टन",
+    "emoji": ":)",
+    "imageUrl": "https://i.ytimg.com/vi/mm-WAsWfXN4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDqtl0twfm2w8hw8nCC4ThxWO3JjA"
+  },
+  {
+    "name": "चुकाउने",
+    "emoji": ":)",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC9Vq2hl6214xS59PsfnIuvomSmoefFj9GPA&s"
+  },
+  {
+    "name": "लाफिङ",
+    "emoji": ":)",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzZQPceoLDYF-n8YIO8Jf_x33qq3OrOQ6xNQ&s"
+  }
 ]
