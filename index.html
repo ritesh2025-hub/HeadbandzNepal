@@ -69,6 +69,9 @@
 
         .game-section {
             display: none;
+            min-height: 100vh;
+            box-sizing: border-box;
+            padding: 10px;
         }
 
         .ready-screen {
@@ -735,12 +738,14 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            min-height: calc(100vh - 20px);
         }
 
         .card-display {
             background: linear-gradient(135deg, rgba(220, 20, 60, 0.95) 0%, rgba(0, 56, 147, 0.95) 100%);
             border-radius: 20px;
             padding: 0;
+            flex: 1;
             min-height: 550px;
             display: flex;
             flex-direction: column;
@@ -989,7 +994,12 @@
 
         /* iPad / Tablet styles */
         @media (min-width: 768px) and (max-width: 1024px) {
+            .game-layout {
+                min-height: calc(100vh - 20px);
+            }
+
             .card-display {
+                flex: 1;
                 min-height: 550px;
             }
 
@@ -1067,14 +1077,17 @@
 
             .game-section {
                 padding: 3px;
+                min-height: 100vh;
             }
 
             .game-layout {
                 gap: 5px;
+                min-height: calc(100vh - 6px);
             }
 
             .card-display {
                 padding: 0;
+                flex: 1;
                 min-height: 385px;
                 border-radius: 15px;
             }
