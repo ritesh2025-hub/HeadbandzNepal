@@ -17,7 +17,7 @@
                 linear-gradient(135deg, rgba(220, 20, 60, 0.92) 0%, rgba(0, 56, 147, 0.92) 100%),
                 url('images/logo.jpg') center/cover fixed;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
             overscroll-behavior-y: contain; /* Prevent pull-to-refresh */
         }
 
@@ -33,7 +33,7 @@
         h1 {
             text-align: center;
             color: white;
-            margin-bottom: 30px;
+            margin-bottom: 0;
             font-size: 2.5em;
             text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
             display: flex;
@@ -45,7 +45,12 @@
         }
 
         h1.hidden {
-            display: none;
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
         }
 
         .header-logo {
@@ -59,7 +64,7 @@
         .setup-section, .game-section {
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
@@ -533,15 +538,11 @@
         }
 
         .section-title {
-            font-size: 1.5em;
+            font-size: 1.3em;
             color: #DC143C;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #DC143C;
-        }
-
-        .player-input-section {
-            margin-bottom: 30px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #DC143C;
         }
 
         .input-group {
@@ -565,7 +566,7 @@
         }
 
         button {
-            padding: 12px 24px;
+            padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 10px;
@@ -643,7 +644,46 @@
         }
 
         .category-section {
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+        }
+
+        .player-input-section {
+            margin-bottom: 15px;
+        }
+
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            user-select: none;
+        }
+
+        .collapsible-header:hover {
+            opacity: 0.8;
+        }
+
+        .collapse-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+            color: #DC143C;
+        }
+
+        .collapse-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            opacity: 0;
         }
 
         .category-grid {
@@ -692,16 +732,14 @@
         .game-layout {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 10px;
         }
 
         .card-display {
-            background:
-                linear-gradient(135deg, rgba(220, 20, 60, 0.7) 0%, rgba(0, 56, 147, 0.7) 100%),
-                url('images/logo.jpg') center/cover;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.95) 0%, rgba(0, 56, 147, 0.95) 100%);
             border-radius: 20px;
             padding: 0;
-            min-height: 500px;
+            min-height: 550px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -716,7 +754,7 @@
             animation: bounce 1s ease;
             width: 100%;
             height: 100%;
-            min-height: 500px;
+            min-height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -747,7 +785,7 @@
         }
 
         .card-name {
-            font-size: 2.5em;
+            font-size: 2.75em;
             font-weight: bold;
             color: white;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
@@ -757,7 +795,7 @@
             left: 0;
             right: 0;
             padding: 30px 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 50%, transparent 100%);
             z-index: 10;
         }
 
@@ -845,17 +883,17 @@
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-top: 20px;
+            margin-top: 0;
         }
 
         .action-buttons button {
             font-size: 1.5em;
-            height: 80px;
+            height: 70px;
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 30px;
+            padding: 10px 15px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             transition: all 0.3s;
             font-weight: bold;
@@ -868,7 +906,8 @@
         .btn-correct {
             background: #48bb78;
             color: white;
-            width: 360px; /* Twice the size of skip button */
+            width: 450px; /* Larger than skip button */
+            font-size: 1.8em; /* 20% bigger than default 1.5em */
         }
 
         .btn-correct:hover {
@@ -880,7 +919,7 @@
         .btn-skip {
             background: #ed8936;
             color: white;
-            width: 180px;
+            width: 130px;
         }
 
         .btn-skip:hover {
@@ -931,20 +970,21 @@
             }
 
             .card-name {
-                font-size: 2.2em;
+                font-size: 2.42em;
             }
 
             .action-buttons button {
-                height: 90px;
+                height: 80px;
                 font-size: 1.6em;
             }
 
             .btn-correct {
-                width: 400px; /* Twice the size for tablets */
+                width: 490px; /* Larger size for tablets */
+                font-size: 1.92em; /* 20% bigger than 1.6em */
             }
 
             .btn-skip {
-                width: 200px;
+                width: 145px;
             }
 
             .game-info-bar {
@@ -959,12 +999,13 @@
 
             h1 {
                 font-size: 2.2em;
+                margin-bottom: 0;
             }
         }
 
         @media (max-width: 768px) {
             body {
-                padding: 5px;
+                padding: 3px;
             }
 
             .container {
@@ -973,7 +1014,7 @@
 
             h1 {
                 font-size: 1.5em;
-                margin-bottom: 10px;
+                margin-bottom: 0;
             }
 
             .header-logo {
@@ -982,7 +1023,7 @@
             }
 
             .setup-section, .game-section {
-                padding: 15px 10px;
+                padding: 10px 8px;
             }
 
             .section-title {
@@ -991,21 +1032,21 @@
             }
 
             .game-section {
-                padding: 5px;
+                padding: 3px;
             }
 
             .game-layout {
-                gap: 10px;
+                gap: 5px;
             }
 
             .card-display {
                 padding: 0;
-                min-height: 350px;
+                min-height: 385px;
                 border-radius: 15px;
             }
 
             .card-image {
-                min-height: 350px;
+                min-height: 385px;
                 font-size: 100px;
             }
 
@@ -1014,7 +1055,7 @@
             }
 
             .card-name {
-                font-size: 1.5em;
+                font-size: 1.65em;
                 padding: 15px 10px;
             }
 
@@ -1076,26 +1117,27 @@
             .action-buttons {
                 gap: 10px;
                 flex-direction: row;
-                margin-top: 10px;
+                margin-top: 0;
             }
 
             .action-buttons button {
-                height: 60px;
+                height: 55px;
                 font-size: 1.2em;
-                padding: 12px 15px;
+                padding: 8px 10px;
                 border-radius: 12px;
             }
 
             .btn-correct {
-                flex: 2; /* Correct button takes twice the space */
+                flex: 3.5; /* Correct button takes more space (450/130 ratio) */
+                font-size: 1.44em; /* 20% bigger than 1.2em */
             }
 
             .btn-skip {
-                flex: 1; /* Skip button takes half the space */
+                flex: 1; /* Skip button takes less space */
             }
 
             button {
-                padding: 14px 20px;
+                padding: 10px 16px;
                 font-size: 15px;
             }
 
@@ -1121,7 +1163,7 @@
 
             .game-controls button {
                 width: 100%;
-                padding: 10px 15px;
+                padding: 8px 12px;
                 font-size: 0.9em;
             }
 
@@ -1225,7 +1267,7 @@
 
         .start-game-section {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 15px;
         }
 
         .error-message {
@@ -1342,19 +1384,15 @@
                     <span class="step-number">1</span>
                     <div class="step-content">
                         <div class="step-title">📱 फोन निधारमा राख्नुहोस्</div>
-                        <div class="step-description">
-                            खेलाडीले फोन आफ्नो निधारमा राख्नुपर्छ (स्क्रिन बाहिर तिर) ताकि आफूले शब्द देख्न नसकून्।
-                        </div>
+                        <div class="step-description">स्क्रिन बाहिर फर्काएर निधारमा राख्नुहोस्।</div>
                     </div>
                 </div>
 
                 <div class="instruction-step">
                     <span class="step-number">2</span>
                     <div class="step-content">
-                        <div class="step-title">👥 अरूले सङ्केत दिनुहोस्</div>
-                        <div class="step-description">
-                            अन्य खेलाडीहरूले शब्द देखेर सङ्केत दिनुहोस्। उदाहरण: "हात्ती" देखिएमा → "यो जनावर हो", "यो ठूलो छ", "यसको लामो नाक छ"
-                        </div>
+                        <div class="step-title">👥 सङ्केत दिनुहोस्</div>
+                        <div class="step-description">अरूले शब्द देखेर सङ्केत दिनुहोस्। सीधा शब्द नभन्नुहोस्।</div>
                     </div>
                 </div>
 
@@ -1362,19 +1400,15 @@
                     <span class="step-number">3</span>
                     <div class="step-content">
                         <div class="step-title">🤔 अनुमान लगाउनुहोस्</div>
-                        <div class="step-description">
-                            सङ्केतबाट शब्द अनुमान लगाउनुहोस्। सही भएमा "✓" थिच्नुहोस्। गाह्रो भएमा "अर्को" थिच्नुहोस् (प्रति पालो १ पटक मात्र)।
-                        </div>
+                        <div class="step-description">सही भए "✓" थिच्नुहोस्। गाह्रो भए "अर्को" (प्रति पालो १ पटक)।</div>
                     </div>
                 </div>
 
                 <div class="instruction-step">
                     <span class="step-number">4</span>
                     <div class="step-content">
-                        <div class="step-title">⏰ १ मिनेट भित्र</div>
-                        <div class="step-description">
-                            प्रत्येक खेलाडीलाई १ मिनेट समय मिल्छ। त्यो समयमा सकेसम्म धेरै सही अनुमान लगाएर अंक कमाउनुहोस्!
-                        </div>
+                        <div class="step-title">⏰ समय सीमा</div>
+                        <div class="step-description">प्रत्येक पालोमा निश्चित समयमा धेरै अंक कमाउनुहोस्।</div>
                     </div>
                 </div>
 
@@ -1382,24 +1416,18 @@
                     <span class="step-number">5</span>
                     <div class="step-content">
                         <div class="step-title">🏆 जित</div>
-                        <div class="step-description">
-                            सबै राउन्ड समाप्त भएपछि सबैभन्दा बढी अंक भएको खेलाडी विजेता हुन्छ!
-                        </div>
+                        <div class="step-description">सबैभन्दा बढी अंक भएको खेलाडी विजेता।</div>
                     </div>
                 </div>
 
                 <div class="important-note">
-                    <div class="important-note-title">⚠️ महत्वपूर्ण सुझाव</div>
-                    <div class="important-note-text">
-                        <strong>सबै वर्ग छान्नुहोस्!</strong> यदि तपाईंले सबै १९ वर्गहरू छान्नुभयो भने खेल धेरै रोमाञ्चक हुन्छ। किनभने खेलाडीलाई थाहा हुँदैन कि शब्द कुन वर्गको हो!
-                    </div>
+                    <div class="important-note-title">💡 सुझाव</div>
+                    <div class="important-note-text">सबै वर्ग छान्नुहोस् - खेल धेरै रोमाञ्चक हुन्छ!</div>
                 </div>
 
                 <div class="important-note" style="background: #ffe6e6; border: 2px solid #dc143c; margin-top: 15px;">
-                    <div class="important-note-title" style="color: #dc143c;">🚫 ध्यान दिनुहोस्</div>
-                    <div class="important-note-text" style="color: #8b0000;">
-                        <strong>खेल खेल्दा पेज रिफ्रेश नगर्नुहोस्!</strong> रिफ्रेश गर्नुभयो भने सबै प्रगति हराउनेछ।
-                    </div>
+                    <div class="important-note-title" style="color: #dc143c;">⚠️ ध्यान दिनुहोस्</div>
+                    <div class="important-note-text" style="color: #8b0000;">खेल खेल्दा पेज रिफ्रेश नगर्नुहोस्!</div>
                 </div>
             </div>
 
@@ -1545,21 +1573,25 @@
             <div class="error-message" id="errorMessage"></div>
 
             <div class="player-input-section">
-                <h2 class="section-title">खेलाडीहरू थप्नुहोस्</h2>
+                <h2 class="section-title">खेलाडीहरू</h2>
                 <div class="input-group">
-                    <input type="text" id="playerNameInput" placeholder="खेलाडीको नाम लेख्नुहोस्">
-                    <button class="btn-primary" onclick="addPlayer()">थप्नुहोस्</button>
+                    <input type="text" id="playerNameInput" placeholder="नाम">
+                    <button class="btn-primary" onclick="addPlayer()">+</button>
                 </div>
                 <div class="players-list" id="playersList"></div>
             </div>
 
             <div class="category-section">
-                <h2 class="section-title">वर्गहरू छान्नुहोस्</h2>
-                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                    <button class="btn-secondary" onclick="selectAllCategories()" style="flex: 1;">सबै छान्नुहोस्</button>
-                    <button class="btn-warning" onclick="unselectAllCategories()" style="flex: 1;">सबै हटाउनुहोस्</button>
+                <div class="collapsible-header" onclick="toggleCategories()">
+                    <h2 class="section-title" style="margin: 0;">वर्गहरू (२२ वटा)</h2>
+                    <span class="collapse-icon collapsed" id="categoryCollapseIcon">▼</span>
                 </div>
-                <div class="category-grid">
+                <div class="collapsible-content collapsed" id="categoryContent">
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <button class="btn-secondary" onclick="selectAllCategories()" style="flex: 1;">सबै</button>
+                        <button class="btn-warning" onclick="unselectAllCategories()" style="flex: 1;">हटाउनुहोस्</button>
+                    </div>
+                    <div class="category-grid">
                     <div class="category-card">
                         <label>
                             <input type="checkbox" value="animals" checked>
@@ -1693,56 +1725,43 @@
                         </label>
                     </div>
                 </div>
-            </div>
-
-            <div class="category-section">
-                <h2 class="section-title">राउन्ड संख्या</h2>
-                <div class="input-group">
-                    <input type="number" id="roundsInput" value="3" min="1" max="20" placeholder="राउन्ड संख्या">
-                    <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
-                        प्रति खेलाडी राउन्ड
-                    </label>
-                </div>
-                <p style="color: #718096; font-size: 14px; margin-top: 10px;">
-                    प्रत्येक खेलाडीले यति राउन्ड खेलेपछि खेल समाप्त हुनेछ
-                </p>
-            </div>
-
-            <div class="category-section">
-                <h2 class="section-title">प्रति राउन्ड समय</h2>
-                <div class="input-group">
-                    <input type="number" id="timeInput" value="90" min="30" max="300" placeholder="सेकेन्ड" step="5">
-                    <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
-                        सेकेन्ड
-                    </label>
-                </div>
-                <p style="color: #718096; font-size: 14px; margin-top: 10px;">
-                    प्रत्येक खेलाडीले यति सेकेन्ड समय पाउनेछ (३० - ३०० सेकेन्ड)
-                </p>
-                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-                    <button class="btn-secondary" onclick="setTime(60)" style="flex: 1; min-width: 100px; padding: 8px;">१ मिनेट</button>
-                    <button class="btn-secondary" onclick="setTime(90)" style="flex: 1; min-width: 100px; padding: 8px;">१.५ मिनेट</button>
-                    <button class="btn-secondary" onclick="setTime(120)" style="flex: 1; min-width: 100px; padding: 8px;">२ मिनेट</button>
-                    <button class="btn-secondary" onclick="setTime(180)" style="flex: 1; min-width: 100px; padding: 8px;">३ मिनेट</button>
                 </div>
             </div>
 
             <div class="category-section">
-                <h2 class="section-title">कार्ड काउन्टडाउन</h2>
+                <h2 class="section-title">राउन्ड</h2>
                 <div class="input-group">
-                    <input type="number" id="countdownInput" value="3" min="0" max="5" placeholder="सेकेन्ड">
+                    <input type="number" id="roundsInput" value="3" min="1" max="20" placeholder="3">
                     <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
-                        सेकेन्ड
+                        प्रति खेलाडी
                     </label>
                 </div>
-                <p style="color: #718096; font-size: 14px; margin-top: 10px;">
-                    अर्को कार्ड देखाउनु अगाडि काउन्टडाउन समय (० = काउन्टडाउन बन्द)
-                </p>
+            </div>
+
+            <div class="category-section">
+                <h2 class="section-title">समय</h2>
+                <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
+                    <button class="btn-secondary" onclick="setTime(60)" style="flex: 1; min-width: 70px; padding: 8px; font-size: 14px;">60s</button>
+                    <button class="btn-secondary" onclick="setTime(90)" style="flex: 1; min-width: 70px; padding: 8px; font-size: 14px;">90s</button>
+                    <button class="btn-secondary" onclick="setTime(120)" style="flex: 1; min-width: 70px; padding: 8px; font-size: 14px;">120s</button>
+                    <button class="btn-secondary" onclick="setTime(180)" style="flex: 1; min-width: 70px; padding: 8px; font-size: 14px;">180s</button>
+                </div>
+                <input type="number" id="timeInput" value="90" min="30" max="300" step="5" style="width: 100%; margin-top: 8px; text-align: center;">
+            </div>
+
+            <div class="category-section">
+                <h2 class="section-title">काउन्टडाउन</h2>
+                <div class="input-group">
+                    <input type="number" id="countdownInput" value="3" min="0" max="5" placeholder="3">
+                    <label style="display: flex; align-items: center; padding: 0 10px; white-space: nowrap;">
+                        सेकेन्ड (0=बन्द)
+                    </label>
+                </div>
             </div>
 
             <div class="start-game-section">
                 <button class="btn-primary" onclick="startGame()" style="font-size: 20px; padding: 15px 40px;">
-                    खेल सुरु गर्नुहोस् 🎮
+                    सुरु गर्नुहोस् 🎮
                 </button>
             </div>
         </div>
@@ -1755,8 +1774,7 @@
                 <div class="ready-player-name" id="readyPlayerName"></div>
                 <div class="ready-motivation" id="readyMotivation"></div>
                 <div class="ready-instructions" id="readyInstructions">
-                    तपाईंसँग <strong>1 मिनेट</strong> छ<br>
-                    सकेसम्म धेरै अनुमान लगाउनुहोस्!
+                    फोन निधारमा राखेर अनुमान लगाउनुहोस्!
                 </div>
                 <button class="start-turn-btn" id="startTurnButton" onclick="startPlayerTurn()">
                     सुरु गर्नुहोस् 🚀
@@ -2116,8 +2134,8 @@
             document.getElementById('readyMotivation').textContent = randomMotivation;
             document.getElementById('readyRoundIndicator').textContent = `राउन्ड ${currentRound} / ${maxRounds}`;
             document.getElementById('readyInstructions').innerHTML = `
-                तपाईंसँग <strong>${timeDisplay}</strong> छ<br>
-                सकेसम्म धेरै अनुमान लगाउनुहोस्!
+                समय: <strong>${timeDisplay}</strong><br>
+                फोन निधारमा राख्नुहोस्!
             `;
 
             const readyScreen = document.getElementById('readyScreen');
@@ -2736,6 +2754,14 @@
 
         function setTime(seconds) {
             document.getElementById('timeInput').value = seconds;
+        }
+
+        function toggleCategories() {
+            const content = document.getElementById('categoryContent');
+            const icon = document.getElementById('categoryCollapseIcon');
+
+            content.classList.toggle('collapsed');
+            icon.classList.toggle('collapsed');
         }
 
         document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
